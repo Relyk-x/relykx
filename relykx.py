@@ -6,7 +6,7 @@ from discord.ext.commands import Bot
 import asyncio
 import os
 
-bot = commands.Bot(command_prefix='r!')
+bot = commands.Bot(command_prefix='m!')
 
 @bot.event
 async def on_ready():
