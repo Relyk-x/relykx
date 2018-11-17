@@ -64,12 +64,17 @@ async def about(ctx):
 
 @bot.command(pass_context=True)
 async def invite(ctx):
-	embed = discord.Embed(description="If you'd like to add MikiBot to your server, Click here: https://goo.gl/2rp6n2", color=0xffafc9)
+	embed = discord.Embed(description="If you'd like to add MikiBot to your server, click here: \nhttps://discordapp.com/oauth2/authorize?&client_id=513265987349643264&scope=bot&permissions=66186303", color=0xffafc9)
 	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
 async def servercount(ctx):
 	embed = discord.Embed(description='Currently watching over ' + str(len(bot.servers)) + ' Discord servers <:discord:501956002158215198>', color=0xffafc9)
+	await bot.say(embed=embed)
+	
+@bot.command(pass_context=True)
+async def vote(ctx):
+	embed = discord.Embed(description='You can vote here: \n\n:point_right: https://discordbots.org/bot/496214977267630080/vote :point_left:', color=0xffafc9)
 	await bot.say(embed=embed)
 	
 bot.run(os.getenv("BOT_TOKEN"))
