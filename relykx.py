@@ -138,7 +138,7 @@ async def eightball(ctx):
 
 @bot.command(pass_context=True)
 async def commands(ctx):
-	embed = discord.Embed(title="📖 General", color=0x00ff00)
+	embed = discord.Embed(title="📖 General", color=0xffafc9)
 	embed.add_field(name="server", value="(description for command...)", inline=False)
 	embed.add_field(name="info", value="(description for command...)", inline=False)
 	embed.add_field(name="kick", value="(description for command...)", inline=False)
