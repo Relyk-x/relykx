@@ -147,6 +147,7 @@ async def commands(ctx):
 	embed.add_field(name="servercount", value="(description for command...)", inline=False)
 	embed.add_field(name="vote", value="(description for command...)", inline=False)
 	embed.add_field(name="donate", value="(description for command...)", inline=False)
+	await bot.say(embed=embed)
 	embed = discord.Embed(title="😜 Fun", color=0xffafc9)
 	embed.add_field(name="wallpaper", value="(description for command...)", inline=False)
 	embed.add_field(name="gif", value="(description for command...)", inline=False)
