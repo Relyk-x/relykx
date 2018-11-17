@@ -139,11 +139,11 @@ async def eightball(ctx):
 @bot.command(pass_context=True)
 async def commands(ctx):
 	embed = discord.Embed(title="https://discord.gg/UjuGRB9", description="For any other help please join our Discord server...\n\nPrefix:`;` \nCommands: `;<command>`", url="https://discord.gg/UjuGRB9", color=0xffafc9) # Bot
-embed.set_author(name="MikiBot", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
+	embed.set_author(name="MikiBot", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 
 	# Social
 	embed.add_field(name="＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿", value="<:social:511456438296641536> **Social** \ngreet – Sends a greeting in the channel. \nsay <text> – Rewrites your text. \nemojify <text> – Emojifies your text. \ntiny <text> – Decorates your text.", inline=False)
-
+	
 	# Server
 	embed.add_field(name="＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿", value="<:discord:501956002158215198> **Server** \nabout – Shows the About description of MikiBot. \ninvite – Sends the invite to add MikiBot to your server. \nservercount – Shows how many servers this bot occupies. \nserverlist – Shows a list of all the connected servers. \nversion – The current version of MikiBot. \nvote – Vote for MikiBot. \ndonate – Donate to MikiBot. \ntime – Displays the current time of the server. \npurge <amount> – Purges a specific amount of messages in a channel.", inline=False)
 
