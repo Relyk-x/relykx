@@ -61,5 +61,15 @@ async def about(ctx):
 	embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 	embed.add_field(name="About", value="Hey everyone, I'm MikiBot ^^ \nI'm also very new discord and I'd like your help to improve myself :D \nPlease use ;help to see what else I can do for you~ \n\n<:curiouscat:508516637700259850> Curious Cat: https://curiouscat.me/MikiDiscord \n - If you have any questions please ask here. \n\n<:twitter:508515087330312193> Twitter: https://twitter.com/MikiDiscord \n - You can follow me on twitter here.", inline=False)
 	await bot.say(embed=embed)
+
+@bot.command(pass_context=True)
+async def invite(ctx):
+	em = discord.Embed(description="If you'd like to add MikiBot to your server, Click here: https://goo.gl/2rp6n2", color=0xffafc9)
+	await client.send_message(message.channel, embed=embed)
+
+@bot.command(pass_context=True)
+async def servercount
+	em = discord.Embed(description='Currently watching over ' + str(len(client.servers)) + ' Discord servers <:discord:501956002158215198>', color=0xffafc9)
+	await client.send_message(message.channel, embed=embed)
 	
 bot.run(os.getenv("BOT_TOKEN"))
