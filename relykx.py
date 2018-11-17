@@ -85,13 +85,13 @@ async def donate(ctx):
 	
 @bot.command(pass_context=True)
 async def wallpaper(ctx):
-	embed = discord.Embed(title='Wallpaper:', color=0xffafc9,)
+	embed = discord.Embed(color=0xffafc9,)
 	embed.set_image(url='https://picsum.photos/1280/720/?image=' + str(random.randint(1, 999)))
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
 async def gif(ctx):
-	embed = discord.Embed(title='Gif:', color=0xffafc9,)
+	embed = discord.Embed(color=0xffafc9,)
 	embed.set_image(url='http://replygif.net/i/' + str(random.randint(90, 1100)) + '.gif')
 	await bot.say(embed=embed)
 	
