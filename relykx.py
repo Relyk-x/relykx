@@ -48,10 +48,19 @@ async def kick(ctx, user: discord.member):
 
 @bot.command(pass_context=True)
 async def embed(ctx):
-	embed = discoed.Embed(title="test", description="my name jeff", color=0x00ff00)
+	embed = discord.Embed(title="test", description="my name jeff", color=0x00ff00)
 	embed.set_author(name="ey boi this is the author")
 	embed.set_footer(text="this is a footer")
 	embed.add_field(name="this is a field", value="this is the value", inline=True)
 	await bot.say(embed=embed)
 
+@bot.comman(pass_context=True)
+async def help(ctx):
+	embed_a = discord.Embed(title="📖 General", color=0x00ff00)
+	embed.add_field(name="<command>", value="(description for command...)", inline=False)
+	await bot.say(embed=embed_a)
+	
+	embed_b = discord.Embed(title="😜 Fun", color=0x00ff00)
+	embed.add_field(name="<command>", value="(description for command...)", inline=False)
+	await bot.say(embed=embed_b)
 bot.run(os.getenv("BOT_TOKEN"))
