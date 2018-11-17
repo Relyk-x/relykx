@@ -5,6 +5,8 @@ from discord.ext import commands
 from discord.ext.commands import Bot
 import asyncio
 import random
+import time
+from time import gmtime, strftime
 import os
 
 bot = commands.Bot(command_prefix='m!')
@@ -135,6 +137,13 @@ async def eightball(ctx):
 	embed = discord.Embed(title ='**Game: 8 Ball**', color=0xffafc9, description="🎱 *shakes the 8 Ball up...*` \n\nYou shook the 8 ball and it shows you... \n Answer: **%s** \n ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿" %(random.choice(randomlist),))
 	embed.add_field(name="Other Games:", value="Dice Roll | ;dicerole \n Coin Flip | ;coinflip", inline=True)
 	await bot.say(embed=embed)
+
+@bot.command(pass_context=True)
+async def time(ctx):
+	dash = strftime("%I:%M", gmtime())
+	wholetime = dash[0] + dash[1]
+	resttime = dash[2:]
+	await bot.say("The server time now is: **" + wholetime + resttime + ", Obtained by 24timezones**")
 	
 @bot.command(pass_context=True)
 async def commands(ctx):
