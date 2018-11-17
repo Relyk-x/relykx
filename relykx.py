@@ -77,4 +77,9 @@ async def vote(ctx):
 	embed = discord.Embed(description='You can vote here: \n\n:point_right: https://discordbots.org/bot/496214977267630080/vote :point_left:', color=0xffafc9)
 	await bot.say(embed=embed)
 	
+@bot.command(pass_context=True)
+async def donate(ctx):
+	embed = discord.Embed(description='You can donate by purchasing roles from the MikiBot Help server here: \n\n:point_right: https://donatebot.io/checkout/499771629396688907?buyer=257784039795064833 :point_left:', color=0xffafc9)
+	await bot.say(embed=embed)
+	
 bot.run(os.getenv("BOT_TOKEN"))
