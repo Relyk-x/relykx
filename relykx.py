@@ -54,14 +54,10 @@ async def embed(ctx):
 	embed.add_field(name="this is a field", value="this is the value", inline=True)
 	await bot.say(embed=embed)
 
-@bot.command(pass_context=True)
+@bot.command(pass_context=False)
 async def help(ctx):
 	embed = discord.Embed(title="📖 General", color=0x00ff00)
 	embed.add_field(name="<command>", value="(description for command...)", inline=False)
-	await bot.say(embed=embed)
-	
-@bot.command(pass_context=True)
-async def help(ctx):	
 	embed = discord.Embed(title="😜 Fun", color=0x00ff00)
 	embed.add_field(name="<command>", value="(description for command...)", inline=False)
 	await bot.say(embed=embed)
