@@ -64,12 +64,12 @@ async def about(ctx):
 
 @bot.command(pass_context=True)
 async def invite(ctx):
-	em = discord.Embed(description="If you'd like to add MikiBot to your server, Click here: https://goo.gl/2rp6n2", color=0xffafc9)
-	await client.send_message(message.channel, embed=embed)
+	embed = discord.Embed(description="If you'd like to add MikiBot to your server, Click here: https://goo.gl/2rp6n2", color=0xffafc9)
+	await bot.send_message(message.channel, embed=embed)
 
 @bot.command(pass_context=True)
 async def servercount(ctx):
-	embed = discord.Embed(description='Currently watching over ' + str(len(client.servers)) + ' Discord servers <:discord:501956002158215198>', color=0xffafc9)
-	await client.send_message(message.channel, embed=embed)
+	embed = discord.Embed(description='Currently watching over ' + str(len(bot.servers)) + ' Discord servers <:discord:501956002158215198>', color=0xffafc9)
+	await bot.send_message(message.channel, embed=embed)
 	
 bot.run(os.getenv("BOT_TOKEN"))
