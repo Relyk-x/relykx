@@ -23,9 +23,9 @@ async def ping(ctx):
 async def info(ctx, user: discord.member):
 	embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what I could find.", color=0x00ff00)
 	embed.set_thumbnail(url=user.avatar_url)
-	embed.add_field(name="Name:", value=user.name, inline=True)
+	embed.add_field(name="Name", value=user.name, inline=True)
 	embed.add_field(name="ID", value=user.id, inline=True)
-	embed.add_field(name="Status" , value=user.status, inline=True)
+	embed.add_field(name="Status", value=user.status, inline=True)
 	embed.add_field(name="Highest role", value=user.top_role, inline=True)
 	embed.add_field(name="Joined", value=user.joined_at, inline=True)
 	await bot.say(embed=embed)
