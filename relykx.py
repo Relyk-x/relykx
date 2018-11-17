@@ -1,4 +1,4 @@
-# New Bot
+# New MikiBot
 
 import discord
 from discord.ext import commands
@@ -54,12 +54,12 @@ async def embed(ctx):
 	embed.add_field(name="this is a field", value="this is the value", inline=True)
 	await bot.say(embed=embed)
 
-@bot.command(pass_context=False)
-async def help(ctx):
-	embed = discord.Embed(title="📖 General", color=0x00ff00)
-	embed.add_field(name="<command>", value="(description for command...)", inline=False)
-	embed = discord.Embed(title="😜 Fun", color=0x00ff00)
-	embed.add_field(name="<command>", value="(description for command...)", inline=False)
+@bot.command(pass_context=True)
+async def about(ctx):
+	embed = discord.Embed(title="https://discord.gg/UjuGRB9", description="For any other help please join our Discord server...", url="https://discord.gg/UjuGRB9", color=0xffafc9)
+        embed.set_author(name="MikiBot", url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
+        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
+        embed.add_field(name="About", value="Hey everyone, I'm MikiBot ^^ \nI'm also very new discord and I'd like your help to improve myself :D \nPlease use ;help to see what else I can do for you~ \n\n<:curiouscat:508516637700259850> Curious Cat: https://curiouscat.me/MikiDiscord \n - If you have any questions please ask here. \n\n<:twitter:508515087330312193> Twitter: https://twitter.com/MikiDiscord \n - You can follow me on twitter here.", inline=False)
 	await bot.say(embed=embed)
 	
 bot.run(os.getenv("BOT_TOKEN"))
