@@ -68,8 +68,8 @@ async def invite(ctx):
 	await client.send_message(message.channel, embed=embed)
 
 @bot.command(pass_context=True)
-async def servercount
-	em = discord.Embed(description='Currently watching over ' + str(len(client.servers)) + ' Discord servers <:discord:501956002158215198>', color=0xffafc9)
+async def servercount(ctx):
+	embed = discord.Embed(description='Currently watching over ' + str(len(client.servers)) + ' Discord servers <:discord:501956002158215198>', color=0xffafc9)
 	await client.send_message(message.channel, embed=embed)
 	
 bot.run(os.getenv("BOT_TOKEN"))
