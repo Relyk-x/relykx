@@ -35,8 +35,8 @@ async def server(ctx):
 	embed.set_thumbnail(url=ctx.message.server.icon_url)
 	embed.add_field(name="Name:", value=ctx.message.server.name, inline=True)
 	embed.add_field(name="ID", value=ctx.message.server.id, inline=True)
-	embed.add_field(name=“Roles”, value=len(ctx.message.server.roles), inline=True)
-	embed.add_field(name=“Members”, value=len(ctx.message.server.members))
+	embed.add_field(name="Roles", value=len(ctx.message.server.roles), inline=True)
+	embed.add_field(name="Members", value=len(ctx.message.server.members))
 	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
