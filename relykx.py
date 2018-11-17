@@ -9,7 +9,7 @@ bot = commands.Bot(command_prefix='r!')
 
 @bot.event
 async def on_ready():
- 	print ("Ready when you are...")
+	print ("Ready when you are...")
 	print ("I am running on " + bot.user.name)
 	print ("With the ID: " + bot.user.id)
 
