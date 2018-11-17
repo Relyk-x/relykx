@@ -61,4 +61,5 @@ async def help(ctx):
 	embed = discord.Embed(title="😜 Fun", color=0x00ff00)
 	embed.add_field(name="<command>", value="(description for command...)", inline=False)
 	await bot.say(embed=embed)
+	
 bot.run(os.getenv("BOT_TOKEN"))
