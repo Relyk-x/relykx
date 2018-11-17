@@ -43,7 +43,7 @@ async def server(ctx):
 
 @bot.command(pass_context=True)
 @commands.has_role("Moderator")
-async def kick(ctx, user: discord.member):
+async def kick(ctx, user: discord.Member):
 	await bot.say(":boot: Cya, {}. ya loser!".format(user.name))
 	await bot.kick(user)
 
@@ -137,7 +137,8 @@ async def eightball(ctx):
 	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
-async def youtube(ctx, user: search):
+async def youtube(ctx, user: message.content):
+	search = message.content
 	fullcontent = ('http://www.youtube.com/results?search_query=' + search)
 	text = requests.get(fullcontent).text
 	soup = bs4.BeautifulSoup(text, 'html.parser')
