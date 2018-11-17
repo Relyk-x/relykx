@@ -85,27 +85,27 @@ async def donate(ctx):
 @bot.command(pass_context=True)
 async def wallpaper(ctx):
 	embed = discord.Embed(title='Wallpaper:', color=0xffafc9,)
-        embed.set_image(url='https://picsum.photos/1280/720/?image=' + str(random.randint(1, 999)))
+	embed.set_image(url='https://picsum.photos/1280/720/?image=' + str(random.randint(1, 999)))
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
 async def gif(ctx):
 	embed = discord.Embed(title='Gif:', color=0xffafc9,)
-        embed.set_image(url='http://replygif.net/i/' + str(random.randint(90, 1100)) + '.gif')
+	embed.set_image(url='http://replygif.net/i/' + str(random.randint(90, 1100)) + '.gif')
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
 async def diceroll(ctx):
 	randomlist = ['1','2','3','4','5','6',]
-        embed = discord.Embed(title ='**Game: Dice Roll**', color=0xffafc9, description="🎲 *rolls a dice* \n\nYou rolled a dice and it landed on a \n Side: **%s** \n ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿" %(random.choice(randomlist),))
-        embed.add_field(name="Other Games:", value="Coin Flip | ;coinflip \n 8 Ball | ;8ball", inline=True)
+	embed = discord.Embed(title ='**Game: Dice Roll**', color=0xffafc9, description="🎲 *rolls a dice* \n\nYou rolled a dice and it landed on a \n Side: **%s** \n ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿" %(random.choice(randomlist),))
+	embed.add_field(name="Other Games:", value="Coin Flip | ;coinflip \n 8 Ball | ;8ball", inline=True)
 	await bot.say(embed=em)
 	
 @bot.command(pass_context=True)
 async def coinflip(ctx):
 	randomlist = ['Heads','Tails',]
-        embed = discord.Embed(title ='**Game: Coin Flip**', color=0xffafc9, description="💰 *flips a coin* \n\nYou flipped a coin and it landed on \n Face: **%s** \n ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿" %(random.choice(randomlist),))
-        embed.add_field(name="Other Games:", value="Dice Roll | ;dicerole \n 8 Ball | ;8ball", inline=True)
+	embed = discord.Embed(title ='**Game: Coin Flip**', color=0xffafc9, description="💰 *flips a coin* \n\nYou flipped a coin and it landed on \n Face: **%s** \n ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿" %(random.choice(randomlist),))
+	embed.add_field(name="Other Games:", value="Dice Roll | ;dicerole \n 8 Ball | ;8ball", inline=True)
 	await bay.say(embed=embed)
 	
 @bot.command(pass_context=True)
@@ -131,8 +131,8 @@ async def eightball(ctx):
                       'Outlook not so good.',
                       'Very doubtful.',
                      ]
-        embed = discord.Embed(title ='**Game: 8 Ball**', color=0xffafc9, description="🎱 *shakes the 8 Ball up...*` \n\nYou shook the 8 ball and it shows you... \n Answer: **%s** \n ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿" %(random.choice(randomlist),))
-        embed.add_field(name="Other Games:", value="Dice Roll | ;dicerole \n Coin Flip | ;coinflip", inline=True)
+	embed = discord.Embed(title ='**Game: 8 Ball**', color=0xffafc9, description="🎱 *shakes the 8 Ball up...*` \n\nYou shook the 8 ball and it shows you... \n Answer: **%s** \n ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿" %(random.choice(randomlist),))
+	embed.add_field(name="Other Games:", value="Dice Roll | ;dicerole \n Coin Flip | ;coinflip", inline=True)
 	await client.send_message(message.channel, embed=embed)
 	
 bot.run(os.getenv("BOT_TOKEN"))
