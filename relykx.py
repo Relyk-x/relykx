@@ -56,11 +56,9 @@ async def embed(ctx):
 
 @bot.comman(pass_context=True)
 async def help(ctx):
-	embed_a = discord.Embed(title="📖 General", color=0x00ff00)
+	embed = discord.Embed(title="📖 General", color=0x00ff00)
 	embed.add_field(name="<command>", value="(description for command...)", inline=False)
-	await bot.say(embed=embed_a)
-	
-	embed_b = discord.Embed(title="😜 Fun", color=0x00ff00)
+	embed = discord.Embed(title="😜 Fun", color=0x00ff00)
 	embed.add_field(name="<command>", value="(description for command...)", inline=False)
 	await bot.say(embed=embed_b)
 bot.run(os.getenv("BOT_TOKEN"))
