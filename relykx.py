@@ -135,5 +135,29 @@ async def eightball(ctx):
 	embed = discord.Embed(title ='**Game: 8 Ball**', color=0xffafc9, description="🎱 *shakes the 8 Ball up...*` \n\nYou shook the 8 ball and it shows you... \n Answer: **%s** \n ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿" %(random.choice(randomlist),))
 	embed.add_field(name="Other Games:", value="Dice Roll | ;dicerole \n Coin Flip | ;coinflip", inline=True)
 	await bot.say(embed=embed)
+
+@bot.command(pass_context=True)
+async def commands(ctx):
+	embed = discord.Embed(title="https://discord.gg/UjuGRB9", description="For any other help please join our Discord server...\n\nPrefix:`;` \nCommands: `;<command>`", url="https://discord.gg/UjuGRB9", color=0xffafc9) # Bot
+        embed.set_author(name="MikiBot", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
+        
+        # Social
+        embed.add_field(name="＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿", value="<:social:511456438296641536> **Social** \ngreet – Sends a greeting in the channel. \nsay <text> – Rewrites your text. \nemojify <text> – Emojifies your text. \ntiny <text> – Decorates your text.", inline=False)
+        
+        # Server
+        embed.add_field(name="＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿", value="<:discord:501956002158215198> **Server** \nabout – Shows the About description of MikiBot. \ninvite – Sends the invite to add MikiBot to your server. \nservercount – Shows how many servers this bot occupies. \nserverlist – Shows a list of all the connected servers. \nversion – The current version of MikiBot. \nvote – Vote for MikiBot. \ndonate – Donate to MikiBot. \ntime – Displays the current time of the server. \npurge <amount> – Purges a specific amount of messages in a channel.", inline=False)
+        
+        # Youtube
+        embed.add_field(name="＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿", value="<:youtube:511430654139957258> **YouTube** \nyoutube <search> – Searches youtube for the most relevent video.", inline=False)
+        
+        # Fortnite
+        embed.add_field(name="＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿", value="<:fortnite:512113103387754509> **Fortnite** \nfortnite <platform> <nickname> – Displays fortnite stats of the entered user. \nhelp fortnite – Shows a how to of the command if you are stuck.", inline=False)
+        
+        # Fun
+        embed.add_field(name="＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿", value="<:fun:511457443939614721> **Fun** \n~~meme~~ – `DISABLED` \npassword – Generates a random password. \nwallpaper – Generate a random wallpaper. \ngif – Generate a random gif.", inline=False)
+        
+        # Games
+        embed.add_field(name="＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿", value="<:game:511448070005981204> **Games** \ndiceroll – Rolls a six sided die. \ncoinflip – Flips a coin, could be heads could be tails. \n8ball – Ask a question and shake the 8 Ball.", inline=False)
+	await bot.say(embed=embed)
 	
 bot.run(os.getenv("BOT_TOKEN"))
