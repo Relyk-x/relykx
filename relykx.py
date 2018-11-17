@@ -137,6 +137,27 @@ async def eightball(ctx):
 	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
+async def youtube(ctx, user: search):
+	fullcontent = ('http://www.youtube.com/results?search_query=' + search)
+	text = requests.get(fullcontent).text
+	soup = bs4.BeautifulSoup(text, 'html.parser')
+	img = soup.find_all('img')
+	div = [ d for d in soup.find_all('div') if d.has_attr('class') and 'yt-lockup-dismissable' in d['class']]
+	img0 = div[0].find_all('img')[0]
+	imgurl = (img0['src'])
+	a = [ x for x in div[0].find_all('a') if x.has_attr('title') ]
+	title = (a[0]['title'])
+	a0 = [ x for x in div[0].find_all('a') if x.has_attr('title') ][0]
+	url= ('http://www.youtube.com'+a0['href'])
+	embed = discord.Embed(title=title, url=url, color=0xdd342f)
+	embed.set_author(name='📺   YouTube Search')
+	embed.set_thumbnail(url=imgurl)
+	embed.add_field(name='Channel', value='<channel name>', inline=True)
+	embed.add_field(name='Duration', value='<duration of video>', inline=True)
+	embed.set_footer(text="not yet fully opperational...")
+	await bot.say(embed=embed)
+	
+@bot.command(pass_context=True)
 async def commands(ctx):
 	embed = discord.Embed(title="📖 General", color=0xffafc9)
 	embed.add_field(name="server", value="Displays the info of the current server.", inline=False)
@@ -149,8 +170,8 @@ async def commands(ctx):
 	embed.add_field(name="donate", value="Donate to MikiBot.", inline=False)
 	await bot.say(embed=embed)
 	embed = discord.Embed(title="😜 Fun", color=0xffafc9)
-	embed.add_field(name="wallpaper", value="Generate a random wallpaper.", inline=False)
-	embed.add_field(name="gif", value="Generate a random gif.", inline=False)
+	embed.add_field(name="wallpaper", value="Generates a random wallpaper.", inline=False)
+	embed.add_field(name="gif", value="Generates a random gif.", inline=False)
 	embed.add_field(name="dicroll", value="Rolls a six sided die.", inline=False)
 	embed.add_field(name="coinflip", value="Flips a coin, could be heads could be tails.", inline=False)
 	embed.add_field(name="eightball", value="Ask a question and shake the 8 Ball.", inline=False)
