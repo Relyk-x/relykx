@@ -135,28 +135,6 @@ async def eightball(ctx):
 	embed = discord.Embed(title ='**Game: 8 Ball**', color=0xffafc9, description="🎱 *shakes the 8 Ball up...*` \n\nYou shook the 8 ball and it shows you... \n Answer: **%s** \n ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿" %(random.choice(randomlist),))
 	embed.add_field(name="Other Games:", value="Dice Roll | ;dicerole \n Coin Flip | ;coinflip", inline=True)
 	await bot.say(embed=embed)
-
-@bot.command(pass_context=True)
-async def youtube(ctx, user: message.content):
-	search = message.content
-	fullcontent = ('http://www.youtube.com/results?search_query=' + search)
-	text = requests.get(fullcontent).text
-	soup = bs4.BeautifulSoup(text, 'html.parser')
-	img = soup.find_all('img')
-	div = [ d for d in soup.find_all('div') if d.has_attr('class') and 'yt-lockup-dismissable' in d['class']]
-	img0 = div[0].find_all('img')[0]
-	imgurl = (img0['src'])
-	a = [ x for x in div[0].find_all('a') if x.has_attr('title') ]
-	title = (a[0]['title'])
-	a0 = [ x for x in div[0].find_all('a') if x.has_attr('title') ][0]
-	url= ('http://www.youtube.com'+a0['href'])
-	embed = discord.Embed(title=title, url=url, color=0xdd342f)
-	embed.set_author(name='📺   YouTube Search')
-	embed.set_thumbnail(url=imgurl)
-	embed.add_field(name='Channel', value='<channel name>', inline=True)
-	embed.add_field(name='Duration', value='<duration of video>', inline=True)
-	embed.set_footer(text="not yet fully opperational...")
-	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
 async def commands(ctx):
