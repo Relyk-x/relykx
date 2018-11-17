@@ -1,1 +1,2 @@
-# relykx
+# Relykx
+A new Discord bot.
