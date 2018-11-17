@@ -4,6 +4,7 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import Bot
 import asyncio
+import random
 import os
 
 bot = commands.Bot(command_prefix='m!')
