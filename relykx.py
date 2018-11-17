@@ -18,11 +18,6 @@ async def on_ready():
 	print ("With the ID: " + bot.user.id)
 
 @bot.command(pass_context=True)
-async def ping(ctx):
-	await bot.say(":ping_pong: pong!")
-	print ("user has pinged")
-
-@bot.command(pass_context=True)
 async def info(ctx, user: discord.Member):
 	embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what I could find.", color=0xffafc9)
 	embed.set_thumbnail(url=user.avatar_url)
@@ -112,6 +107,11 @@ async def coinflip(ctx):
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
+async def ping(ctx):
+	await bot.say(":ping_pong: pong!")
+	print ("user has pinged")
+	
+@bot.command(pass_context=True)
 async def eightball(ctx):
 	randomlist = ['It is certain.',
                       'It is decidedly so.',
@@ -160,6 +160,7 @@ async def commands(ctx):
 	embed = discord.Embed(title="😜 Fun", color=0xffafc9)
 	embed.add_field(name="wallpaper", value="Generates a random wallpaper.", inline=False)
 	embed.add_field(name="gif", value="Generates a random gif.", inline=False)
+	embed.add_field(name"ping", value="Pongs the user's ping", inline=False)
 	embed.add_field(name="dicroll", value="Rolls a six sided die.", inline=False)
 	embed.add_field(name="coinflip", value="Flips a coin, could be heads could be tails.", inline=False)
 	embed.add_field(name="eightball", value="Ask a question and shake the 8 Ball.", inline=False)
