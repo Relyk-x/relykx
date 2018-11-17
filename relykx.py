@@ -10,8 +10,8 @@ bot = commands.Bot(command_prefix='r!')
 @bot.event
 async def on_ready():
  	print ("Ready when you are...")
-	print ("I am running on" + bot.user.name)
-	print ("With the ID:" + bot.user.id)
+	print ("I am running on " + bot.user.name)
+	print ("With the ID: " + bot.user.id)
 
 @bot.command(pass_context=True)
 async def ping(ctx):
@@ -40,7 +40,7 @@ async def server(ctx):
 	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
-@commands.has_role(“”)
+@commands.has_role("Moderator")
 async def kick(ctx, user: discord.member):
 	await bot.say(":boot: Cya, {}. ya loser!".format(user.name))
 	await bot.kick(user)
