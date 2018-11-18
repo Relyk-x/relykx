@@ -54,8 +54,13 @@ async def kick(ctx, user: discord.Member):
 
 @bot.command(pass_context=True)
 async def clear(ctx, msglimit : int):
-	deleted = await bot.purge_from(ctx.message.channel, limit=msglimit)
-	await bot.say("Cleared **{}** Messages".format(len(deleted)))
+	if message.author.id == '257784039795064833':
+		deleted = await bot.purge_from(ctx.message.channel, limit=msglimit)
+		embed = discord.Embed(description='Purged **{}** message(s) from this channel! ⚠'.format(len(deleted)), color=0xffafc9,)
+		await bot.say(embed=embed)
+	else:
+		embed = discord.Embed(description="You don't have the permissions to use this command", color=0xffafc9,)
+		await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
 async def about(ctx):
