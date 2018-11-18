@@ -78,7 +78,6 @@ async def kick(ctx, user: discord.Member):
 @bot.command(pass_context=True)
 async def clear(ctx, msglimit : int):
 	deleted = await bot.purge_from(ctx.message.channel, limit=msglimit)
-	await bot.delete_message(message)
 	embed = discord.Embed(description='Cleared **{}** message(s) from the channel! ⚠'.format(len(deleted)), color=0xffafc9,)
 	await bot.say(embed=embed)
 	selfdel = await client.send_message(message.channel, embed=em)
