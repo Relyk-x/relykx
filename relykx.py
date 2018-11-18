@@ -71,7 +71,7 @@ async def avatar(ctx, user: discord.Member):
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
-@commands.has_role("Moderator")
+@commands.has_role("Creator")
 async def kick(ctx, user: discord.Member):
 	await bot.say(":boot: Cya, {}. ya loser!".format(user.name))
 	await bot.kick(user)
