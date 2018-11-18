@@ -121,7 +121,6 @@ async def time(ctx):
 	resttime = dash[2:]
 	await bot.say("The server time now is: **" + wholetime + resttime + ", Obtained by 24timezones**")
 	
-	
 ##############################################################################################################################
 # 😜 F U N - C O M M A N D S													      
 ##############################################################################################################################
@@ -183,7 +182,6 @@ async def eightball(ctx):
 	embed = discord.Embed(title ="🎱 8 Ball", color=0xffafc9, description="*shakes the 8 Ball up...*")
 	embed.add_field(name="You shook the 8 ball and it shows you...", value="Answer: **%s**" %(random.choice(randomlist),))
 	await bot.say(embed=embed)
-	
 	
 ##############################################################################################################################
 # ℹ️ H E L P - C O M M A N D S	
