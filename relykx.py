@@ -67,6 +67,12 @@ async def info(ctx, user: discord.Member):
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
+async def avatar(ctx):
+	embed = discord.Embed(title="{}'s avatar".format(user.name) description="Here it is...",color=0xffafc9)
+	embed.set_image(url=user.avatar_url)
+	await bot.say(embed=embed)
+	
+@bot.command(pass_context=True)
 @commands.has_role("Moderator")
 async def kick(ctx, user: discord.Member):
 	await bot.say(":boot: Cya, {}. ya loser!".format(user.name))
