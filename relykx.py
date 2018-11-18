@@ -7,6 +7,7 @@ from discord.ext import commands
 from discord.ext.commands import Bot
 import asyncio
 import random
+import json
 import time
 from time import gmtime, strftime
 import os
@@ -124,12 +125,6 @@ async def time(ctx):
 ##############################################################################################################################
 # 😜 F U N - C O M M A N D S													      
 ##############################################################################################################################
-	
-@bot.command(pass_context=True)
-async def neko(ctx):
-	embed = discord.Embed(color=0xffafc9,)
-	embed.set_image(url="https://nekos.life/")
-	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
 async def wallpaper(ctx):
