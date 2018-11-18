@@ -126,6 +126,12 @@ async def time(ctx):
 ##############################################################################################################################
 	
 @bot.command(pass_context=True)
+async def hug(ctx, user: discord.Member):
+	embed = discord.Embed(descriotion=user.name + "you just got a hug from" + author.name, color=0xffafc9,)
+	embed.set_image(url="https://cdn.nekos.life/hug/")
+	await bot.say(embed=embed)
+	
+@bot.command(pass_context=True)
 async def wallpaper(ctx):
 	embed = discord.Embed(color=0xffafc9,)
 	embed.set_image(url='https://picsum.photos/1280/720/?image=' + str(random.randint(1, 999)))
