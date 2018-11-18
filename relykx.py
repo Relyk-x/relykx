@@ -80,7 +80,7 @@ async def clear(ctx, msglimit : int):
 	deleted = await bot.purge_from(ctx.message.channel, limit=msglimit)
 	embed = discord.Embed(description='Cleared **{}** message(s) from the channel! ⚠'.format(len(deleted)), color=0xffafc9,)
 	await bot.say(embed=embed)
-	selfdel = await bot.send_message(message.channel, embed=em)
+	selfdel = await bot.say(embed=em)
 	await asyncio.sleep(10)
 	await bot.delete_message(selfdel)
 	#embed = discord.Embed(description="Sorry that's too much...", color=0xffafc9,)
