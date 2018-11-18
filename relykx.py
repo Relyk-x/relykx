@@ -156,10 +156,6 @@ async def eightball(ctx):
 	
 @bot.command(pass_context=True)
 async def commands(ctx):
-	embed = discord.Embed(title="🤖 Bot", color=0xffafc9)
-	embed.add_field(name="prefix", value="m!", inline=True)
-	embed.add_field(name="commands", value="m!command", inline=True)
-	await bot.say(embed=embed)
 	embed = discord.Embed(title="📖 General", color=0xffafc9)
 	embed.add_field(name="server", value="Displays the info of the current server.", inline=False)
 	embed.add_field(name="info", value="Displays a profile of the mentioned user.", inline=False)
