@@ -15,11 +15,10 @@ bot = commands.Bot(command_prefix='m!')
 msglimit = 100
 
 async def change_status():
-	await bot.wait_until_ready()
 	servers = list(bot.servers)
 	status = 'over ' + str(len(bot.servers)) + ' servers'
+	await bot.change_presence(game=discord.Game(name=status,type=3))
 # WATCHING 'over ' + str(len(bot.servers)) + ' servers'
-	await bot.change_presence(game=discord.Game(name=status, url="https://www.twitch.tv/streamer",type=3))
 
 @bot.event
 async def on_member_join(member):
