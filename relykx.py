@@ -127,7 +127,7 @@ async def time(ctx):
 	
 @bot.command(pass_context=True)
 async def hug(ctx, user: discord.Member):
-	embed = discord.Embed(descriotion=user.name + "you just got a hug from" + author.name, color=0xffafc9,)
+	embed = discord.Embed(descriotion=user.name + "you just got a hug from MikiBot", color=0xffafc9,)
 	embed.set_image(url="https://cdn.nekos.life/hug/")
 	await bot.say(embed=embed)
 	
