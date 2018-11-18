@@ -169,7 +169,7 @@ async def commands(ctx):
 	embed.add_field(name="invite", value="Sends the invite to add MikiBot to your server.", inline=False)
 	embed.add_field(name="vote", value="Vote for MikiBot.", inline=False)
 	embed.add_field(name="donate", value="Donate to MikiBot.", inline=False)
-	embed.add_field(name="time", value="Displays the current time of the server.", inlineFalse)
+	embed.add_field(name="time", value="Displays the current time of the server.", inline=False)
 	await bot.say(embed=embed)
 	embed = discord.Embed(title="😜 Fun", color=0xffafc9)
 	embed.add_field(name="wallpaper", value="Generates a random wallpaper.", inline=False)
