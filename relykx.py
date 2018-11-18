@@ -16,7 +16,7 @@ msglimit = 100
 
 async def change_status():
 	await bot.wait_until_ready()
-	servers = list(client.servers)
+	servers = list(bot.servers)
 	status = 'over ' + str(len(bot.servers)) + ' servers'
 # WATCHING 'over ' + str(len(bot.servers)) + ' servers'
 	await bot.change_presence(game=discord.Game(name=status, url="https://www.twitch.tv/streamer",type=3))
