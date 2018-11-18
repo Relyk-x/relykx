@@ -106,12 +106,12 @@ async def invite(ctx):
 	
 @bot.command(pass_context=True)
 async def vote(ctx):
-	embed = discord.Embed(description='You can vote here: \nhttps://discordbots.org/bot/496214977267630080/vote', color=0xffafc9)
+	embed = discord.Embed(description="You can vote here: \nhttps://discordbots.org/bot/496214977267630080/vote", color=0xffafc9)
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
 async def donate(ctx):
-	embed = discord.Embed(description='You can donate by purchasing roles from the MikiBot Help server here: \nhttps://donatebot.io/checkout/499771629396688907?buyer=257784039795064833', color=0xffafc9)
+	embed = discord.Embed(description="You can donate by purchasing roles from the MikiBot Help server here: \nhttps://donatebot.io/checkout/499771629396688907?buyer", color=0xffafc9)
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
@@ -146,13 +146,15 @@ async def ping(ctx):
 @bot.command(pass_context=True)
 async def diceroll(ctx):
 	randomlist = ['1','2','3','4','5','6',]
-	embed = discord.Embed(title ='**Game: Dice Roll**', color=0xffafc9, description="🎲 *rolls a dice* \n\nYou rolled a dice and it landed on a \n Side: **%s**" %(random.choice(randomlist),))
+	embed = discord.Embed(title ="🎲 Dice Roll", color=0xffafc9, description="*rolls a dice*")
+	embed.add_field(name="You rolled a dice and it landed on...", value="Side: **%s**" %(random.choice(randomlist),))
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
 async def coinflip(ctx):
 	randomlist = ['Heads','Tails',]
-	embed = discord.Embed(title ='**Game: Coin Flip**', color=0xffafc9, description="💰 *flips a coin* \n\nYou flipped a coin and it landed on \n Face: **%s**" %(random.choice(randomlist),))
+	embed = discord.Embed(title ="💰 Coin Flip", color=0xffafc9, description="*flips a coin*")
+	embed.add_field(name="You flipped a coin and it landed on" value="Face: **%s**" %(random.choice(randomlist),))
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
@@ -178,7 +180,8 @@ async def eightball(ctx):
                       'Outlook not so good.',
                       'Very doubtful.',
                      ]
-	embed = discord.Embed(title ='**Game: 8 Ball**', color=0xffafc9, description="🎱 *shakes the 8 Ball up...*` \n\nYou shook the 8 ball and it shows you... \n Answer: **%s**" %(random.choice(randomlist),))
+	embed = discord.Embed(title ="🎱 8 Ball", color=0xffafc9, description="*shakes the 8 Ball up...*")
+	embed.add_field(name="You shook the 8 ball and it shows you...", value="Answer: **%s**" %(random.choice(randomlist),))
 	await bot.say(embed=embed)
 	
 	
