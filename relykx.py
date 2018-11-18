@@ -156,7 +156,7 @@ async def eightball(ctx):
 	
 @bot.command(pass_context=True)
 async def commands(ctx):
-	embed = discord.Embed(title=" Bot", color=0xffafc9)
+	embed = discord.Embed(title="🤖 Bot", color=0xffafc9)
 	embed.add_field(name="prefix", value=command_prefix, inline=True)
 	embed.add_field(name="{}command".format(command_prefix), inline=True)
 	await bot.say(embed=embed)
