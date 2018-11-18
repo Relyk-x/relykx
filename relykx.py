@@ -1,4 +1,6 @@
-# New MikiBot
+#######################################################################################################################
+# 🤖 B O T - S T A R T U P
+#######################################################################################################################
 
 import discord
 from discord.ext import commands
@@ -16,17 +18,11 @@ async def on_ready():
 	print ("Ready when you are...")
 	print ("I am running on " + bot.user.name)
 	print ("With the ID: " + bot.user.id)
-
-@bot.command(pass_context=True)
-async def info(ctx, user: discord.Member):
-	embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what I could find.", color=0xffafc9)
-	embed.set_thumbnail(url=user.avatar_url)
-	embed.add_field(name="Name", value=user.name, inline=True)
-	embed.add_field(name="ID", value=user.id, inline=True)
-	embed.add_field(name="Status", value=user.status, inline=True)
-	embed.add_field(name="Highest role", value=user.top_role, inline=True)
-	embed.add_field(name="Joined", value=user.joined_at, inline=True)
-	await bot.say(embed=embed)
+	
+	
+#######################################################################################################################
+# 📖 G E N E R A L - C O M M A N D S
+#######################################################################################################################
 
 @bot.command(pass_context=True)
 async def server(ctx):
@@ -39,18 +35,21 @@ async def server(ctx):
 	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
+async def info(ctx, user: discord.Member):
+	embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what I could find.", color=0xffafc9)
+	embed.set_thumbnail(url=user.avatar_url)
+	embed.add_field(name="Name", value=user.name, inline=True)
+	embed.add_field(name="ID", value=user.id, inline=True)
+	embed.add_field(name="Status", value=user.status, inline=True)
+	embed.add_field(name="Highest role", value=user.top_role, inline=True)
+	embed.add_field(name="Joined", value=user.joined_at, inline=True)
+	await bot.say(embed=embed)
+	
+@bot.command(pass_context=True)
 @commands.has_role("Moderator")
 async def kick(ctx, user: discord.Member):
 	await bot.say(":boot: Cya, {}. ya loser!".format(user.name))
 	await bot.kick(user)
-
-@bot.command(pass_context=True)
-async def embed(ctx):
-	embed = discord.Embed(title="test", description="my name jeff", color=0xffafc9)
-	embed.set_author(name="ey boi this is the author")
-	embed.set_footer(text="this is a footer")
-	embed.add_field(name="this is a field", value="this is the value", inline=True)
-	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
 async def about(ctx):
@@ -61,13 +60,13 @@ async def about(ctx):
 	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
-async def invite(ctx):
-	embed = discord.Embed(description="If you'd like to add MikiBot to your server, click here: \nhttps://discordapp.com/oauth2/authorize?&client_id=513265987349643264&scope=bot&permissions=66186303", color=0xffafc9)
-	await bot.say(embed=embed)
-
-@bot.command(pass_context=True)
 async def servercount(ctx):
 	embed = discord.Embed(description='Currently watching over ' + str(len(bot.servers)) + ' Discord servers <:discord:501956002158215198>', color=0xffafc9)
+	await bot.say(embed=embed)
+	
+@bot.command(pass_context=True)
+async def invite(ctx):
+	embed = discord.Embed(description="If you'd like to add MikiBot to your server, click here: \nhttps://discordapp.com/oauth2/authorize?&client_id=513265987349643264&scope=bot&permissions=66186303", color=0xffafc9)
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
@@ -79,6 +78,18 @@ async def vote(ctx):
 async def donate(ctx):
 	embed = discord.Embed(description='You can donate by purchasing roles from the MikiBot Help server here: \nhttps://donatebot.io/checkout/499771629396688907?buyer=257784039795064833', color=0xffafc9)
 	await bot.say(embed=embed)
+	
+@bot.command(pass_context=True)
+async def time(ctx):
+	dash = strftime("%I:%M", gmtime())
+	wholetime = dash[0] + dash[1]
+	resttime = dash[2:]
+	await bot.say("The server time now is: **" + wholetime + resttime + ", Obtained by 24timezones**")
+	
+	
+#######################################################################################################################
+# 😜 F U N - C O M M A N D S													      
+#######################################################################################################################
 	
 @bot.command(pass_context=True)
 async def wallpaper(ctx):
@@ -93,6 +104,11 @@ async def gif(ctx):
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
+async def ping(ctx):
+	await bot.say("🏓 pong!")
+	print ("user has pinged")
+	
+@bot.command(pass_context=True)
 async def diceroll(ctx):
 	randomlist = ['1','2','3','4','5','6',]
 	embed = discord.Embed(title ='**Game: Dice Roll**', color=0xffafc9, description="🎲 *rolls a dice* \n\nYou rolled a dice and it landed on a \n Side: **%s** \n ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿" %(random.choice(randomlist),))
@@ -105,11 +121,6 @@ async def coinflip(ctx):
 	embed = discord.Embed(title ='**Game: Coin Flip**', color=0xffafc9, description="💰 *flips a coin* \n\nYou flipped a coin and it landed on \n Face: **%s** \n ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿" %(random.choice(randomlist),))
 	embed.add_field(name="Other Games:", value="Dice Roll | ;dicerole \n 8 Ball | ;8ball", inline=True)
 	await bot.say(embed=embed)
-	
-@bot.command(pass_context=True)
-async def ping(ctx):
-	await bot.say(":ping_pong: pong!")
-	print ("user has pinged")
 	
 @bot.command(pass_context=True)
 async def eightball(ctx):
@@ -137,13 +148,11 @@ async def eightball(ctx):
 	embed = discord.Embed(title ='**Game: 8 Ball**', color=0xffafc9, description="🎱 *shakes the 8 Ball up...*` \n\nYou shook the 8 ball and it shows you... \n Answer: **%s** \n ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿" %(random.choice(randomlist),))
 	embed.add_field(name="Other Games:", value="Dice Roll | ;dicerole \n Coin Flip | ;coinflip", inline=True)
 	await bot.say(embed=embed)
-
-@bot.command(pass_context=True)
-async def time(ctx):
-	dash = strftime("%I:%M", gmtime())
-	wholetime = dash[0] + dash[1]
-	resttime = dash[2:]
-	await bot.say("The server time now is: **" + wholetime + resttime + ", Obtained by 24timezones**")
+	
+	
+#######################################################################################################################
+# ℹ️ H E L P - C O M M A N D S	
+#######################################################################################################################
 	
 @bot.command(pass_context=True)
 async def commands(ctx):
@@ -152,10 +161,11 @@ async def commands(ctx):
 	embed.add_field(name="info", value="Displays a profile of the mentioned user.", inline=False)
 	embed.add_field(name="kick", value="Kicks the mentioned user.", inline=False)
 	embed.add_field(name="about", value="Shows the About description of MikiBot.", inline=False)
-	embed.add_field(name="invite", value="Sends the invite to add MikiBot to your server.", inline=False)
 	embed.add_field(name="servercount", value="Shows how many servers this bot occupies.", inline=False)
+	embed.add_field(name="invite", value="Sends the invite to add MikiBot to your server.", inline=False)
 	embed.add_field(name="vote", value="Vote for MikiBot.", inline=False)
 	embed.add_field(name="donate", value="Donate to MikiBot.", inline=False)
+	embed.add_field(name="time", value="Displays the current time of the server.", inlineFalse)
 	await bot.say(embed=embed)
 	embed = discord.Embed(title="😜 Fun", color=0xffafc9)
 	embed.add_field(name="wallpaper", value="Generates a random wallpaper.", inline=False)
@@ -165,5 +175,13 @@ async def commands(ctx):
 	embed.add_field(name="coinflip", value="Flips a coin, could be heads could be tails.", inline=False)
 	embed.add_field(name="eightball", value="Ask a question and shake the 8 Ball.", inline=False)
 	await bot.say(embed=embed)
+	
+#@bot.command(pass_context=True)
+#async def embed(ctx):
+#	embed = discord.Embed(title="this is the title", description="this is the descriptionf", color=0xffafc9)
+#	embed.set_author(name="this is the author")
+#	embed.set_footer(text="this is a footer")
+#	embed.add_field(name="this is a field", value="this is the value", inline=True)
+#	await bot.say(embed=embed)
 
 bot.run(os.getenv("BOT_TOKEN"))
