@@ -195,7 +195,7 @@ async def commands(ctx):
 	embed.add_field(name="info", value="Displays a profile of the mentioned user.", inline=False)
 	embed.add_field(name="avatar", value="Dusplays the profile pic of the mentioned user.", inline=False)
 	embed.add_field(name="kick", value="Kicks the mentioned user.", inline=False)
-	embed.add_field(name="clear", value"Clears a specific amount of messages in a channel.", inline=False)
+	embed.add_field(name="clear", value="Clears a specific amount of messages in a channel.", inline=False)
 	embed.add_field(name="about", value="Shows the About description of MikiBot.", inline=False)
 	embed.add_field(name="servercount", value="Shows how many servers this bot occupies.", inline=False)
 	embed.add_field(name="invite", value="Sends the invite to add MikiBot to your server.", inline=False)
