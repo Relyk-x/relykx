@@ -126,9 +126,9 @@ async def time(ctx):
 ##############################################################################################################################
 	
 @bot.command(pass_context=True)
-async def hug(ctx, user: discord.Member):
-	embed = discord.Embed(descriotion=user.name + "you just got a hug from MikiBot", color=0xffafc9,)
-	embed.set_image(url="https://cdn.nekos.life/hug/")
+async def neko(ctx):
+	embed = discord.Embed(color=0xffafc9,)
+	embed.set_image(url="https://nekos.life/")
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
