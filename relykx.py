@@ -12,6 +12,7 @@ from time import gmtime, strftime
 import os
 
 bot = commands.Bot(command_prefix='m!')
+msglimit = 100
 
 @bot.event
 async def on_ready():
@@ -51,6 +52,11 @@ async def kick(ctx, user: discord.Member):
 	await bot.say(":boot: Cya, {}. ya loser!".format(user.name))
 	await bot.kick(user)
 
+@bot.command(pass_context=True)
+async def clear(ctx, msglimit : int):
+	deleted = await bot.purge_from(ctx.message.channel, limit=msglimit)
+	await bot.say("Cleared **{}** Messages".format(len(deleted)))
+	
 @bot.command(pass_context=True)
 async def about(ctx):
 	embed = discord.Embed(title="https://discord.gg/UjuGRB9", description="For any other help please join our Discord server...", url="https://discord.gg/UjuGRB9", color=0xffafc9)
