@@ -14,12 +14,32 @@ import os
 bot = commands.Bot(command_prefix='m!')
 msglimit = 100
 
+async def change_status():
+	await bot.wait_until_ready()
+	servers = list(client.servers)
+	status = 'over ' + str(len(bot.servers)) + ' servers'
+# WATCHING 'over ' + str(len(bot.servers)) + ' servers'
+	await bot.change_presence(game=discord.Game(name=status, url="https://www.twitch.tv/streamer",type=3))
+
+@bot.event
+async def on_member_join(member):
+	servers = list(bot.servers)
+    	print("Connected on " + str(len(bot.servers)) + " servers:")
+    	for x in range(len(servers)):
+    	 print(' ' + servers[x-1].name)
+    	embed = discord.Embed(title="https://discord.gg/UjuGRB9", description="Invite your friends!!", url="https://discord.gg/UjuGRB9", color=0xffafc9)
+    	embed.set_author(name="MikiBot", url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
+    	embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
+    	embed.add_field(name="About", value="Hey there, I'm MikiBot ^^ \nI'm also very new discord and I'd like your help to improve myself :D \nPlease use ;help to see what else I can do for you~ \n\n<:curiouscat:508516637700259850> Curious Cat: https://curiouscat.me/MikiDiscord \n - If you have any questions please ask here. \n\n<:twitter:508515087330312193> Twitter: https://twitter.com/MikiDiscord \n - You can follow me on twitter here.", inline=False)
+    	#embed.set_footer(text="version: " + VERSION)
+    	await bot.send_message(member, embed=embed)
+	
 @bot.event
 async def on_ready():
+	print ('MikiBot is up and running with ' + str(len(client.servers)) + ' servers connected!')
 	print ("Ready when you are...")
 	print ("I am running on " + bot.user.name)
 	print ("With the ID: " + bot.user.id)
-	
 	
 #######################################################################################################################
 # 📖 G E N E R A L - C O M M A N D S
