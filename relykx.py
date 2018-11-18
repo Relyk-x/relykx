@@ -54,7 +54,7 @@ async def kick(ctx, user: discord.Member):
 
 @bot.command(pass_context=True)
 async def clear(ctx, msglimit : int):
-	if author.id == '257784039795064833':
+	if user.id == '257784039795064833':
 		deleted = await bot.purge_from(ctx.message.channel, limit=msglimit)
 		embed = discord.Embed(description='Purged **{}** message(s) from this channel! ⚠'.format(len(deleted)), color=0xffafc9,)
 		await bot.say(embed=embed)
