@@ -64,7 +64,7 @@ async def info(ctx, user: discord.Member):
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
-async def avatar(ctx):
+async def avatar(ctx, user: discord.Member):
 	embed = discord.Embed(title="{}'s avatar".format(user.name), description="Here it is...",color=0xffafc9)
 	embed.set_image(url=user.avatar_url)
 	await bot.say(embed=embed)
