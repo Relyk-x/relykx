@@ -148,7 +148,7 @@ async def hi(ctx):
 
 @bot.command(pass_context=True)
 async def kawaii(ctx):
-	embed = discord.Embed(title="Kawaii Emoji", description="Find more here: https://kawaiiface.net/", color=0xffafc9,)
+	embed = discord.Embed(title="💠 Kawaii Emoji", description="Find more here: https://kawaiiface.net/", color=0xffafc9,)
 	embed.add_field(name="Happy", value="`(✿◠‿◠)` `≧◡≦` `(▰˘◡˘▰)` `(●´ω｀●)` `(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧`\n`（ミ￣ー￣ミ）` `(づ｡◕‿‿◕｡)づ` `✌.ʕʘ‿ʘʔ.✌` `◎[▪‿▪]◎`", inline=False)
 	embed.add_field(name="Sad", value="`ಥ_ಥ` `┐(‘～'；)┌` `◄.►` `(◕︵◕)` `v( ‘.’ )v`\n`ਉ_ਉ` `o(╥﹏╥)o` `●︿●` `(∩︵∩)`", inline=False)
 	embed.add_field(name="Mad", value="`〴⋋_⋌〵` `(◣_◢)` `☉▵☉凸` `ↁ_ↁ` `╚(•⌂•)╝`\n`ᇂﮌᇂ)` `(┛◉Д◉)┛彡┻━┻ `", inline=False)
