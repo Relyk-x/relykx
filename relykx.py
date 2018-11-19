@@ -94,8 +94,6 @@ async def about(ctx):
 	embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 	embed.add_field(name="Website", value="https://relykxdiscord.wixsite.com/mikibot", inline=True)
 	embed.add_field(name="About", value="Hey everyone, I'm MikiBot ^^ \nI'm also very new discord and I'd like your help to improve myself :D \nPlease use m!help to see what else I can do for you~", inline=False)
-	embed.add_field(name="Curious Cat", value="<:curiouscat:508516637700259850> https://curiouscat.me/MikiDiscord", inline=True)
-	embed.add_field(name="Twitter", value="<:twitter:508515087330312193> https://twitter.com/MikiDiscord", inline=True)
 	embed.add_field(name="Social", value="<:curiouscat:508516637700259850>Curious Cat |<:twitter:508515087330312193>Twitter", inline=True)
 	embed.add_field(name="Website", value="https://relykxdiscord.wixsite.com/mikibot", inline=True)
 	await bot.say(embed=embed)
