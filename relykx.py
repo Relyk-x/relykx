@@ -148,7 +148,7 @@ async def hi(ctx):
 
 @bot.command(pass_context=True)
 async def kawaii(ctx):
-	embed = discord.Embed(color=0xffafc9,)
+	embed = discord.Embed(title="Kawaii Emoji", description="Find more here: https://kawaiiface.net/", color=0xffafc9,)
 	embed.add_field(name="Happy", value="`(✿◠‿◠)` `≧◡≦` `(▰˘◡˘▰)` `(●´ω｀●)` `(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧`\n`（ミ￣ー￣ミ）` `(づ｡◕‿‿◕｡)づ` `✌.ʕʘ‿ʘʔ.✌` `◎[▪‿▪]◎`", inline=False)
 	embed.add_field(name="Sad", value="`ಥ_ಥ` `┐(‘～'；)┌` `◄.►` `(◕︵◕)` `v( ‘.’ )v`\n`ਉ_ਉ` `o(╥﹏╥)o` `●︿●` `(∩︵∩)`", inline=False)
 	embed.add_field(name="Mad", value="`〴⋋_⋌〵` `(◣_◢)` `☉▵☉凸` `ↁ_ↁ` `╚(•⌂•)╝`\n`ᇂﮌᇂ)` `(┛◉Д◉)┛彡┻━┻ `", inline=False)
@@ -177,14 +177,14 @@ async def ping(ctx):
 @bot.command(pass_context=True)
 async def diceroll(ctx):
 	randomlist = ['1','2','3','4','5','6',]
-	embed = discord.Embed(title ="🎲 Dice Roll", color=0xffafc9, description="*rolls a dice*")
+	embed = discord.Embed(title ="🎲 Dice Roll", description="*rolls a dice*"color=0xffafc9,)
 	embed.add_field(name="You rolled a dice and it landed on...", value="Side: **%s**" %(random.choice(randomlist),))
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
 async def coinflip(ctx):
 	randomlist = ['Heads','Tails',]
-	embed = discord.Embed(title ="💰 Coin Flip", color=0xffafc9, description="*flips a coin*")
+	embed = discord.Embed(title ="💰 Coin Flip", description="*flips a coin*", color=0xffafc9,)
 	embed.add_field(name="You flipped a coin and it landed on", value="Face: **%s**" %(random.choice(randomlist),))
 	await bot.say(embed=embed)
 	
@@ -211,7 +211,7 @@ async def eightball(ctx):
                       'Outlook not so good.',
                       'Very doubtful.',
                      ]
-	embed = discord.Embed(title ="🎱 8 Ball", color=0xffafc9, description="*shakes the 8 Ball up...*")
+	embed = discord.Embed(title ="🎱 8 Ball", description="*shakes the 8 Ball up...*", color=0xffafc9,)
 	embed.add_field(name="You shook the 8 ball and it shows you...", value="Answer: **%s**" %(random.choice(randomlist),))
 	await bot.say(embed=embed)
 	
