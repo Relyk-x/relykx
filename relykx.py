@@ -69,7 +69,7 @@ async def serverinfo(ctx):
 	embed.add_field(name="Created:", value=ctx.message.server.created_at, inline=True)
 	embed.add_field(name="Roles:", value=len(ctx.message.server.roles), inline=True)
 # embed.add_field(name="Channels:", value=?, inline=True)
-# embed.add_field(name="Members:", value=len(ctx.message.server.members == 'online') + "\n" + len(ctx.message.server.members == 'offline') + "\n" + len(ctx.message.server.members), inline=True)
+# embed.add_field(name="Members:", value=len(ctx.message.server.member.status = discord.Status.online) + "\n" + len(ctx.message.server.members == 'offline') + "\n" + len(ctx.message.server.members), inline=True)
 	embed.add_field(name="Members:", value=len(ctx.message.server.members), inline=True)
 # embed.add_field(name="Number of Emotes:", value=?, inline=True)
 # embed.set_footer(text="Requested by " + author.username + " - " + <day> + " at " + <current.time> + <am/pm>, icon_url=user.avatar_url)
@@ -150,7 +150,8 @@ async def time(ctx):
 	dash = strftime("%I:%M", gmtime())
 	wholetime = dash[0] + dash[1]
 	resttime = dash[2:]
-	embed = discord.Embed(title="🕗 Time", description="The server time now is: **" + wholetime + resttime + "**, Obtained by 24timezones", color=0xffafc9)
+	embed = discord.Embed(title="🕗 Time", description="The server time now is:\n**" + wholetime + resttime + "**\nObtained by 24timezones", color=0xffafc9)
+	embed.set_footer(text="Requested by {}".format(author.name), icon_url=user.avatar_url)
 	await bot.say(embed=embed)
 	
 ##############################################################################################################################
