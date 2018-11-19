@@ -235,6 +235,8 @@ async def commands(ctx):
 	embed.add_field(name="time", value="Displays the current time of the server.", inline=False)
 	await bot.say(embed=embed)
 	embed = discord.Embed(title="😜 Fun", color=0xffafc9)
+	embed.add_field(name"hi", value='Generates a response, for example: "hai ^-^"', inline=False)
+	embed.add_field(name"kawaii", value="Displays multiple different kawaii emoji", inline=False)
 	embed.add_field(name="wallpaper", value="Generates a random wallpaper.", inline=False)
 	embed.add_field(name="gif", value="Generates a random gif.", inline=False)
 	embed.add_field(name="ping", value="Pongs the user's ping.", inline=False)
