@@ -153,7 +153,7 @@ async def diceroll(ctx):
 async def coinflip(ctx):
 	randomlist = ['Heads','Tails',]
 	embed = discord.Embed(title ="💰 Coin Flip", color=0xffafc9, description="*flips a coin*")
-	embed.add_field(name="You flipped a coin and it landed on" value="Face: **%s**" %(random.choice(randomlist),))
+	embed.add_field(name="You flipped a coin and it landed on", value="Face: **%s**" %(random.choice(randomlist),))
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
