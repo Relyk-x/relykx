@@ -78,6 +78,7 @@ async def kick(ctx, user: discord.Member):
 	await bot.kick(user)
 
 @bot.command(pass_context=True)
+@commands.has_role("Creator")
 async def clear(ctx, msglimit : int):
 	deleted = await bot.purge_from(ctx.message.channel, limit=msglimit)
 	embed = discord.Embed(description='Cleared **{}** message(s) from the channel! ⚠'.format(len(deleted)), color=0xffafc9,)
