@@ -62,12 +62,16 @@ async def on_member_join(member):
 async def serverinfo(ctx):
 	embed = discord.Embed(title="📋 {}'s info".format(ctx.message.server.name), description="Here's what I could find.", color=0xffafc9)
 	embed.set_thumbnail(url=ctx.message.server.icon_url)
-	embed.add_field(name="Name", value=ctx.message.server.name, inline=True)
-	embed.add_field(name="Region", value=ctx.message.server.region, inline=True)
-	embed.add_field(name="ID", value=ctx.message.server.id, inline=True)
-	embed.add_field(name="Roles", value=len(ctx.message.server.roles), inline=True)
-	embed.add_field(name="Members", value=len(ctx.message.server.members), inline=True)
-	embed.add_field(name="Created", value=ctx.message.server.created_at, inline=True)
+	embed.add_field(name="ID:", value=ctx.message.server.id, inline=True
+# embed.add_field(name="Owner:", value=?, inline=True)
+	embed.add_field(name="Region:", value=ctx.message.server.region, inline=True)
+# embed.add_field(name="Varification level:, value=?, inline=True)
+	embed.add_field(name="Created:", value=ctx.message.server.created_at, inline=True)
+	embed.add_field(name="Roles:", value=len(ctx.message.server.roles), inline=True)
+# embed.add_field(name="Channels:", value=?, inline=True)
+	embed.add_field(name="Members:", value=len(ctx.message.server.online) + "\n" + ctx.message.server.offline + "\n" + ctx.message.server.members), inline=True)
+# embed.add_field(name="Number of Emotes:", value=?, inline=True)
+# embed.set_footer(text="Requested by " + author.username + " - " + <day> + " at " + <current.time> + <am/pm>, icon_url=user.avatar_url)
 	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
@@ -105,8 +109,8 @@ async def clear(ctx, msglimit : int):
 	selfdel = await bot.say(embed=embed)
 	await asyncio.sleep(10)
 	await bot.delete_message(selfdel)
-	#embed = discord.Embed(description="Sorry that's too much...", color=0xffafc9,)
-	#await bot.say(embed=embed)
+# embed = discord.Embed(description="Sorry that's too much...", color=0xffafc9,)
+# await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
 async def about(ctx):
