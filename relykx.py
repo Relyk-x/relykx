@@ -62,7 +62,7 @@ async def on_member_join(member):
 async def serverinfo(ctx):
 	embed = discord.Embed(title="📋 {}'s info".format(ctx.message.server.name), description="Here's what I could find.", color=0xffafc9)
 	embed.set_thumbnail(url=ctx.message.server.icon_url)
-	embed.add_field(name="ID:", value=ctx.message.server.id, inline=True
+	embed.add_field(name="ID:", value=ctx.message.server.id, inline=True)
 # embed.add_field(name="Owner:", value=?, inline=True)
 	embed.add_field(name="Region:", value=ctx.message.server.region, inline=True)
 # embed.add_field(name="Varification level:, value=?, inline=True)
