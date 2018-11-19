@@ -134,8 +134,8 @@ async def time(ctx):
 @bot.command(pass_context=True)
 async def hi(ctx):
 	randomlist = ['>//< hellu',
-                      'hai ^^',
-                      'hewo o3o',
+		      'hai ^^',
+		      'hewo o3o',
 		      'h-hi o-o',
 		      'hello ^-^',
 		      'hellu',
