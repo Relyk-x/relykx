@@ -49,9 +49,10 @@ async def on_member_join(member):
 @bot.event
 async def on_message(message):
 	if message.content == 'm!on-message':
-		embed = discord.Embed(description="🚧 ᴜɴᴅᴇʀ ᴄᴏɴsᴛʀᴜᴄᴛɪᴏɴ 🚧", color=0xffafc9)
-		await bot.send_message(message.channel, embed=em)
-		
+		embed = discord.Embed(title="⚠ Bot Logs", description="🚧 ᴜɴᴅᴇʀ ᴄᴏɴsᴛʀᴜᴄᴛɪᴏɴ 🚧", color=0xffafc9)
+		selfdel = await bot.send_message(message.channel, embed=embed)
+		await asyncio.sleep(10)
+		await bot.delete_message(selfdel)
 ##############################################################################################################################
 # 📖 | G E N E R A L - C O M M A N D S
 ##############################################################################################################################
