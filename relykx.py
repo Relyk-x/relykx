@@ -94,7 +94,7 @@ async def avatar(ctx, user: discord.Member):
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
-@commands.has_role("Creator")
+@commands.has_permissions(administrator=True)
 async def kick(ctx, user: discord.Member):
 	embed = discord.Embed(title="⚠ Bot Logs", description="**{}** has been kicked from the server".format(user.name), color=0xffafc9,)
 	selfdel = await bot.say(embed=embed)
