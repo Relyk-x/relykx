@@ -150,7 +150,7 @@ async def time(ctx):
 	dash = strftime("%I:%M", gmtime())
 	wholetime = dash[0] + dash[1]
 	resttime = dash[2:]
-	embed = discord.Embed(title="🕗 Time", description="The server time now is: **" + wholetime + resttime + "**, Obtained by 24timezones"
+	embed = discord.Embed(title="🕗 Time", description="The server time now is: **" + wholetime + resttime + "**, Obtained by 24timezones", color=0xffafc9)
 	await bot.say(embed=embed)
 	
 ##############################################################################################################################
