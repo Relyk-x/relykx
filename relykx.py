@@ -93,12 +93,13 @@ async def clear(ctx, msglimit : int):
 	
 @bot.command(pass_context=True)
 async def about(ctx):
-	embed = discord.Embed(title="https://discord.gg/UjuGRB9", description="For any other help please join our Discord server...", url="https://discord.gg/UjuGRB9", color=0xffafc9)
+	embed = discord.Embed(color=0xffafc9,)
 	embed.set_author(name="MikiBot", url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 	embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 	embed.add_field(name="About", value="Hey everyone, I'm MikiBot ^^ \nI'm also very new discord and I'd like your help to improve myself :D \nPlease use m!help to see what else I can do for you~", inline=False)
-	embed.add_field(name="Social", value="<:curiouscat:508516637700259850> Curious Cat | <:twitter:508515087330312193> Twitter", inline=True)
-	embed.add_field(name="Website", value="🌏 https://goo.gl/wKEVjA", inline=True)
+	embed.add_field(name="Social", value="<:curiouscat:508516637700259850> Curious Cat | <:twitter:508515087330312193> Twitter", inline=False)
+	embed.add_field(name="Website", value="🌏 https://goo.gl/wKEVjA", inline=False)
+	embed.add_field(name="Server", value="<:discord:501956002158215198> https://discord.gg/UjuGRB9", inline=True)
 	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
