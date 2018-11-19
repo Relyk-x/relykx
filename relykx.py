@@ -52,7 +52,7 @@ async def server(ctx):
 	embed.add_field(name="Name:", value=ctx.message.server.name, inline=True)
 	embed.add_field(name="ID", value=ctx.message.server.id, inline=True)
 	embed.add_field(name="Created", value=ctx.message.server.created_at, inline=True)
-	embed.add_field(name="Joined", value=vtx.message.server.joined_at, inline=True)
+	embed.add_field(name="Joined", value=ctx.message.server.joined_at, inline=True)
 	embed.add_field(name="Roles", value=len(ctx.message.server.roles), inline=True)
 	embed.add_field(name="Members", value=len(ctx.message.server.members), inline=True)
 	await bot.say(embed=embed)
