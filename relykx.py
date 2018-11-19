@@ -47,7 +47,7 @@ async def on_member_join(member):
 
 @bot.command(pass_context=True)
 async def serverinfo(ctx):
-	embed = discord.Embed(title="{}'s info".format(ctx.message.server.name), description="Here's what I could find.", color=0xffafc9)
+	embed = discord.Embed(title="📋 {}'s info".format(ctx.message.server.name), description="Here's what I could find.", color=0xffafc9)
 	embed.set_thumbnail(url=ctx.message.server.icon_url)
 	embed.add_field(name="Name:", value=ctx.message.server.name, inline=True)
 	embed.add_field(name="ID", value=ctx.message.server.id, inline=True)
@@ -58,7 +58,7 @@ async def serverinfo(ctx):
 
 @bot.command(pass_context=True)
 async def info(ctx, user: discord.Member):
-	embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what I could find.", color=0xffafc9)
+	embed = discord.Embed(title="📋 {}'s info".format(user.name), description="Here's what I could find.", color=0xffafc9)
 	embed.set_thumbnail(url=user.avatar_url)
 	embed.add_field(name="Name", value=user.name, inline=True)
 	embed.add_field(name="ID", value=user.id, inline=True)
@@ -70,7 +70,7 @@ async def info(ctx, user: discord.Member):
 	
 @bot.command(pass_context=True)
 async def avatar(ctx, user: discord.Member):
-	embed = discord.Embed(title="{}'s avatar".format(user.name), description="Here it is...",color=0xffafc9)
+	embed = discord.Embed(title="🖼️ {}'s avatar".format(user.name), description="Here it is...",color=0xffafc9)
 	embed.set_image(url=user.avatar_url)
 	await bot.say(embed=embed)
 	
@@ -84,7 +84,7 @@ async def kick(ctx, user: discord.Member):
 @commands.has_role("Creator")
 async def clear(ctx, msglimit : int):
 	deleted = await bot.purge_from(ctx.message.channel, limit=msglimit)
-	embed = discord.Embed(description='Cleared **{}** message(s) from the channel! ⚠'.format(len(deleted)), color=0xffafc9,)
+	embed = discord.Embed(description='⚠ Cleared **{}** message(s) from the channel!'.format(len(deleted)), color=0xffafc9,)
 	selfdel = await bot.say(embed=embed)
 	await asyncio.sleep(10)
 	await bot.delete_message(selfdel)
@@ -103,17 +103,17 @@ async def about(ctx):
 
 @bot.command(pass_context=True)
 async def servercount(ctx):
-	embed = discord.Embed(description='Currently watching over ' + str(len(bot.servers)) + ' Discord servers <:discord:501956002158215198>', color=0xffafc9)
+	embed = discord.Embed(description='<:discord:501956002158215198> Currently watching over ' + str(len(bot.servers)) + ' Discord servers', color=0xffafc9)
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
 async def invite(ctx):
-	embed = discord.Embed(description="If you'd like to add MikiBot to your server, go to our website here: https://relykxdiscord.wixsite.com/mikibot", color=0xffafc9)
+	embed = discord.Embed(description="📨 If you'd like to add MikiBot to your server, go to our website here: https://relykxdiscord.wixsite.com/mikibot", color=0xffafc9)
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
 async def vote(ctx):
-	embed = discord.Embed(description="You can vote here: \nhttps://discordbots.org/bot/496214977267630080/vote", color=0xffafc9)
+	embed = discord.Embed(description="📥 You can vote here: \nhttps://discordbots.org/bot/496214977267630080/vote", color=0xffafc9)
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
@@ -127,7 +127,7 @@ async def time(ctx):
 	dash = strftime("%I:%M", gmtime())
 	wholetime = dash[0] + dash[1]
 	resttime = dash[2:]
-	await bot.say("The server time now is: **" + wholetime + resttime + ", Obtained by 24timezones**")
+	await bot.say("🕗 The server time now is: **" + wholetime + resttime + ", Obtained by 24timezones**")
 	
 ##############################################################################################################################
 # 😜 | F U N - C O M M A N D S													      
