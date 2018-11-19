@@ -153,8 +153,8 @@ async def kawaii(ctx):
 	embed.add_field(name="Sad", value="`ಥ_ಥ` `┐(‘～'；)┌` `◄.►` `(◕︵◕)`\n`v( ‘.’ )v` `ਉ_ਉ` `o(╥﹏╥)o` `●︿●`\n`(∩︵∩)`", inline=False)
 	embed.add_field(name="Mad", value="`〴⋋_⋌〵` `(◣_◢)` `☉▵☉凸` `ↁ_ↁ`\n`╚(•⌂•)╝` `ᇂﮌᇂ)` `ლ(́◉◞౪◟◉‵ლ`\n`(┛◉Д◉)┛彡┻━┻ `", inline=False)
 	embed.add_field(name="Love", value="`v(=∩_∩=)ﾌ` `(n˘v˘•)¬` `♥╣[-_-]╠♥` `★~(◡﹏◕✿)`\n`(◕‿-)` `( ^▽^)σ)~O~)` `♥‿♥` `(✿ ♥‿♥)`\n`(●´ω｀●)`", inline=False)
-	embed.add_field(name="Party", value="`\m/(>.<)\m/` `ヾ(〃^∇^)ﾉ` `(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧` `♨(⋆‿⋆)♨`\n`┌( ಠ_ಠ)┘` `Ｏ(≧▽≦)Ｏ` `☜-(ΘLΘ)-☞` `@(ᵕ.ᵕ)@`\n`╘[◉﹃◉]╕`", inline=False)
-	embed.add_field(name="Weird", value="`（ ´_⊃｀）` `(￣。￣)～ｚｚｚ` `~(⊕⌢⊕)~` `⊂•⊃_⊂•⊃`\n`ᕙ(⇀‸↼‶)ᕗ` `( 　ﾟ,_ゝﾟ)` `(⊙︿⊙✿)` `̿̿’̿’\̵͇̿̿\=(•̪●)=/̵͇̿̿/’̿̿ ̿ ̿ ̿`\n`( ͡° ͜ʖ ͡°)`", inline=False)
+	embed.add_field(name="Party", value="`\m/(>.<)\m/` `ヾ(〃^∇^)ﾉ` `(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧`\n`♨(⋆‿⋆)♨` `┌( ಠ_ಠ)┘` `Ｏ(≧▽≦)Ｏ` `☜-(ΘLΘ)-☞` `@(ᵕ.ᵕ)@`\n`╘[◉﹃◉]╕`", inline=False)
+	embed.add_field(name="Weird", value="`（ ´_⊃｀）` `(￣。￣)～ｚｚｚ` `~(⊕⌢⊕)~` `⊂•⊃_⊂•⊃`\n`ᕙ(⇀‸↼‶)ᕗ` `( 　ﾟ,_ゝﾟ)` `(⊙︿⊙✿)`\n`̿̿’̿’\̵͇̿̿\=(•̪●)=/̵͇̿̿/’̿̿ ̿ ̿ ̿` `( ͡° ͜ʖ ͡°)`", inline=False)
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
