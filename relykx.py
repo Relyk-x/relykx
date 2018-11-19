@@ -38,10 +38,20 @@ async def on_member_join(member):
 	embed.add_field(name="About", value="Hey everyone, I'm MikiBot ^^ \nI'm also very new discord and I'd like your help to improve myself :D \nPlease use m!help to see what else I can do for you~", inline=False)
 	embed.add_field(name="Website", value="🌏 https://goo.gl/wKEVjA", inline=True)
 	embed.add_field(name="Server", value="<:discord:501956002158215198> https://discord.gg/UjuGRB9", inline=True)
-	embed.add_field(name="Social", value="<:curiouscat:508516637700259850> Curious Cat | <:twitter:508515087330312193> Twitter", inline=False)
+	embed.add_field(name="Social: @MikiDiscord", value="<:curiouscat:508516637700259850> Curious Cat | <:twitter:508515087330312193> Twitter", inline=False)
 # embed.set_footer(text="version: " + VERSION)
 	await bot.send_message(member, embed=embed)
 	
+##############################################################################################################################
+# 💬 | O N - M E S S A G E
+##############################################################################################################################
+
+@bot.event
+async def on_message(message):
+	if message.content == 'm!on-message'
+		embed = discord.Embed(description="🚧 ᴜɴᴅᴇʀ ᴄᴏɴsᴛʀᴜᴄᴛɪᴏɴ 🚧", color=0xffafc9)
+		await bot.send_message(message.channel, embed=em)
+		
 ##############################################################################################################################
 # 📖 | G E N E R A L - C O M M A N D S
 ##############################################################################################################################
@@ -58,7 +68,7 @@ async def serverinfo(ctx):
 	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
-async def info(ctx, user: discord.Member):
+async def userinfo(ctx, user: discord.Member):
 	embed = discord.Embed(title="📋 {}'s info".format(user.name), description="Here's what I could find.", color=0xffafc9)
 	embed.set_thumbnail(url=user.avatar_url)
 	embed.add_field(name="Name", value=user.name, inline=True)
@@ -78,14 +88,17 @@ async def avatar(ctx, user: discord.Member):
 @bot.command(pass_context=True)
 @commands.has_role("Creator")
 async def kick(ctx, user: discord.Member):
-	await bot.say(":boot: Cya, {}. ya loser!".format(user.name))
+	embed = discord.Embed(title="⚠ Bot Logs", description="**{}** has been kicked from the server".format(user.name), color=0xffafc9,)
+	selfdel = await bot.say(embed=embed)
 	await bot.kick(user)
-
+	await asyncio.sleep(10)
+	await bot.delete_message(selfdel)
+	
 @bot.command(pass_context=True)
 @commands.has_role("Creator")
 async def clear(ctx, msglimit : int):
 	deleted = await bot.purge_from(ctx.message.channel, limit=msglimit)
-	embed = discord.Embed(description='⚠ Cleared **{}** message(s) from the channel!'.format(len(deleted)), color=0xffafc9,)
+	embed = discord.Embed(title="⚠ Bot Logs"description='Cleared **{}** message(s) from the channel'.format(len(deleted)), color=0xffafc9,)
 	selfdel = await bot.say(embed=embed)
 	await asyncio.sleep(10)
 	await bot.delete_message(selfdel)
@@ -100,7 +113,7 @@ async def about(ctx):
 	embed.add_field(name="About", value="Hey everyone, I'm MikiBot ^^ \nI'm also very new discord and I'd like your help to improve myself :D \nPlease use m!help to see what else I can do for you~", inline=False)
 	embed.add_field(name="Website", value="🌏 https://goo.gl/wKEVjA", inline=True)
 	embed.add_field(name="Server", value="<:discord:501956002158215198> https://discord.gg/UjuGRB9", inline=True)
-	embed.add_field(name="Social", value="<:curiouscat:508516637700259850> Curious Cat | <:twitter:508515087330312193> Twitter", inline=False)
+	embed.add_field(name="Social: @MikiDiscord", value="<:curiouscat:508516637700259850> Curious Cat | <:twitter:508515087330312193> Twitter", inline=False)
 	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
@@ -120,7 +133,7 @@ async def vote(ctx):
 	
 @bot.command(pass_context=True)
 async def donate(ctx):
-	embed = discord.Embed(title="Patreon", description="You can donate here: \nhttps://www.patreon.com/join/mikidiscord?", color=0xffafc9)
+	embed = discord.Embed(title="💵 Patreon", description="You can donate here: \nhttps://www.patreon.com/join/mikidiscord?", color=0xffafc9)
 	embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/499771950764261396/513936104357888000/icon_color_variations.jpg")
 	await bot.say(embed=embed)
 	
@@ -226,8 +239,8 @@ async def eightball(ctx):
 @bot.command(pass_context=True)
 async def commands(ctx):
 	embed = discord.Embed(title="📖 General", color=0xffafc9)
-	embed.add_field(name="server", value="Displays the info of the current server.", inline=False)
-	embed.add_field(name="info", value="Displays a profile of the mentioned user.", inline=False)
+	embed.add_field(name="serverinfo", value="Displays the info of the current server.", inline=False)
+	embed.add_field(name="userinfo", value="Displays a profile of the mentioned user.", inline=False)
 	embed.add_field(name="avatar", value="Dusplays the profile pic of the mentioned user.", inline=False)
 	embed.add_field(name="kick", value="Kicks the mentioned user.", inline=False)
 	embed.add_field(name="clear", value="Clears a specific amount of messages in a channel.", inline=False)
