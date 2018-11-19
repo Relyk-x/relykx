@@ -51,8 +51,10 @@ async def server(ctx):
 	embed.set_thumbnail(url=ctx.message.server.icon_url)
 	embed.add_field(name="Name:", value=ctx.message.server.name, inline=True)
 	embed.add_field(name="ID", value=ctx.message.server.id, inline=True)
+	embed.add_field(name="Created", value=ctx.message.server.created_at, inline=True)
+	embed.add_field(name="Joined", value=vtx.message.server.joined_at, inline=True)
 	embed.add_field(name="Roles", value=len(ctx.message.server.roles), inline=True)
-	embed.add_field(name="Members", value=len(ctx.message.server.members))
+	embed.add_field(name="Members", value=len(ctx.message.server.members), inline=True)
 	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
@@ -63,8 +65,8 @@ async def info(ctx, user: discord.Member):
 	embed.add_field(name="ID", value=user.id, inline=True)
 	embed.add_field(name="Status", value=user.status, inline=True)
 	embed.add_field(name="Highest role", value=user.top_role, inline=True)
-	embed.add_field(name="Joined", value=user.joined_at, inline=True)
 	embed.add_field(name="Created", value=user.created_at, inline=True)
+	embed.add_field(name="Joined", value=user.joined_at, inline=True)
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
