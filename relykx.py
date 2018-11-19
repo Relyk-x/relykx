@@ -101,7 +101,7 @@ async def servercount(ctx):
 	
 @bot.command(pass_context=True)
 async def invite(ctx):
-	embed = discord.Embed(description="If you'd like to add MikiBot to your server, click here: \nhttps://discordapp.com/oauth2/authorize?&client_id=513265987349643264&scope=bot&permissions=66186303", color=0xffafc9)
+	embed = discord.Embed(description="If you'd like to add MikiBot to your server, go to our website here: https://relykxdiscord.wixsite.com/mikibot", color=0xffafc9)
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
