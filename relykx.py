@@ -177,7 +177,7 @@ async def ping(ctx):
 @bot.command(pass_context=True)
 async def diceroll(ctx):
 	randomlist = ['1','2','3','4','5','6',]
-	embed = discord.Embed(title ="🎲 Dice Roll", description="*rolls a dice*"color=0xffafc9,)
+	embed = discord.Embed(title ="🎲 Dice Roll", description="*rolls a dice*", color=0xffafc9,)
 	embed.add_field(name="You rolled a dice and it landed on...", value="Side: **%s**" %(random.choice(randomlist),))
 	await bot.say(embed=embed)
 	
