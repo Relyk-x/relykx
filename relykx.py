@@ -145,6 +145,17 @@ async def hi(ctx):
 		      'hello',
                      ]
 	await bot.say("%s" %(random.choice(randomlist),))
+
+@bot.command(pass_context=True)
+async def kawaii(ctx):
+	embed = discord.Embed(color=0xffafc9,)
+	embed.add_field(name="Happy", value="`(✿◠‿◠)` `≧◡≦` `(▰˘◡˘▰)` `(●´ω｀●)` `(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧` `（ミ￣ー￣ミ）` `(づ｡◕‿‿◕｡)づ` `✌.ʕʘ‿ʘʔ.✌` `◎[▪‿▪]◎`", inline=False)
+	embed.add_field(name="Sad", value="`ಥ_ಥ` `┐(‘～`；)┌` `◄.►` `(◕︵◕)` `v( ‘.’ )v` `ਉ_ਉ` `o(╥﹏╥)o` `●︿●` `(∩︵∩)`", inline=False)
+	embed.add_field(name="Mad", value="`〴⋋_⋌〵` `(◣_◢)` `☉▵☉凸` `ↁ_ↁ` `╚(•⌂•)╝` `ᇂﮌᇂ)` `(┛◉Д◉)┛彡┻━┻ `", inline=False)
+	embed.add_field(name="Love", value="`v(=∩_∩=)ﾌ` `(n˘v˘•)¬` `♥╣[-_-]╠♥` `★~(◡﹏◕✿)` `(◕‿-)` `( ^▽^)σ)~O~)` `♥‿♥` `(✿ ♥‿♥)` `(●´ω｀●)`", inline=False)
+	embed.add_field(name="Party", value="`\m/(>.<)\m/` `ヾ(〃^∇^)ﾉ` `(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧` `♨(⋆‿⋆)♨` `┌( ಠ_ಠ)┘` `Ｏ(≧▽≦)Ｏ` `☜-(ΘLΘ)-☞` `@(ᵕ.ᵕ)@` `╘[◉﹃◉]╕`", inline=False)
+	embed.add_field(name="Weird", value="`（ ´_⊃｀）` `(￣。￣)～ｚｚｚ` `~(⊕⌢⊕)~` `⊂•⊃_⊂•⊃` `ᕙ(⇀‸↼‶)ᕗ` `( 　ﾟ,_ゝﾟ)` `(⊙︿⊙✿)` `̿̿’̿’\̵͇̿̿\=(•̪●)=/̵͇̿̿/’̿̿ ̿ ̿ ̿` `( ͡° ͜ʖ ͡°)`", inline=False)
+	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
 async def wallpaper(ctx):
