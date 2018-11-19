@@ -113,7 +113,7 @@ async def vote(ctx):
 	
 @bot.command(pass_context=True)
 async def donate(ctx):
-	embed = discord.Embed(description="You can donate by purchasing roles from the MikiBot Help server here: \nhttps://donatebot.io/checkout/499771629396688907?buyer", color=0xffafc9)
+	embed = discord.Embed(description="You can donate by purchasing roles from the MikiBot Help server here: \nhttps://www.patreon.com/join/mikidiscord?", color=0xffafc9)
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
