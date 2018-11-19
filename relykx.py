@@ -36,7 +36,7 @@ async def on_member_join(member):
 	embed.set_author(name="MikiBot", url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 	embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 	embed.add_field(name="About", value="Hey everyone, I'm MikiBot ^^ \nI'm also very new discord and I'd like your help to improve myself :D \nPlease use m!help to see what else I can do for you~", inline=False)
-	embed.add_field(name="Social", value="<:curiouscat:508516637700259850> Curious Cat | <:twitter:508515087330312193> Twitter", inline=True)
+	embed.add_field(name="Social", value="<:curiouscat:508516637700259850> Curious Cat | <:twitter:508515087330312193>Twitter", inline=True)
 	embed.add_field(name="Website", value="🌏 https://goo.gl/wKEVjA", inline=True)
 # embed.set_footer(text="version: " + VERSION)
 	await bot.send_message(member, embed=embed)
