@@ -48,7 +48,7 @@ async def on_member_join(member):
 
 @bot.event
 async def on_message(message):
-	if message.content == 'm!on-message'
+	if message.content == 'm!on-message':
 		embed = discord.Embed(description="🚧 ᴜɴᴅᴇʀ ᴄᴏɴsᴛʀᴜᴄᴛɪᴏɴ 🚧", color=0xffafc9)
 		await bot.send_message(message.channel, embed=em)
 		
