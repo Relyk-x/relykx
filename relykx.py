@@ -150,7 +150,7 @@ async def time(ctx):
 	dash = strftime("%I:%M", gmtime())
 	wholetime = dash[0] + dash[1]
 	resttime = dash[2:]
-	embed = discord.Embed(title="🕗 Time", description="The server time now is:\n**" + wholetime + resttime + "**\nObtained by 24timezones", color=0xffafc9)
+	embed = discord.Embed(title="🕗 Time", description=wholetime + resttime + "\n\nObtained by 24timezones", color=0xffafc9)
 	embed.set_footer(text="Requested by {}".format("you"), icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 	await bot.say(embed=embed)
 	
