@@ -151,7 +151,7 @@ async def time(ctx):
 	wholetime = dash[0] + dash[1]
 	resttime = dash[2:]
 	embed = discord.Embed(title="🕗 Time", description="The server time now is:\n**" + wholetime + resttime + "**\nObtained by 24timezones", color=0xffafc9)
-	embed.set_footer(text="Requested by {}".format(author.name), icon_url=user.avatar_url)
+	embed.set_footer(text="Requested by {}".format("you"), icon_url=user.avatar_url)
 	await bot.say(embed=embed)
 	
 ##############################################################################################################################
