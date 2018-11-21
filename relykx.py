@@ -276,6 +276,7 @@ async def test(ctx):
 	embed.add_field(name="⚠️ Admin", value="All commands under the Admin categorie:",inline=False)
 	embed.add_field(name="kick", value="-",inline=True)
 	embed.add_field(name="clear", value="-",inline=True)
+	embed.add_field(name="-", value="-",inline=True)
 	embed.add_field(name="🌀 General", value="All commands under the General categorie:",inline=False)
 	embed.add_field(name="server", value="-",inline=True)
 	embed.add_field(name="user", value="-",inline=True)
@@ -293,6 +294,7 @@ async def test(ctx):
 	embed.add_field(name="diceroll", value="-",inline=True)
 	embed.add_field(name="coinflip", value="-",inline=True)
 	embed.add_field(name="eightball", value="-",inline=True)
+	embed.add_field(name="-", value="-",inline=True)
 	await bot.say(embed=embed)
 	
 bot.run(os.getenv("BOT_TOKEN"))
