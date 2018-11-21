@@ -52,7 +52,7 @@ async def on_member_join(member):
 async def server(ctx):
 	embed = discord.Embed(title="📋 Server Info", description="Here's what I could find.", color=0xffafc9)
 	embed.set_thumbnail(url=ctx.message.server.icon_url)
-	embed.add_field(name="Name:" value=ctx.message.server.name, inline=True)
+	embed.add_field(name="Name:", value=ctx.message.server.name, inline=True)
 	embed.add_field(name="ID:", value=ctx.message.server.id, inline=True)
 	embed.add_field(name="Region:", value=ctx.message.server.region, inline=True)
 	embed.add_field(name="Owner:", value=ctx.message.server.owner.mention, inline=True)
