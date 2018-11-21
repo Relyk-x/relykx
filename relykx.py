@@ -51,7 +51,7 @@ async def on_member_join(member):
 
 @bot.command(pass_context=True)
 async def serverinfo(ctx):
-	embed = discord.Embed(title="📋 {}'s info".format(ctx.message.server.name), description="Here's what I could find.", color=0xffafc9)
+	embed = discord.Embed(title="📋 Server Info", description="Here's what I could find.", color=0xffafc9)
 	embed.set_thumbnail(url=ctx.message.server.icon_url)
 	embed.add_field(name="ID:", value=ctx.message.server.id, inline=True)
 	embed.add_field(name="Owner:", value=ctx.message.server.owner.mention, inline=True)
@@ -69,7 +69,7 @@ async def serverinfo(ctx):
 
 @bot.command(pass_context=True)
 async def userinfo(ctx, user: discord.Member):
-	embed = discord.Embed(title="📋 {}'s info".format(user.name), description="Here's what I could find.", color=0xffafc9)
+	embed = discord.Embed(title="📋 {}'s Info".format(user.name), description="Here's what I could find.", color=0xffafc9)
 	embed.set_thumbnail(url=user.avatar_url)
 	embed.add_field(name="Name", value=user.name, inline=True)
 	embed.add_field(name="ID", value=user.id, inline=True)
