@@ -64,7 +64,7 @@ async def serverinfo(ctx):
 	embed = discord.Embed(title="📋 {}'s info".format(ctx.message.server.name), description="Here's what I could find.", color=0xffafc9)
 	embed.set_thumbnail(url=ctx.message.server.icon_url)
 	embed.add_field(name="ID:", value=ctx.message.server.id, inline=True)
-# embed.add_field(name="Owner:", value=?, inline=True)
+	embed.add_field(name="Owner:", value="@" + ctx.message.owner.name, inline=True)
 	embed.add_field(name="Region:", value=ctx.message.server.region, inline=True)
 # embed.add_field(name="Varification level:, value=?, inline=True)
 	embed.add_field(name="Created:", value=ctx.message.server.created_at, inline=True)
@@ -74,6 +74,7 @@ async def serverinfo(ctx):
 	embed.add_field(name="Members:", value=len(ctx.message.server.members), inline=True)
 # embed.add_field(name="Number of Emotes:", value=?, inline=True)
 # embed.set_footer(text="Requested by " + author.username + " - " + <day> + " at " + <current.time> + <am/pm>, icon_url=user.avatar_url)
+	embed.set_footer(text="Requested by " + author + " - " + strftime("%I:%M %p", gmtime()), icon_url=author.avatar_url)
 	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
@@ -153,7 +154,7 @@ async def time(ctx):
 	embed = discord.Embed(title="🕗 Clock", color=0xffafc9)
 	embed.add_field(name="Time", value=time, inline=True)
 	embed.add_field(name="Date", value=date, inline=True)
-	embed.set_footer(text="Requested by {.author}".format(msg), icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
+	embed.set_footer(text="Requested by {.author}".format(), icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
