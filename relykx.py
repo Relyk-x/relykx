@@ -135,7 +135,7 @@ async def donate(ctx):
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
-rasync def time(ctx):
+async def time(ctx):
 	time = now.strftime("%I:%M %p")
 	date = now.strftime("%a, %d %b %Y")
 	embed = discod.Embed(title="🕗 Clock", color=0xffafc9)
