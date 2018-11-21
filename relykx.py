@@ -144,7 +144,7 @@ async def time(ctx):
 	embed = discord.Embed(title="🕗 Clock", color=0xffafc9)
 	embed.add_field(name="Time", value=time, inline=True)
 	embed.add_field(name="Date", value=date, inline=True)
-	embed.set_footer(text="Requested by {.author}".format(), icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
+	embed.set_footer(text="Requested by " + "@" + " - " + now.strftime('%B %d, %Y')) #icon_url=author.avatar_url)
 	await bot.say(embed=embed)
 	
 	
