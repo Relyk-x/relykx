@@ -64,7 +64,7 @@ async def serverinfo(ctx):
 	embed.add_field(name="Created:", value=ctx.message.server.created_at, inline=False)
 # embed.add_field(name="Number of Emotes:", value=?, inline=True)
 # embed.set_footer(text="Requested by " + author.username + " - " + <day> + " at " + <current.time> + <am/pm>, icon_url=user.avatar_url)
-	embed.set_footer(text="Requested by " + "@" + " - " + now.strftime('%B %d, %Y')) #icon_url=author.avatar_url)
+	embed.set_footer(text="Requested by " + ctx.message.author + " - " + now.strftime('%B %d, %Y')) #icon_url=author.avatar_url)
 	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
