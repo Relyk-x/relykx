@@ -147,7 +147,6 @@ async def donate(ctx):
 	
 @bot.command(pass_context=True)
 async def time(ctx):
-	os.environ['TZ'] = 'WST-8'
 	time = strftime("%I:%M %p", gmtime())
 	date = strftime("%a, %d %b %Y", gmtime())
 	embed = discord.Embed(title="🕗 Clock", color=0xffafc9)
@@ -155,6 +154,30 @@ async def time(ctx):
 	embed.add_field(name="Date", value=date, inline=True)
 	embed.set_footer(text="Requested by {}".format("you"), icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 	await bot.say(embed=embed)
+	
+@bot.command(pass_context=True)
+async def clock(ctx):
+	# UTC
+	tmp1 = datetime.datetime.now()
+	utcnow = datetime.time(hour=tmp1.hour, minute=tmp1.minute, second=tmp1.second)
+	del tmp1
+	utcfulltime = "{}:{}:{}".format(utcnow.hour, utcnow.minute, utcnow.second)
+
+	# SMT
+	tmp1 = datetime.timedelta(hours=4)
+	smt = datetime.timezone(tmp1)
+	tmp2 = datetime.datetime.now(smt)
+	smtnow = datetime.time(hour=tmp2.hour, minute=tmp2.minute, second=tmp2.second)
+	del tmp1
+	del tmp2
+	del smt
+	smtfulltime = "{}:{}:{}".format(smtnow.hour, smtnow.minute, smtnow.second)
+        
+	# Print the timezones...
+	yield from bot.say("```UTC: {}\nSMT: {}```".format(utcfulltime, smtfulltime))
+	# cleaning up
+	del utcnow
+	del smtnow
 	
 ##############################################################################################################################
 # 😜 | F U N - C O M M A N D S													      
