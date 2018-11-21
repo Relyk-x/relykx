@@ -147,12 +147,8 @@ async def donate(ctx):
 	
 @bot.command(pass_context=True)
 async def time(ctx):
-	#dash = strftime("%I:%M", gmtime())
-	#wholetime = dash[0] + dash[1]
-	#resttime = dash[2:]
-	os.environ['TZ'] = 'AEST-10AEDT-11,M10.5.0,M3.5.0'
-	time = time.tzset(time.strftime('%X %Z'))
-	date = time.strftime('%x')
+	time = strftime("I:%M", gmtime())
+	date = time.strftime("%a, %d %b %Y %H:%M:%S +0800", gmtime())
 	embed = discord.Embed(title="🕗 Clock", color=0xffafc9)
 	embed.add_field(name="Time", value=time, inline=True)
 	embed.add_field(name="Date", value=date, inline=True)
