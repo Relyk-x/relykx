@@ -32,7 +32,7 @@ async def on_ready():
 async def on_member_join(member):
 	servers = list(bot.servers)
 	print(f"Connected on {str(len(bot.servers))} servers:"
-	for x in range(len(servers)):
+	for x in range(len(servers))
 	 print(' ' + servers[x-1].name)
 	embed = discord.Embed(color=0xffafc9,)
 	embed.set_author(name="MikiBot", url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
