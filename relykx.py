@@ -174,7 +174,7 @@ async def clock(ctx):
 	smtfulltime = "{}:{}:{}".format(smtnow.hour, smtnow.minute, smtnow.second)
         
 	# Print the timezones...
-	yield from bot.say("```UTC: {}\nSMT: {}```".format(utcfulltime, smtfulltime))
+	await bot.say("```UTC: {}\nSMT: {}```".format(utcfulltime, smtfulltime))
 	# cleaning up
 	del utcnow
 	del smtnow
