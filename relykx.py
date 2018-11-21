@@ -8,6 +8,7 @@ from discord.ext.commands import Bot
 import asyncio
 import random
 import json
+import datetime
 import time
 from time import gmtime, strftime
 import os
