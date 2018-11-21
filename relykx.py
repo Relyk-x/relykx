@@ -15,32 +15,34 @@ import os
 bot = commands.Bot(command_prefix='m!')
 msglimit = 100
 now = datetime.now()
+version = "v0.0.0"
 
 @bot.event
 async def on_ready():
 	servers = list(bot.servers)
-	status = "over {} servers".format(str(len(bot.servers)))
-	print ('MikiBot is up and running with ' + str(len(bot.servers)) + ' servers connected!')
+	status = f"over {str(len(bot.servers))} servers"
+	print (f"MikiBot is up and running with {str(len(bot.servers))} servers connected!")
 	print ("Ready when you are...")
-	print ("I am running on " + bot.user.name)
-	print ("With the ID: " + bot.user.id)
+	print (f"I am running on {bot.user.name}")
+	print (f"With the ID: {bot.user.id}")
 	await bot.change_presence(game=discord.Game(name=status,type=3))
 # WATCHING 'over ' + str(len(bot.servers)) + ' servers', url="https://www.twitch.tv/streamer"
 
 @bot.event
 async def on_member_join(member):
 	servers = list(bot.servers)
-	print("Connected on {} servers:".fomat(str(len(bot.servers))))
+	print(f"Connected on {str(len(bot.servers))} servers:"
 	for x in range(len(servers)):
 	 print(' ' + servers[x-1].name)
 	embed = discord.Embed(color=0xffafc9,)
 	embed.set_author(name="MikiBot", url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 	embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 	embed.add_field(name="About", value="Hey everyone, I'm MikiBot ^^ \nI'm also very new discord and I'd like your help to improve myself :D \nPlease use m!help to see what else I can do for you~", inline=False)
+	embed.add_field(name="Creator", value="<@257784039795064833>", inline=True)
+	embed.add_field(name="Social: @MikiDiscord", value="<:curiouscat:508516637700259850> Curious Cat | <:twitter:508515087330312193> Twitter", inline=False)
 	embed.add_field(name="Website", value="🌏 https://goo.gl/wKEVjA", inline=True)
 	embed.add_field(name="Server", value="<:discord:501956002158215198> https://discord.gg/UjuGRB9", inline=True)
-	embed.add_field(name="Social: @MikiDiscord", value="<:curiouscat:508516637700259850> Curious Cat | <:twitter:508515087330312193> Twitter", inline=False)
-# embed.set_footer(text="version: " + VERSION)
+	embed.set_footer(text=f"version: {version}")
 	await bot.send_message(member, embed=embed)
 	
 ##############################################################################################################################
@@ -48,12 +50,13 @@ async def on_member_join(member):
 ##############################################################################################################################
 
 @bot.command(pass_context=True)
-async def serverinfo(ctx):
+async def server.info(ctx):
 	embed = discord.Embed(title="📋 Server Info", description="Here's what I could find.", color=0xffafc9)
 	embed.set_thumbnail(url=ctx.message.server.icon_url)
+	embed.add_field(name="Name:" value=ctx.message.server.name, inline=True)
 	embed.add_field(name="ID:", value=ctx.message.server.id, inline=True)
+	embed.add_field(name="Region:", value=ctx.message.server.region, inline=True)
 	embed.add_field(name="Owner:", value=ctx.message.server.owner.mention, inline=True)
-	embed.add_field(name="Region:", value=ctx.message.server.region, inline=False)
 # embed.add_field(name="Varification level:, value=?, inline=True)
 	embed.add_field(name="Roles:", value=len(ctx.message.server.roles), inline=True)
 # embed.add_field(name="Channels:", value=?, inline=True)
@@ -65,12 +68,12 @@ async def serverinfo(ctx):
 	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
-async def userinfo(ctx, user: discord.Member):
-	embed = discord.Embed(title="📋 {}'s Info".format(user.name), description="Here's what I could find.", color=0xffafc9)
+async def user.info(ctx, user: discord.Member):
+	embed = discord.Embed(title="📋 User Info", description="Here's what I could find.", color=0xffafc9)
 	embed.set_thumbnail(url=user.avatar_url)
-	embed.add_field(name="Name", value=user.name, inline=True)
+	embed.add_field(name="Name", value=user, inline=True)
 	embed.add_field(name="ID", value=user.id, inline=True)
-	embed.add_field(name="Status", value=user.status, inline=True)
+	embed.add_field(name="Status", value=user.status, inline=False)
 	embed.add_field(name="Highest role", value=user.top_role, inline=True)
 	embed.add_field(name="Created", value=user.created_at, inline=True)
 	embed.add_field(name="Joined", value=user.joined_at, inline=True)
@@ -78,7 +81,7 @@ async def userinfo(ctx, user: discord.Member):
 	
 @bot.command(pass_context=True)
 async def avatar(ctx, user: discord.Member):
-	embed = discord.Embed(title="🖼️ {}'s avatar".format(user.name), description="Here it is...",color=0xffafc9)
+	embed = discord.Embed(title="🖼️ User Avatar", description=f"Here it is {user.name}'s profile pic",color=0xffafc9)
 	embed.set_image(url=user.avatar_url)
 	await bot.say(embed=embed)
 	
@@ -108,9 +111,11 @@ async def about(ctx):
 	embed.set_author(name="MikiBot", url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 	embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 	embed.add_field(name="About", value="Hey everyone, I'm MikiBot ^^ \nI'm also very new discord and I'd like your help to improve myself :D \nPlease use m!help to see what else I can do for you~", inline=False)
+	embed.add_field(name="Creator", value="<@257784039795064833>", inline=True)
+	embed.add_field(name="Social: @MikiDiscord", value="<:curiouscat:508516637700259850> Curious Cat | <:twitter:508515087330312193> Twitter", inline=False)
 	embed.add_field(name="Website", value="🌏 https://goo.gl/wKEVjA", inline=True)
 	embed.add_field(name="Server", value="<:discord:501956002158215198> https://discord.gg/UjuGRB9", inline=True)
-	embed.add_field(name="Social: @MikiDiscord", value="<:curiouscat:508516637700259850> Curious Cat | <:twitter:508515087330312193> Twitter", inline=False)
+	embed.set_footer(text=f"version: {version}")
 	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
@@ -149,7 +154,7 @@ async def time(ctx):
 ##############################################################################################################################
 	
 @bot.command(pass_context=True)
-async def hi(ctx):
+async def greet(ctx):
 	randomlist = ['>//< hellu',
 		      'hai ^^',
 		      'hewo o3o',
