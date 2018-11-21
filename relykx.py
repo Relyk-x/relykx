@@ -10,8 +10,6 @@ import random
 import json
 import datetime
 from datetime import datetime
-import time
-from time import gmtime, strftime
 import os
 
 bot = commands.Bot(command_prefix='m!')
@@ -63,8 +61,7 @@ async def serverinfo(ctx):
 	embed.add_field(name="Members:", value=len(ctx.message.server.members), inline=True)
 	embed.add_field(name="Created:", value=ctx.message.server.created_at, inline=False)
 # embed.add_field(name="Number of Emotes:", value=?, inline=True)
-# embed.set_footer(text="Requested by " + author.username + " - " + <day> + " at " + <current.time> + <am/pm>, icon_url=user.avatar_url)
-	embed.set_footer(text=f"Requested by {ctx.message.author} • {now.strftime('%B %d, %Y')}", icon_url=ctx.message.author.avatar_url) 
+	embed.set_footer(text=f"Requested by {ctx.message.author}", icon_url=ctx.message.author.avatar_url) 
 	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
@@ -138,13 +135,13 @@ async def donate(ctx):
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
-async def time(ctx):
+rasync def time(ctx):
 	time = now.strftime("%I:%M %p")
 	date = now.strftime("%a, %d %b %Y")
-	embed = discord.Embed(title="🕗 Clock", color=0xffafc9)
+	embed = discod.Embed(title="🕗 Clock", color=0xffafc9)
 	embed.add_field(name="Time", value=time, inline=True)
 	embed.add_field(name="Date", value=date, inline=True)
-	embed.set_footer(text=f"Requested by {ctx.message.author} • {now.strftime('%B %d, %Y')}", icon_url=ctx.message.author.avatar_url) 
+	embed.set_footer(text=f"Requested by {ctx.message.author}", icon_url=ctx.message.author.avatar_url) 
 	await bot.say(embed=embed)
 	
 	
