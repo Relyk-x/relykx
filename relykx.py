@@ -148,7 +148,7 @@ async def donate(ctx):
 @bot.command(pass_context=True)
 async def time(ctx):
 	time = strftime("I:%M", gmtime())
-	date = time.strftime("%a, %d %b %Y %H:%M:%S +0800", gmtime())
+	date = strftime("%a, %d %b %Y %H:%M:%S +0800", gmtime())
 	embed = discord.Embed(title="🕗 Clock", color=0xffafc9)
 	embed.add_field(name="Time", value=time, inline=True)
 	embed.add_field(name="Date", value=date, inline=True)
