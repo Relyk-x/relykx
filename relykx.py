@@ -49,6 +49,20 @@ async def on_member_join(member):
 ##############################################################################################################################
 
 @bot.command(pass_context=True)
+@commands.has_permissions(ban_members = True)
+async def ban(self, ctx, user: discord.Member):
+await ctx.server.ban(user)
+embed = discord.Embed(color = 0x9842f4)
+embed.description = f"{user.mention} has been banned by {ctx.author.display_name}"
+await bot.say(embed=embed)
+
+@bot.command(pass_context=True)
+@commands.has_permissions(ban_members=True)
+async def unban(self,ctx,user: discord.Member):
+	await ctx.server.unban(user)
+	await bot.say(embed = discord.Embed(title="Unban",description="{0.name} got unbanned from the server".format(user)))
+
+@bot.command(pass_context=True)
 @commands.has_permissions(administrator=True)
 async def kick(ctx, user: discord.Member):
 	embed = discord.Embed(title="⚠ Bot Logs", description="**{}** has been kicked from the server".format(user.name), color=0xffafc9,)
@@ -68,6 +82,41 @@ async def clear(ctx, msglimit : int):
 # embed = discord.Embed(description="Sorry that's too much...", color=0xffafc9,)
 # await bot.say(embed=embed)
 
+@bot.command(pass_context=True)
+async def ping(self,ctx):
+	# Time the time required to send a message first.
+	# This is the time taken for the message to be sent, awaited, and then 
+	# for discord to send an ACK TCP header back to you to say it has been
+	# received; this is dependant on your bot's load (the event loop latency)
+	# and generally how shit your computer is, as well as how badly discord
+	# is behaving.
+	start = time.monotonic()
+	msg = await bot.say('Pinging...')
+	millis = (time.monotonic() - start) * 1000
+
+	# Since sharded bots will have more than one latency, this will average them if needed.
+	heartbeat = ctx.bot.latency * 1000
+
+	await msg.edit(content=f'Heartbeat: {heartbeat:,.2f}ms\tACK: {millis:,.2f}ms.')
+	
+@bot.command(pass_context=True)
+async def count(self,ctx):
+	bots = 0
+	members = 0
+	total = 0
+	for x in ctx.guild.members:
+	 if x.bot == True:
+	  bots += 1
+	  total += 1
+	 else:
+	  members += 1
+	  total += 1
+	embed = discord.Embed(title="Server Member Count",color=0x0000FF)
+	embed.add_field(name="Bot Count",value=bots)
+	embed.add_field(name="Member Count",value=members)
+	embed.add_field(name="Total",value=total)
+	await bot.say(embed=embed)
+
 ##############################################################################################################################
 # 📖 | G E N E R A L - C O M M A N D S
 ##############################################################################################################################
@@ -83,6 +132,7 @@ async def server(ctx):
 # embed.add_field(name="Varification level:, value=?, inline=True)
 	embed.add_field(name="Roles:", value=len(ctx.message.server.roles), inline=True)
 # embed.add_field(name="Channels:", value=?, inline=True)
+	embed.add_field(name="Online:", value=f"{len([I for I in ctx.message.server.members if I.status is discord.Status.online])}",inline=False)
 # embed.add_field(name="Members:", value=len(ctx.message.server.member.status = discord.Status.online) + "\n" + len(ctx.message.server.members == 'offline') + "\n" + len(ctx.message.server.members), inline=True)
 	embed.add_field(name="Members:", value=len(ctx.message.server.members), inline=True)
 	embed.add_field(name="Created:", value=ctx.message.server.created_at, inline=False)
@@ -156,6 +206,18 @@ async def time(ctx):
 # 😜 | F U N - C O M M A N D S													      
 ##############################################################################################################################
 	
+@bot.command(pass_context=True)
+async def google(self,ctx,*args):
+	x = f"https://www.google.com/search?rlz=1C1CHBF_enUS753US753&ei=n62RW536KpL2swWl1IKIBg&q={args}&oq=google+search&gs_l=psy-ab.3..0i71l8.0.0..8290...0.0..0.0.0.......0......gws-wiz.vtjc2PzIHFg"
+	y = x.replace(" ","+")
+	await ctx.send(y)
+
+@commands.command()
+async def youtube(self,ctx,*args):
+	x = f"https://www.youtube.com/results?search_query={args}"
+	y = x.replace(" ","+")
+	await ctx.send(y)
+
 @bot.command(pass_context=True)
 async def greet(ctx):
 	randomlist = ['>//< hellu',
