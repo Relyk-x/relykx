@@ -49,7 +49,7 @@ async def on_member_join(member):
 ##############################################################################################################################
 
 @bot.command(pass_context=True)
-async def server.info(ctx):
+async def server(ctx):
 	embed = discord.Embed(title="📋 Server Info", description="Here's what I could find.", color=0xffafc9)
 	embed.set_thumbnail(url=ctx.message.server.icon_url)
 	embed.add_field(name="Name:" value=ctx.message.server.name, inline=True)
@@ -67,7 +67,7 @@ async def server.info(ctx):
 	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
-async def user.info(ctx, user: discord.Member):
+async def user(ctx, user: discord.Member):
 	embed = discord.Embed(title="📋 User Info", description="Here's what I could find.", color=0xffafc9)
 	embed.set_thumbnail(url=user.avatar_url)
 	embed.add_field(name="Name", value=user, inline=True)
