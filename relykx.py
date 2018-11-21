@@ -9,12 +9,14 @@ import asyncio
 import random
 import json
 import datetime
+from datetime import datetime
 import time
 from time import gmtime, strftime
 import os
 
 bot = commands.Bot(command_prefix='m!')
 msglimit = 100
+now = datetime.now()
 
 @bot.event
 async def on_ready():
@@ -62,7 +64,7 @@ async def serverinfo(ctx):
 	embed.add_field(name="Members:", value=len(ctx.message.server.members), inline=True)
 # embed.add_field(name="Number of Emotes:", value=?, inline=True)
 # embed.set_footer(text="Requested by " + author.username + " - " + <day> + " at " + <current.time> + <am/pm>, icon_url=user.avatar_url)
-	embed.set_footer(text="Requested by " + ctx.author + " - " + strftime("%I:%M %p", gmtime()), icon_url=author.avatar_url)
+	embed.set_footer(text="Requested by " + "@" + " - " + now.strftime('%B %d, %Y')) #icon_url=author.avatar_url)
 	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
