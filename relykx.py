@@ -151,8 +151,7 @@ async def time(ctx):
 	#wholetime = dash[0] + dash[1]
 	#resttime = dash[2:]
 	os.environ['TZ'] = 'AEST-10AEDT-11,M10.5.0,M3.5.0'
-	time.tzset()
-	time = time.strftime('%X %Z')
+	time = time.tzset(time.strftime('%X %Z'))
 	date = time.strftime('%x')
 	embed = discord.Embed(title="🕗 Clock", color=0xffafc9)
 	embed.add_field(name="Time", value=time, inline=True)
