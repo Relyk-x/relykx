@@ -11,21 +11,6 @@ import json
 import datetime
 from datetime import datetime
 import time
-import os
-import ast
-import collections
-import contextlib
-import copy
-import importlib
-import io
-import inspect
-import logging
-import pprint
-import re
-import shutil
-import sqlite3
-import sys
-import traceback
 
 bot = commands.Bot(command_prefix='m!')
 msglimit = 100
@@ -78,7 +63,7 @@ async def unban(ctx, user: discord.Member):
 	await bot.send(embed = discord.Embed(title="Unban",description="{0.name} got unbanned from the server".format(user)))
 
 @bot.command(pass_context=True)
-@commands.has_permissions(administrator=True)
+@commands.has_permissions(kick_members=True)
 async def kick(ctx, user: discord.Member):
 	embed = discord.Embed(title="⚠ Bot Logs", description="**{}** has been kicked from the server".format(user.name), color=0xffafc9,)
 	selfdel = await bot.say(embed=embed)
@@ -87,7 +72,7 @@ async def kick(ctx, user: discord.Member):
 	await bot.delete_message(selfdel)
 	
 @bot.command(pass_context=True)
-@commands.has_permissions(administrator=True)
+@commands.has_permissions(manage_messages=True)
 async def clear(ctx, msglimit : int):
 	deleted = await bot.purge_from(ctx.message.channel, limit=msglimit)
 	embed = discord.Embed(title="⚠ Bot Logs", description='Cleared **{}** message(s) from the channel'.format(len(deleted)), color=0xffafc9,)
@@ -99,20 +84,22 @@ async def clear(ctx, msglimit : int):
 
 @bot.command(pass_context=True)
 async def ping(ctx):
+	embed = discord.Embed(title=":ping_pong: Bot Ping", description=":construction:  under construction :construction:", color=0xffafc9)
+	await bot.say(embed=embed)
 	# Time the time required to send a message first.
 	# This is the time taken for the message to be sent, awaited, and then 
 	# for discord to send an ACK TCP header back to you to say it has been
 	# received; this is dependant on your bot's load (the event loop latency)
 	# and generally how shit your computer is, as well as how badly discord
 	# is behaving.
-	start = time.monotonic()
-	msg = await ctx.send('Pinging...')
-	millis = (time.monotonic() - start) * 1000
+#	start = time.monotonic()
+#	msg = await ctx.send('Pinging...')
+#	millis = (time.monotonic() - start) * 1000
 
 	# Since sharded bots will have more than one latency, this will average them if needed.
-	heartbeat = ctx.bot.latency * 1000
+#	heartbeat = ctx.bot.latency * 1000
 
-	await msg.edit(content=f'Heartbeat: {heartbeat:,.2f}ms\tACK: {millis:,.2f}ms.')
+#	await msg.edit(content=f'Heartbeat: {heartbeat:,.2f}ms\tACK: {millis:,.2f}ms.')
 	
 @bot.command(pass_context=True)
 async def count(ctx):
@@ -185,11 +172,6 @@ async def about(ctx):
 	embed.add_field(name="Server", value="<:discord:501956002158215198> https://discord.gg/UjuGRB9", inline=True)
 	embed.set_footer(text=f"version: {version}")
 	await bot.say(embed=embed)
-
-@bot.command(pass_context=True)
-async def servercount(ctx):
-	embed = discord.Embed(description='<:discord:501956002158215198> Currently watching over ' + str(len(bot.servers)) + ' Discord servers', color=0xffafc9)
-	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
 async def invite(ctx):
@@ -227,7 +209,7 @@ async def google(ctx,*args):
 	y = x.replace(" ","+")
 	await bot.say(y)
 
-@bot.command()
+@bot.command(pass_context=True)
 async def youtube(ctx,*args):
 	x = f"https://www.youtube.com/results?search_query={args}"
 	y = x.replace(" ","+")
@@ -342,13 +324,22 @@ async def commands(ctx):
 	embed.add_field(name="eightball", value="Ask a question and shake the 8 Ball.", inline=False)
 	await bot.say(embed=embed)
 	
+
+@bot.command(pass_context=True)
+async def servercount(ctx):
+	embed = discord.Embed(description='<:discord:501956002158215198> Currently watching over ' + str(len(bot.servers)) + ' Discord servers', color=0xffafc9)
+	await bot.say(embed=embed)
+	
 @bot.command(pass_context=True)
 async def test(ctx):
 	embed = discord.Embed(title="⚙️ Commands", color=0xffafc9)
 	embed.add_field(name="⚠️ Admin", value="All commands under the Admin categorie:",inline=False)
+	embed.add_field(name="ban", value="-",inline=True)
+	embed.add_field(name="unban", value="-",inline=True)
 	embed.add_field(name="kick", value="-",inline=True)
 	embed.add_field(name="clear", value="-",inline=True)
-	embed.add_field(name="-", value="-",inline=True)
+	embed.add_field(name="ping", value="-",inline=True)
+	embed.add_field(name="count", value="-",inline=True)
 	embed.add_field(name="🌀 General", value="All commands under the General categorie:",inline=False)
 	embed.add_field(name="server", value="-",inline=True)
 	embed.add_field(name="user", value="-",inline=True)
@@ -357,16 +348,18 @@ async def test(ctx):
 	embed.add_field(name="invite", value="-",inline=True)
 	embed.add_field(name="donate", value="-",inline=True)
 	embed.add_field(name="time", value="-",inline=True)
+	embed.add_field(name="-", value="-",inline=True)
+	embed.add_field(name="-", value="-",inline=True)
 	embed.add_field(name="✨ Fun", value="All commands under the Fun categorie:",inline=False)
+	embed.add_field(name="google", value="-",inline=True)
+	embed.add_field(name="youtube", value="-",inline=True)
 	embed.add_field(name="greet", value="-",inline=True)
 	embed.add_field(name="kawaii", value="-",inline=True)
 	embed.add_field(name="wallpaper", value="-",inline=True)
 	embed.add_field(name="gif", value="-",inline=True)
-	embed.add_field(name="ping", value="-",inline=True)
 	embed.add_field(name="diceroll", value="-",inline=True)
 	embed.add_field(name="coinflip", value="-",inline=True)
 	embed.add_field(name="eightball", value="-",inline=True)
-	embed.add_field(name="-", value="-",inline=True)
 	await bot.say(embed=embed)
 	
 bot.run(os.getenv("BOT_TOKEN"))
