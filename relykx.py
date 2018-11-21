@@ -227,7 +227,7 @@ async def google(ctx,*args):
 	y = x.replace(" ","+")
 	await bot.say(y)
 
-@commands.command()
+@bot.command()
 async def youtube(ctx,*args):
 	x = f"https://www.youtube.com/results?search_query={args}"
 	y = x.replace(" ","+")
