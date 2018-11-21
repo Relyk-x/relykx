@@ -270,6 +270,28 @@ async def commands(ctx):
 	embed.add_field(name="eightball", value="Ask a question and shake the 8 Ball.", inline=False)
 	await bot.say(embed=embed)
 	
+@bot.command(pass_context=True)
+async def test(ctx):
+	embed = discord.Embed(title="⚙️ Commands", color=0xffafc9)
+	embed.add_field(name="kick", value="-",inline=True)
+	embed.add_field(name="clear", value="-",inline=True)
+	embed.add_field(name="server", value="-",inline=True)
+	embed.add_field(name="user", value="-",inline=True)
+	embed.add_field(name="avatar", value="-",inline=True)
+	embed.add_field(name="about", value="-",inline=True)
+	embed.add_field(name="invite", value="-",inline=True)
+	embed.add_field(name="donate", value="-",inline=True)
+	embed.add_field(name="time", value="-",inline=True)
+	embed.add_field(name="greet", value="-",inline=True)
+	embed.add_field(name="kawaii", value="-",inline=True)
+	embed.add_field(name="wallpaper", value="-",inline=True)
+	embed.add_field(name="gif", value="-",inline=True)
+	embed.add_field(name="ping", value="-",inline=True)
+	embed.add_field(name="diceroll", value="-",inline=True)
+	embed.add_field(name="coinflip", value="-",inline=True)
+	embed.add_field(name="eightball", value="-",inline=True)
+	await bot.say(embed=embed)
+	
 #@bot.command(pass_context=True)
 #async def embed(ctx):
 #	embed = discord.Embed(title="this is the title", description="this is the descriptionf", color=0xffafc9)
