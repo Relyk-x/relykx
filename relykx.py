@@ -147,15 +147,22 @@ async def donate(ctx):
 	
 @bot.command(pass_context=True)
 async def time(ctx):
-	dash = strftime("%I:%M", gmtime())
-	wholetime = dash[0] + dash[1]
-	resttime = dash[2:]
-	date = strftime("%a, %d.%m.%Y", gmtime())
+	#dash = strftime("%I:%M", gmtime())
+	#wholetime = dash[0] + dash[1]
+	#resttime = dash[2:]
+	os.environ['TZ'] = 'AEST-10AEDT-11,M10.5.0,M3.5.0'
+	time.tzset()
+	time = time.strftime('%X %Z')
+	date = time.strftime('%x')
 	embed = discord.Embed(title="🕗 Clock", color=0xffafc9)
-	embed.add_field(name="Time", value=wholetime + resttime, inline=True)
+	embed.add_field(name="Time", value=time, inline=True)
 	embed.add_field(name="Date", value=date, inline=True)
 	embed.set_footer(text="Requested by {}".format("you"), icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 	await bot.say(embed=embed)
+	>>> os.environ['TZ'] = 'AEST-10AEDT-11,M10.5.0,M3.5.0'
+>>> time.tzset()
+>>> time.strftime('%X %x %Z')
+'16:08:12 05/08/03 AEST'
 	
 ##############################################################################################################################
 # 😜 | F U N - C O M M A N D S													      
