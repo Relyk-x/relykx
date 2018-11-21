@@ -54,13 +54,13 @@ async def ban(self, ctx, user: discord.Member):
 	await ctx.server.ban(user)
 	embed = discord.Embed(color = 0x9842f4)
 	embed.description = f"{user.mention} has been banned by {ctx.author.display_name}"
-	await bot.say(embed=embed)
+	await ctx.send(embed=embed)
 
 @bot.command(pass_context=True)
 @commands.has_permissions(ban_members=True)
 async def unban(self,ctx,user: discord.Member):
 	await ctx.server.unban(user)
-	await bot.say(embed = discord.Embed(title="Unban",description="{0.name} got unbanned from the server".format(user)))
+	await ctx.send(embed = discord.Embed(title="Unban",description="{0.name} got unbanned from the server".format(user)))
 
 @bot.command(pass_context=True)
 @commands.has_permissions(administrator=True)
@@ -91,7 +91,7 @@ async def ping(self,ctx):
 	# and generally how shit your computer is, as well as how badly discord
 	# is behaving.
 	start = time.monotonic()
-	msg = await bot.say('Pinging...')
+	msg = await ctx.send('Pinging...')
 	millis = (time.monotonic() - start) * 1000
 
 	# Since sharded bots will have more than one latency, this will average them if needed.
@@ -115,7 +115,7 @@ async def count(self,ctx):
 	embed.add_field(name="Bot Count",value=bots)
 	embed.add_field(name="Member Count",value=members)
 	embed.add_field(name="Total",value=total)
-	await bot.say(embed=embed)
+	await ctx.send(embed=embed)
 
 ##############################################################################################################################
 # 📖 | G E N E R A L - C O M M A N D S
