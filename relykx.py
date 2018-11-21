@@ -119,7 +119,7 @@ async def count(ctx):
 	bots = 0
 	members = 0
 	total = 0
-	for x in ctx.server.members:
+	for x in ctx.message.server.members:
 	 if x.bot == True:
 	  bots += 1
 	  total += 1
