@@ -10,6 +10,7 @@ import random
 import json
 import datetime
 from datetime import datetime
+import time
 import os
 
 bot = commands.Bot(command_prefix='m!')
@@ -50,17 +51,17 @@ async def on_member_join(member):
 
 @bot.command(pass_context=True)
 @commands.has_permissions(ban_members = True)
-async def ban(self, ctx, user: discord.Member):
-	await ctx.server.ban(user)
-	embed = discord.Embed(color = 0x9842f4)
+async def ban(ctx, user: discord.Member):
+	await bot.server.ban(user)
+	embed = discord.Embed(color=0xffafc9)
 	embed.description = f"{user.mention} has been banned by {ctx.author.display_name}"
-	await ctx.send(embed=embed)
+	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
 @commands.has_permissions(ban_members=True)
-async def unban(self,ctx,user: discord.Member):
-	await ctx.server.unban(user)
-	await ctx.send(embed = discord.Embed(title="Unban",description="{0.name} got unbanned from the server".format(user)))
+async def unban(ctx, user: discord.Member):
+	await bot.server.unban(user)
+	await bot.send(embed = discord.Embed(title="Unban",description="{0.name} got unbanned from the server".format(user)))
 
 @bot.command(pass_context=True)
 @commands.has_permissions(administrator=True)
@@ -83,7 +84,7 @@ async def clear(ctx, msglimit : int):
 # await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
-async def ping(self,ctx):
+async def ping(ctx):
 	# Time the time required to send a message first.
 	# This is the time taken for the message to be sent, awaited, and then 
 	# for discord to send an ACK TCP header back to you to say it has been
@@ -100,22 +101,22 @@ async def ping(self,ctx):
 	await msg.edit(content=f'Heartbeat: {heartbeat:,.2f}ms\tACK: {millis:,.2f}ms.')
 	
 @bot.command(pass_context=True)
-async def count(self,ctx):
+async def count(ctx):
 	bots = 0
 	members = 0
 	total = 0
-	for x in ctx.guild.members:
+	for x in ctx.server.members:
 	 if x.bot == True:
 	  bots += 1
 	  total += 1
 	 else:
 	  members += 1
 	  total += 1
-	embed = discord.Embed(title="Server Member Count",color=0x0000FF)
+	embed = discord.Embed(title="Server Member Count",color=0xffafc9)
 	embed.add_field(name="Bot Count",value=bots)
 	embed.add_field(name="Member Count",value=members)
 	embed.add_field(name="Total",value=total)
-	await ctx.send(embed=embed)
+	await bot.say(embed=embed)
 
 ##############################################################################################################################
 # 📖 | G E N E R A L - C O M M A N D S
@@ -207,16 +208,16 @@ async def time(ctx):
 ##############################################################################################################################
 	
 @bot.command(pass_context=True)
-async def google(self,ctx,*args):
+async def google(ctx,*args):
 	x = f"https://www.google.com/search?rlz=1C1CHBF_enUS753US753&ei=n62RW536KpL2swWl1IKIBg&q={args}&oq=google+search&gs_l=psy-ab.3..0i71l8.0.0..8290...0.0..0.0.0.......0......gws-wiz.vtjc2PzIHFg"
 	y = x.replace(" ","+")
-	await ctx.send(y)
+	await bot.say(y)
 
 @commands.command()
-async def youtube(self,ctx,*args):
+async def youtube(ctx,*args):
 	x = f"https://www.youtube.com/results?search_query={args}"
 	y = x.replace(" ","+")
-	await ctx.send(y)
+	await bot.say(y)
 
 @bot.command(pass_context=True)
 async def greet(ctx):
