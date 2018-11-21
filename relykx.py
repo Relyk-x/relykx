@@ -138,7 +138,7 @@ async def donate(ctx):
 async def time(ctx):
 	time = now.strftime("%I:%M %p")
 	date = now.strftime("%a, %d %b %Y")
-	embed = discod.Embed(title="🕗 Clock", color=0xffafc9)
+	embed = discord.Embed(title="🕗 Clock", color=0xffafc9)
 	embed.add_field(name="Time", value=time, inline=True)
 	embed.add_field(name="Date", value=date, inline=True)
 	embed.set_footer(text=f"Requested by {ctx.message.author}", icon_url=ctx.message.author.avatar_url) 
