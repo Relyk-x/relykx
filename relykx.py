@@ -12,6 +12,20 @@ import datetime
 from datetime import datetime
 import time
 import os
+import ast
+import collections
+import contextlib
+import copy
+import importlib
+import io
+import inspect
+import logging
+import pprint
+import re
+import shutil
+import sqlite3
+import sys
+import traceback
 
 bot = commands.Bot(command_prefix='m!')
 msglimit = 100
