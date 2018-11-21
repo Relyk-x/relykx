@@ -45,6 +45,30 @@ async def on_member_join(member):
 	await bot.send_message(member, embed=embed)
 	
 ##############################################################################################################################
+# 🔑 | A D M I N - C O M M A N D S
+##############################################################################################################################
+
+@bot.command(pass_context=True)
+@commands.has_permissions(administrator=True)
+async def kick(ctx, user: discord.Member):
+	embed = discord.Embed(title="⚠ Bot Logs", description="**{}** has been kicked from the server".format(user.name), color=0xffafc9,)
+	selfdel = await bot.say(embed=embed)
+	await bot.kick(user)
+	await asyncio.sleep(10)
+	await bot.delete_message(selfdel)
+	
+@bot.command(pass_context=True)
+@commands.has_permissions(administrator=True)
+async def clear(ctx, msglimit : int):
+	deleted = await bot.purge_from(ctx.message.channel, limit=msglimit)
+	embed = discord.Embed(title="⚠ Bot Logs", description='Cleared **{}** message(s) from the channel'.format(len(deleted)), color=0xffafc9,)
+	selfdel = await bot.say(embed=embed)
+	await asyncio.sleep(10)
+	await bot.delete_message(selfdel)
+# embed = discord.Embed(description="Sorry that's too much...", color=0xffafc9,)
+# await bot.say(embed=embed)
+
+##############################################################################################################################
 # 📖 | G E N E R A L - C O M M A N D S
 ##############################################################################################################################
 
@@ -85,35 +109,15 @@ async def avatar(ctx, user: discord.Member):
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
-@commands.has_permissions(administrator=True)
-async def kick(ctx, user: discord.Member):
-	embed = discord.Embed(title="⚠ Bot Logs", description="**{}** has been kicked from the server".format(user.name), color=0xffafc9,)
-	selfdel = await bot.say(embed=embed)
-	await bot.kick(user)
-	await asyncio.sleep(10)
-	await bot.delete_message(selfdel)
-	
-@bot.command(pass_context=True)
-@commands.has_permissions(administrator=True)
-async def clear(ctx, msglimit : int):
-	deleted = await bot.purge_from(ctx.message.channel, limit=msglimit)
-	embed = discord.Embed(title="⚠ Bot Logs", description='Cleared **{}** message(s) from the channel'.format(len(deleted)), color=0xffafc9,)
-	selfdel = await bot.say(embed=embed)
-	await asyncio.sleep(10)
-	await bot.delete_message(selfdel)
-# embed = discord.Embed(description="Sorry that's too much...", color=0xffafc9,)
-# await bot.say(embed=embed)
-	
-@bot.command(pass_context=True)
 async def about(ctx):
 	embed = discord.Embed(color=0xffafc9,)
 	embed.set_author(name="MikiBot", url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 	embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 	embed.add_field(name="About", value="Hey everyone, I'm MikiBot ^^ \nI'm also very new discord and I'd like your help to improve myself :D \nPlease use m!help to see what else I can do for you~", inline=False)
 	embed.add_field(name="Creator", value="<@257784039795064833>", inline=True)
-	embed.add_field(name="Social: @MikiDiscord", value="<:curiouscat:508516637700259850> Curious Cat | <:twitter:508515087330312193> Twitter", inline=False)
-	embed.add_field(name="Website", value="🌏 https://goo.gl/wKEVjA", inline=True)
+	embed.add_field(name="Website", value="🌏 https://goo.gl/wKEVjA", inline=False)
 	embed.add_field(name="Server", value="<:discord:501956002158215198> https://discord.gg/UjuGRB9", inline=True)
+	embed.add_field(name="Social: @MikiDiscord", value="<:curiouscat:508516637700259850> Curious Cat | <:twitter:508515087330312193> Twitter", inline=False)
 	embed.set_footer(text=f"version: {version}")
 	await bot.say(embed=embed)
 
