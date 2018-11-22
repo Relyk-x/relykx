@@ -1,2 +1,5 @@
 discord.py
+discord
 asyncio
+requests
+BeautifulSoup4
