@@ -141,6 +141,11 @@ async def count(ctx):
 	embed.add_field(name="Total",value=total)
 	await bot.say(embed=embed)
 
+@bot.command(pass_context=True)
+async def version(ctx):
+	embed = discord.Embed(description=f"The current version of Sector Bot is: `{version}`", color=0xffafc9)
+	await bot.ssay(embed=embed)
+	
 ##############################################################################################################################
 # 📖 | G E N E R A L - C O M M A N D S
 ##############################################################################################################################
