@@ -35,14 +35,31 @@ async def on_member_join(member):
 	servers = list(client.servers)
 	print("Connected on " + str(len(client.servers)) + "servers:")
 	embed = discord.Embed(color=0xffafc9,)
-	embed.set_author(name="MikiBot", url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
+	embed.set_author(name="MikiBot", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 	embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 	embed.add_field(name="About", value="Hey everyone, I'm MikiBot ^^ \nI'm also very new discord and I'd like your help to improve myself :D \nPlease use m!help to see what else I can do for you~", inline=False)
 	embed.add_field(name="Creator", value="<@257784039795064833>", inline=True)
-	embed.add_field(name="Social: @MikiDiscord", value="<:curiouscat:508516637700259850> Curious Cat | <:twitter:508515087330312193> Twitter", inline=True)
-	embed.add_field(name="Website", value="🌏 https://goo.gl/wKEVjA", inline=True)
-	embed.add_field(name="Server", value="<:discord:501956002158215198> https://discord.gg/UjuGRB9", inline=True)
 	embed.set_footer(text=f"version: {version}")
+	await bot.send_message(member, embed=embed)
+	
+	embed = discord.Embed(color=0xffafc9,)
+	embed.set_author(name="Website", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
+	embed.add_field(name="Link:", value="https://relykxdiscord.wixsite.com/mikibot", inline=False)
+	await bot.send_message(member, embed=embed)
+	
+	embed = discord.Embed(color=0x7289da,)
+	embed.set_author(name="Server", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/500485578794729482/discord_logo1600.png")
+	embed.add_field(name="Link:", value="https://discord.gg/UjuGRB9", inline=False)
+	await bot.send_message(member, embed=embed)
+	
+	embed = discord.Embed(color=0xce7a1e,)
+	embed.set_author(name="Curious Cat", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/514996231647395841/curiouscat.png")
+	embed.add_field(name="Link:", value="https://curiouscat.me/MikiDiscord", inline=False)
+	await bot.send_message(member, embed=embed)
+	
+	embed = discord.Embed(color=0x2da9e1,)
+	embed.set_author(name="Twitter", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/514996202719150088/twitter.png")
+	embed.add_field(name="Link:", value="https://twitter.com/MikiDiscord", inline=False)
 	await bot.send_message(member, embed=embed)
 	
 ##############################################################################################################################
@@ -346,13 +363,18 @@ async def commands(ctx):
 	embed.add_field(name="eightball", value="Ask a question and shake the 8 Ball.", inline=False)
 	await bot.say(embed=embed)
 	
+##############################################################################################################################
+# 🛠️ | O W N E R - C O M M A N D S	
+##############################################################################################################################
 
 @bot.command(pass_context=True)
+@commands.has_id('257784039795064833')
 async def servercount(ctx):
 	embed = discord.Embed(description='<:discord:501956002158215198> Currently watching over ' + str(len(bot.servers)) + ' Discord servers', color=0xffafc9)
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
+@commands.has_id('257784039795064833')
 async def test(ctx):
 	embed = discord.Embed(title=":warning: Admin", description="All commands under the Admin categorie:", color=0xffafc9)
 	embed.add_field(name="ban", value="-",inline=True)
