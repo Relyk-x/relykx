@@ -1,327 +1,553 @@
-##############################################################################################################################
-# 🤖 | B O T - S T A R T U P
-##############################################################################################################################
-
+# Initialise
 import discord
 from discord.ext import commands
-from discord.ext.commands import Bot
 import asyncio
-import random
-import json
-import datetime
-from datetime import datetime
 import time
+import random
+from discord import Game
+from itertools import cycle
+import json
 import os
+import bs4, requests
+from time import gmtime, strftime
 
-bot = commands.Bot(command_prefix='m!')
-msglimit = 100
-now = datetime.now()
-version = "v0.0.0"
+FORTNITE_API_TOKEN = os.getenv('FORTNITETOKEN')
+COMMAND_PREFIX = ';'
+VERSION = 'v0.4.7' #v0.4.7,7
 
-@bot.event
-async def on_ready():
-	servers = list(bot.servers)
-	status = f"over {str(len(bot.servers))} servers"
-	print (f"MikiBot is up and running with {str(len(bot.servers))} servers connected!")
-	print ("Ready when you are...")
-	print (f"I am running on {bot.user.name}")
-	print (f"With the ID: {bot.user.id}")
-	await bot.change_presence(game=discord.Game(name=status,type=3))
-# WATCHING 'over ' + str(len(bot.servers)) + ' servers', url="https://www.twitch.tv/streamer"
+Client = discord.client
+client = commands.Bot(command_prefix = ';')
+Clientdiscord = discord.Client()
+querystring = {"format":"json"}
 
-@bot.event
+headers = {
+    'Content-Type': "application/json",
+    'x-api-key': "bc77e012-c69d-4dc9-ba73-42e710028838"
+    }
+def fortnite_tracker_api(platform, nickname):
+  URL = 'https://api.fortnitetracker.com/v1/profile/' + platform + '/' + nickname
+  req = requests.get(URL, headers={"TRN-Api-Key": FORTNITE_API_TOKEN})
+
+  if req.status_code == 200:
+    try:
+      print(req.json())
+      lifetime_stats = req.json()['lifeTimeStats']
+      return lifetime_stats[7:]
+    except KeyError:
+      return False
+  else:
+    return False
+
+# Setting Bot status 'Watching'
+async def change_status():
+  await client.wait_until_ready()
+  servers = list(client.servers)
+  status = ['for ;help | ' + VERSION, 'for bot suggestions', 'for @Relyk-x#2896']
+# WATCHING 'over ' + str(len(bot.servers)) + ' servers'
+# WATCHING 'for: ;help | ' + VERSION, 'for: bot suggestions', 'for: @Relyk-x#2896'
+  msgs = cycle(status)
+
+  while not client.is_closed:
+     current_status = next(msgs)
+     await client.change_presence(game=discord.Game(name=current_status, url="https://www.twitch.tv/streamer",type=3))
+     await asyncio.sleep(10)
+      
+# Start Up
+@client.event
 async def on_member_join(member):
-	print('Sent message to ' + member.name)
-	servers = list(bot.servers)
-	print("Connected on " + str(len(client.servers)) + "servers:")
-	embed = discord.Embed(color=0xffafc9,)
-	embed.set_author(name="MikiBot", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
-	embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
-	embed.add_field(name="About", value="Hey everyone, I'm MikiBot ^^ \nI'm also very new discord and I'd like your help to improve myself :D \nPlease use m!help to see what else I can do for you~", inline=False)
-	embed.add_field(name="Creator", value="<@257784039795064833>", inline=True)
-	embed.set_footer(text=f"version: {version}")
-	await bot.send_message(member, embed=embed)
-	
-	embed = discord.Embed(color=0xffafc9,)
-	embed.set_author(name="Website", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
-	embed.add_field(name="Link:", value="https://relykxdiscord.wixsite.com/mikibot", inline=False)
-	await bot.send_message(member, embed=embed)
-	
-	embed = discord.Embed(color=0x7289da,)
-	embed.set_author(name="Server", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/500485578794729482/discord_logo1600.png")
-	embed.add_field(name="Link:", value="https://discord.gg/UjuGRB9", inline=False)
-	await bot.send_message(member, embed=embed)
-	
-	embed = discord.Embed(color=0xce7a1e,)
-	embed.set_author(name="Curious Cat", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/514996231647395841/curiouscat.png")
-	embed.add_field(name="Link:", value="https://curiouscat.me/MikiDiscord", inline=False)
-	await bot.send_message(member, embed=embed)
-	
-	embed = discord.Embed(color=0x2da9e1,)
-	embed.set_author(name="Twitter", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/514996202719150088/twitter.png")
-	embed.add_field(name="Link:", value="https://twitter.com/MikiDiscord", inline=False)
-	await bot.send_message(member, embed=embed)
-	
-##############################################################################################################################
-# 🔑 | A D M I N - C O M M A N D S
-##############################################################################################################################
+    servers = list(client.servers)
+    print("Connected on " + str(len(client.servers)) + " servers:")
+    for x in range(len(servers)):
+     print(' ' + servers[x-1].name)
+    em = discord.Embed(title="https://discord.gg/UjuGRB9", description="Invite your friends!!", url="https://discord.gg/UjuGRB9", color=0xffafc9)
+    em.set_author(name="MikiBot", url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
+    em.set_thumbnail(url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
+    em.add_field(name="About", value="Hey there, I'm MikiBot ^^ \nI'm also very new discord and I'd like your help to improve myself :D \nPlease use ;help to see what else I can do for you~ \n\n<:curiouscat:508516637700259850> Curious Cat: https://curiouscat.me/MikiDiscord \n - If you have any questions please ask here. \n\n<:twitter:508515087330312193> Twitter: https://twitter.com/MikiDiscord \n - You can follow me on twitter here.", inline=False)
+    em.set_footer(text="version: " + VERSION)
+    await client.send_message(member, embed=em)
+    
+# Checking if bot is online    
+async def on_ready():
+   print('MikiBot is up and running with ' + str(len(client.servers)) + ' servers connected!')
 
-@bot.command(pass_context=True)
-@commands.has_permissions(ban_members = True)
-async def ban(ctx, user: discord.Member):
-	embed = discord.Embed(title="Ban", description = f"{user.mention} has been banned by {ctx.message.author}", color=0xffafc9,)
-	seldel = await bot.say(embed=embed)
-	await bot.ban(user)
-	await asyncio.sleep(10)
-	await bot.delete_message(selfdel)
-	
-@bot.command(pass_context=True)
-@commands.has_permissions(ban_members=True)
-async def unban(ctx, user: discord.Member):
-	embed = discord.Embed(title="Unban", description="{0.name} has been unbanned from the server".format(user), color=0xffafc9,)
-	seldel = await bot.say(embed=embed)
-	await bot.unban(user)
-	await asyncio.sleep(10)
-	await bot.delete_message(selfdel)
-	
-@bot.command(pass_context=True)
-@commands.has_permissions(kick_members=True)
-async def kick(ctx, user: discord.Member):
-	embed = discord.Embed(title="⚠ Bot Logs", description="**{}** has been kicked from the server".format(user.name), color=0xffafc9,)
-	selfdel = await bot.say(embed=embed)
-	await bot.kick(user)
-	await asyncio.sleep(10)
-	await bot.delete_message(selfdel)
-	
-@bot.command(pass_context=True)
-@commands.has_permissions(manage_messages=True)
-async def clear(ctx, msglimit : int):
-	deleted = await bot.purge_from(ctx.message.channel, limit=msglimit)
-	embed = discord.Embed(title="⚠ Bot Logs", description='Cleared **{}** message(s) from the channel'.format(len(deleted)), color=0xffafc9,)
-	selfdel = await bot.say(embed=embed)
-	await asyncio.sleep(10)
-	await bot.delete_message(selfdel)
-# embed = discord.Embed(description="Sorry that's too much...", color=0xffafc9,)
-# await bot.say(embed=embed)
+# Multiple Commands
+@client.event
+async def on_message(message):
+    
+############################## S O C I A L ##############################
+    
+    # Greet
+    if message.content == ';greet':
+        await client.send_message(message.channel, 'H-hello >//<')
+     
+    # Say
+    content = message.content
+    if content.startswith(';say '):
+        await client.send_message(message.channel, content[5:])
+        await client.delete_message(message)
+    
+    # emojify
+    if message.content.startswith(';emojify '):
+        result = ''
+        for letter in message.content[9:]:
+            if letter in 'aA':
+                result = result + '🅰'
+            if letter in 'bB':
+                result = result + '🅱'
+            if letter in 'cC':
+                result = result + '🅲'
+            if letter in 'dD':
+                result = result + '🅳'
+            if letter in 'eE':
+                result = result + '🅴'
+            if letter in 'fF':
+                result = result + '🅵'
+            if letter in 'gG':
+                result = result + '🅶'
+            if letter in 'hH':
+                result = result + '🅷'
+            if letter in 'iI':
+                result = result + '🅸'
+            if letter in 'jJ':
+                result = result + '🅹'
+            if letter in 'Kk':
+                result = result + '🅺'
+            if letter in 'lL':
+                result = result + '🅻'
+            if letter in 'mM':
+                result = result + '🅼'
+            if letter in 'nN':
+                result = result + '🅽'
+            if letter in 'oO':
+                result = result + '🅾'
+            if letter in 'pP':
+                result = result + '🅿'
+            if letter in 'qQ':
+                result = result + '🆀'
+            if letter in 'rR':
+                result = result + '🆁'
+            if letter in 'sS':
+                result = result + '🆂'
+            if letter in 'tT':
+                result = result + '🆃'
+            if letter in 'uU':
+                result = result + '🆄'
+            if letter in 'Vv':
+                result = result + '🆅'
+            if letter in 'wW':
+                result = result + '🆆'
+            if letter in 'xX':
+                result = result + '🆇'
+            if letter in 'Yy':
+                result = result + '🆈'
+            if letter in 'zZ':
+                result = result + '🆉'
+            if letter in '1':
+                result = result + '1️⃣'
+            if letter in '2':
+                result = result + '2️⃣'
+            if letter in '3':
+                result = result + '3️⃣'
+            if letter in '4':
+                result = result + '4️⃣'
+            if letter in '5':
+                result = result + '5️⃣'
+            if letter in '6':
+                result = result + '6️⃣'
+            if letter in '7':
+                result = result + '7️⃣'
+            if letter in '8':
+                result = result + '8️⃣'
+            if letter in '9':
+                result = result + '9️⃣'
+            if letter in '0':
+                result = result + '0️⃣'
+            if letter in ' ':
+                result = result + ' '
+            if letter in '@':
+                result = result + '🕒'
+            if letter in '!':
+                result = result + '❗️'
+            if letter in '.':
+                result = result + '▫️'
+            if letter in ',':
+                result = result + '🔸'
+            if letter in '#':
+                result = result + '#️⃣'
+            if letter in '$':
+                result = result + '💲'
+            if letter in '%':
+                result = result + '💮'
+            if letter in '^':
+                result = result + '🔺'
+            if letter in '&':
+                result = result + '🌀'
+            if letter in '?':
+                result = result + '❔'
+        asyncio.sleep(2)
+        oofmsg = await client.send_message(message.channel,'Processing > ☑️')
+        asyncio.sleep(5)
+        await client.edit_message(oofmsg,"Error > ❌ > [Invalid Characters detected]")
+        asyncio.sleep(1)
+        await client.edit_message(oofmsg, result)
+        await client.delete_message(message)
+    
+    # Tiny Caps
+    if message.content.startswith(';tiny '):
+        result = ''
+        for letter in message.content[6:]:
+            if letter in 'aA':
+                result = result + 'ᴀ'
+            if letter in 'bB':
+                result = result + 'ʙ'
+            if letter in 'cC':
+                result = result + 'ᴄ'
+            if letter in 'dD':
+                result = result + 'ᴅ'
+            if letter in 'eE':
+                result = result + 'ᴇ'
+            if letter in 'fF':
+                result = result + 'ғ'
+            if letter in 'gG':
+                result = result + 'ɢ'
+            if letter in 'hH':
+                result = result + 'ʜ'
+            if letter in 'iI':
+                result = result + 'ɪ'
+            if letter in 'jJ':
+                result = result + 'ᴊ'
+            if letter in 'Kk':
+                result = result + 'ᴋ'
+            if letter in 'lL':
+                result = result + 'ʟ'
+            if letter in 'mM':
+                result = result + 'ᴍ'
+            if letter in 'nN':
+                result = result + 'ɴ'
+            if letter in 'oO':
+                result = result + 'ᴏ'
+            if letter in 'pP':
+                result = result + 'ᴘ'
+            if letter in 'qQ':
+                result = result + 'ǫ'
+            if letter in 'rR':
+                result = result + 'ʀ'
+            if letter in 'sS':
+                result = result + 's'
+            if letter in 'tT':
+                result = result + 'ᴛ'
+            if letter in 'uU':
+                result = result + 'ᴜ'
+            if letter in 'Vv':
+                result = result + 'ᴠ'
+            if letter in 'wW':
+                result = result + 'ᴡ'
+            if letter in 'xX':
+                result = result + 'x'
+            if letter in 'Yy':
+                result = result + 'ʏ'
+            if letter in 'zZ':
+                result = result + 'ᴢ'
+            if letter in '1':
+                result = result + '➊'
+            if letter in '2':
+                result = result + '➋'
+            if letter in '3':
+                result = result + '➌'
+            if letter in '4':
+                result = result + '➍'
+            if letter in '5':
+                result = result + '➎'
+            if letter in '6':
+                result = result + '➏'
+            if letter in '7':
+                result = result + '➐'
+            if letter in '8':
+                result = result + '➑'
+            if letter in '9':
+                result = result + '➒'
+            if letter in '0':
+                result = result + '⓪'
+            if letter in ' ':
+                result = result + ' '
+            if letter in '@':
+                result = result + '@'
+            if letter in '!':
+                result = result + '!'
+            if letter in '.':
+                result = result + '.'
+            if letter in ',':
+                result = result + ','
+            if letter in '#':
+                result = result + '#'
+            if letter in '$':
+                result = result + '$'
+            if letter in '%':
+                result = result + '%'
+            if letter in '^':
+                result = result + '^'
+            if letter in '&':
+                result = result + '&'
+            if letter in '?':
+                result = result + '?'
+        await client.send_message(message.channel, result)
+        await client.delete_message(message)
+                
+############################## S E R V E R ##############################
+    
+    # About
+    if message.content == ';about':
+        em = discord.Embed(title="https://discord.gg/UjuGRB9", description="For any other help please join our Discord server...", url="https://discord.gg/UjuGRB9", color=0xffafc9)
+        em.set_author(name="MikiBot", url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
+        em.set_thumbnail(url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
+        em.add_field(name="About", value="Hey everyone, I'm MikiBot ^^ \nI'm also very new discord and I'd like your help to improve myself :D \nPlease use ;help to see what else I can do for you~ \n\n<:curiouscat:508516637700259850> Curious Cat: https://curiouscat.me/MikiDiscord \n - If you have any questions please ask here. \n\n<:twitter:508515087330312193> Twitter: https://twitter.com/MikiDiscord \n - You can follow me on twitter here.", inline=False)
+        em.set_footer(text="version: " + VERSION)
+        await client.send_message(message.channel, embed=em) 
+    
+    # Invite
+    if message.content == ';invite':
+        em = discord.Embed(description="If you'd like to add MikiBot to your server, Click here: https://goo.gl/2rp6n2", color=0xffafc9)
+        await client.send_message(message.channel, embed=em)
+    
+    # Server Count
+    if message.content == ';servercount':
+        em = discord.Embed(description='Currently watching over ' + str(len(client.servers)) + ' Discord servers <:discord:501956002158215198>', color=0xffafc9)
+        await client.send_message(message.channel, embed=em)
+    
+    # Server List
+    if message.content.startswith(';serverlist'):
+        if message.author.id == '257784039795064833':
+            servers = list(client.servers)
+            em = discord.Embed(description='Currently watching over ' + str(len(client.servers)) + ' Discord servers <:discord:501956002158215198>', color=0xffafc9)
+            await client.send_message(message.channel, embed=em)
+            for x in range(len(servers)):
+             await client.send_message(message.channel,('```md\n# ' + servers[x-1].name) + '\n ● ServerID: ' + servers[x-1].id + '```')
+        else:
+            await client.send_message(message.channel,"You don't have the permissions to use this command")
+    
+##### Version #####
+    if message.content == ';version':
+        em = discord.Embed(description='The current version of Sector Bot is: `' + VERSION + '`', color=0xffafc9)
+        await client.send_message(message.channel, embed=em)
+    
+    # Vote
+    if message.content == ';vote':
+        em = discord.Embed(description='You can vote here: \n\n:point_right: https://discordbots.org/bot/496214977267630080/vote :point_left:', color=0xffafc9)
+        await client.send_message(message.channel, embed=em)
+    
+    # Donate
+    if message.content == ';donate':
+        em = discord.Embed(description='You can donate by purchasing roles from the MikiBot Help server here: \n\n:point_right: https://goo.gl/wGG82o :point_left:', color=0xffafc9)
+        await client.send_message(message.channel, embed=em)
+    
+    # Time
+    if message.content == ';time':
+        dash = strftime("%H:%M", gmtime())
+        wholetime = dash[0] + dash[1]
+        resttime = dash[2:]
+        if int(wholetime) < 12:
+            await client.send_message(message.channel, 'The server time now is: **' + wholetime + resttime + 'AM. GMTIME(0:00)**')
+        else:
+            await client.send_message(message.channel, 'The server time now is: **' + int(wholetime-12) + resttime + 'PM. GMTTIME(0:00)**')
 
-@bot.command(pass_context=True)
-async def ping(ctx):
-	embed = discord.Embed(title=":ping_pong: Bot Ping", description=":construction:  under construction :construction:", color=0xffafc9)
-	await bot.say(embed=embed)
-	# Time the time required to send a message first.
-	# This is the time taken for the message to be sent, awaited, and then 
-	# for discord to send an ACK TCP header back to you to say it has been
-	# received; this is dependant on your bot's load (the event loop latency)
-	# and generally how shit your computer is, as well as how badly discord
-	# is behaving.
-#	start = time.monotonic()
-#	msg = await ctx.send('Pinging...')
-#	millis = (time.monotonic() - start) * 1000
+    # Purge
+    if message.content.startswith(';purge ') and not message.content[7:]=='':
+        if message.author.id == '257784039795064833':
+          message_amount = int(message.content[7:])
+          deleted = await client.purge_from(message.channel, limit=message_amount, check=on_message)
+          em = discord.Embed(description='Purged {} message(s) from this channel ⚠'.format(len(deleted)), color=0xffafc9,)
+          selfdel = await client.send_message(message.channel, embed=em)
+          await asyncio.sleep(10)
+          await client.delete_message(selfdel)
+        else:
+          await client.send_message(message.channel,"You don't have the permissions to use this command")
+    
+############################## Y O U T U B E ##############################    
+    
+    # YouTube
+    if message.content.startswith(';youtube '):
+        name = message.content[9:]
+        fullcontent = ('http://www.youtube.com/results?search_query=' + name)
+        text = requests.get(fullcontent).text
+        soup = bs4.BeautifulSoup(text, 'html.parser')
+        img = soup.find_all('img')
+        div = [ d for d in soup.find_all('div') if d.has_attr('class') and 'yt-lockup-dismissable' in d['class']]
+        img0 = div[0].find_all('img')[0]
+        imgurl = (img0['src'])
+        a = [ x for x in div[0].find_all('a') if x.has_attr('title') ]
+        title = (a[0]['title'])
+        a0 = [ x for x in div[0].find_all('a') if x.has_attr('title') ][0]
+        url= ('http://www.youtube.com'+a0['href'])
+        em = discord.Embed(title=title, url=url, color=0xdd342f)
+        em.set_author(name='📺   YouTube Search')
+        em.set_thumbnail(url=imgurl)
+        em.add_field(name='Channel', value='<channel name>', inline=True)
+        em.add_field(name='Duration', value='<duration of video>', inline=True)
+        em.set_footer(text="not yet fully opperational...")
+        await client.send_message(message.channel, embed=em)
 
-	# Since sharded bots will have more than one latency, this will average them if needed.
-#	heartbeat = ctx.bot.latency * 1000
+############################## F O R T N I T E ##############################
 
-#	await msg.edit(content=f'Heartbeat: {heartbeat:,.2f}ms\tACK: {millis:,.2f}ms.')
-	
-@bot.command(pass_context=True)
-async def count(ctx):
-	bots = 0
-	members = 0
-	total = 0
-	for x in ctx.message.server.members:
-	 if x.bot == True:
-	  bots += 1
-	  total += 1
-	 else:
-	  members += 1
-	  total += 1
-	embed = discord.Embed(title="Server Member Count",color=0xffafc9)
-	embed.add_field(name="Bot Count",value=bots)
-	embed.add_field(name="Member Count",value=members)
-	embed.add_field(name="Total",value=total)
-	await bot.say(embed=embed)
+    # Fortnite
+    if message.content.startswith(COMMAND_PREFIX + 'fortnite'):
+      words = message.content.split(' ', 2)
 
-@bot.command(pass_context=True)
-async def version(ctx):
-	embed = discord.Embed(description=f"The current version of Sector Bot is: `{version}`", color=0xffafc9)
-	await bot.ssay(embed=embed)
-	
-##############################################################################################################################
-# 📖 | G E N E R A L - C O M M A N D S
-##############################################################################################################################
+      if len(words) < 3:
+        em = discord.Embed(description='Failed to get data. Please use `' + COMMAND_PREFIX + 'fortnite <platform> <nickname>`', color=0x6234b2)
+        await client.send_message(message.channel, embed=em)
+        return
 
-@bot.command(pass_context=True)
-async def server(ctx):
-	bots = 0
-	members = 0
-	total = 0
-	for x in ctx.message.server.members:
-	 if x.bot == True:
-	  bots += 1
-	  total += 1
-	 else:
-	  members += 1
-	  total += 1
-	embed = discord.Embed(title="📋 Server Info", description="Here's what I could find.", color=0xffafc9)
-	embed.set_thumbnail(url=ctx.message.server.icon_url)
-	embed.add_field(name="Name:", value=ctx.message.server.name, inline=True)
-	embed.add_field(name="ID:", value=ctx.message.server.id, inline=True)
-	embed.add_field(name="Region:", value=ctx.message.server.region, inline=True)
-	embed.add_field(name="Owner:", value=ctx.message.server.owner.mention, inline=True)
-# embed.add_field(name="Varification level:, value=?, inline=True)
-	embed.add_field(name="Roles:", value=len(ctx.message.server.roles), inline=True)
-# embed.add_field(name="Channels:", value=?, inline=True)
-	embed.add_field(name="Members:", value=f"Online: {len([I for I in ctx.message.server.members if I.status is discord.Status.online])}\nBots: {bots}\nMembers: {members}\nTotal: {total}", inline=True)
-	embed.add_field(name="Created:", value=ctx.message.server.created_at, inline=False)
-# embed.add_field(name="Number of Emotes:", value=?, inline=True)
-	embed.set_footer(text=f"Requested by {ctx.message.author}", icon_url=ctx.message.author.avatar_url) 
-	await bot.say(embed=embed)
+      platform = words[1].lower()
 
-@bot.command(pass_context=True)
-async def user(ctx, user: discord.Member):
-	embed = discord.Embed(title="📋 User Info", description="Here's what I could find.", color=0xffafc9)
-	embed.set_thumbnail(url=user.avatar_url)
-	embed.add_field(name="Name", value=user, inline=True)
-	embed.add_field(name="ID", value=user.id, inline=True)
-	embed.add_field(name="Status", value=user.status, inline=False)
-	embed.add_field(name="Highest role", value=user.top_role, inline=True)
-	embed.add_field(name="Created", value=user.created_at, inline=True)
-	embed.add_field(name="Joined", value=user.joined_at, inline=True)
-	await bot.say(embed=embed)
-	
-@bot.command(pass_context=True)
-async def avatar(ctx, user: discord.Member):
-	embed = discord.Embed(title="🖼️ User Avatar", description=f"Here it is {user.name}'s profile pic",color=0xffafc9)
-	embed.set_image(url=user.avatar_url)
-	await bot.say(embed=embed)
-	
-@bot.command(pass_context=True)
-async def about(ctx):
-	embed = discord.Embed(color=0xffafc9,)
-	embed.set_author(name="MikiBot", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
-	embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
-	embed.add_field(name="About", value="Hey everyone, I'm MikiBot ^^ \nI'm also very new discord and I'd like your help to improve myself :D \nPlease use m!help to see what else I can do for you~", inline=False)
-	embed.add_field(name="Creator", value="<@257784039795064833>", inline=True)
-	embed.set_footer(text=f"version: {version}")
-	await bot.say(embed=embed)
-	
-	embed = discord.Embed(color=0xffafc9,)
-	embed.set_author(name="Website", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
-	embed.add_field(name="Link:", value="https://relykxdiscord.wixsite.com/mikibot", inline=False)
-	await bot.say(embed=embed)
-	
-	embed = discord.Embed(color=0x7289da,)
-	embed.set_author(name="Server", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/500485578794729482/discord_logo1600.png")
-	embed.add_field(name="Link:", value="https://discord.gg/UjuGRB9", inline=False)
-	await bot.say(embed=embed)
-	
-	embed = discord.Embed(color=0xce7a1e,)
-	embed.set_author(name="Curious Cat", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/514996231647395841/curiouscat.png")
-	embed.add_field(name="Link:", value="https://curiouscat.me/MikiDiscord", inline=False)
-	await bot.say(embed=embed)
-	
-	embed = discord.Embed(color=0x2da9e1,)
-	embed.set_author(name="Twitter", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/514996202719150088/twitter.png")
-	embed.add_field(name="Link:", value="https://twitter.com/MikiDiscord", inline=False)
-	await bot.say(embed=embed)
-	
-@bot.command(pass_context=True)
-async def invite(ctx):
-	embed = discord.Embed(description="📨 If you'd like to add MikiBot to your server, go to our website here: https://relykxdiscord.wixsite.com/mikibot", color=0xffafc9)
-	await bot.say(embed=embed)
-	
-@bot.command(pass_context=True)
-async def vote(ctx):
-	embed = discord.Embed(description="📥 You can vote here: \nhttps://discordbots.org/bot/496214977267630080/vote", color=0xffafc9)
-	await bot.say(embed=embed)
-	
-@bot.command(pass_context=True)
-async def donate(ctx):
-	embed = discord.Embed(title="💵 Patreon", description="You can donate here: \nhttps://www.patreon.com/join/mikidiscord?", color=0xffafc9)
-	embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/499771950764261396/513936104357888000/icon_color_variations.jpg")
-	await bot.say(embed=embed)
-	
-@bot.command(pass_context=True)
-async def time(ctx):
-	time = now.strftime("%I:%M %p")
-	date = now.strftime("%a, %d %b %Y")
-	embed = discord.Embed(title="🕗 Clock", color=0xffafc9)
-	embed.add_field(name="Time", value=time, inline=True)
-	embed.add_field(name="Date", value=date, inline=True)
-	embed.set_footer(text=f"Requested by {ctx.message.author}", icon_url=ctx.message.author.avatar_url) 
-	await bot.say(embed=embed)
-	
-##############################################################################################################################
-# 😜 | F U N - C O M M A N D S													      
-##############################################################################################################################
-	
-@bot.command(pass_context=True)
-async def google(ctx,*args):
-	x = f"https://www.google.com/search?rlz=1C1CHBF_enUS753US753&ei=n62RW536KpL2swWl1IKIBg&q={args}&oq=google+search&gs_l=psy-ab.3..0i71l8.0.0..8290...0.0..0.0.0.......0......gws-wiz.vtjc2PzIHFg"
-	y = x.replace(" ","+")
-	await bot.say(y)
+      # more acceptable platform names
+      if platform == 'xbox':
+        platform = 'xbl'
+      elif platform == 'ps4':
+        platform = 'psn'
 
-@bot.command(pass_context=True)
-async def youtube(ctx,*args):
-	x = f"https://www.youtube.com/results?search_query={args}"
-	y = x.replace(" ","+")
-	await bot.say(y)
+      if platform not in ('pc','xbl','psn'):
+        em = discord.Embed(description='Failed to get data. Please use `' + COMMAND_PREFIX + 'fortnite <platform> <nickname>`', color=0x6234b2)
+        await client.send_message(message.channel, embed=em)
+        return
+      else:
+        res = fortnite_tracker_api(platform,words[2])
 
-@bot.command(pass_context=True)
-async def greet(ctx):
-	randomlist = ['>//< hellu',
-		      'hai ^^',
-		      'hewo o3o',
-		      'h-hi o-o',
-		      'hello ^-^',
-		      'hellu',
-		      'hai',
-		      'hewo',
-		      'h-hi',
-		      'hello',
-                     ]
-	await bot.say("%s" %(random.choice(randomlist),))
+        if res:
+          matches_played = res[0]['value']
+          wins = res[1]['value']
+          win_percent = res[2]['value']
+          kills = res[3]['value']
+          kd = res[4]['value']
 
-@bot.command(pass_context=True)
-async def kawaii(ctx):
-	embed = discord.Embed(title="💠 Kawaii Emoji", description="Find more here: https://kawaiiface.net/", color=0xffafc9,)
-	embed.add_field(name="Happy", value="`(✿◠‿◠)` `≧◡≦` `(▰˘◡˘▰)` `(●´ω｀●)`\n`(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧` `（ミ￣ー￣ミ）` `(づ｡◕‿‿◕｡)づ`\n`✌.ʕʘ‿ʘʔ.✌` `◎[▪‿▪]◎`", inline=False)
-	embed.add_field(name="Sad", value="`ಥ_ಥ` `┐(‘～'；)┌` `◄.►` `(◕︵◕)`\n`v( ‘.’ )v` `ਉ_ਉ` `o(╥﹏╥)o` `●︿●` `(∩︵∩)`", inline=False)
-	embed.add_field(name="Mad", value="`〴⋋_⋌〵` `(◣_◢)` `☉▵☉凸` `ↁ_ↁ`\n`╚(•⌂•)╝` `ᇂﮌᇂ)` `ლ(́◉◞౪◟◉‵ლ`\n`(┛◉Д◉)┛彡┻━┻ `", inline=False)
-	embed.add_field(name="Love", value="`v(=∩_∩=)ﾌ` `(n˘v˘•)¬` `♥╣[-_-]╠♥` `★~(◡﹏◕✿)`\n`(◕‿-)` `( ^▽^)σ)~O~)` `♥‿♥` `(✿ ♥‿♥)` `(●´ω｀●)`", inline=False)
-	embed.add_field(name="Party", value="`\m/(>.<)\m/` `ヾ(〃^∇^)ﾉ` `(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧`\n`♨(⋆‿⋆)♨` `┌( ಠ_ಠ)┘` `Ｏ(≧▽≦)Ｏ` `☜-(ΘLΘ)-☞`\n`@(ᵕ.ᵕ)@` `╘[◉﹃◉]╕`", inline=False)
-	embed.add_field(name="Weird", value="`（ ´_⊃｀）` `(￣。￣)～ｚｚｚ` `~(⊕⌢⊕)~` `⊂•⊃_⊂•⊃`\n`ᕙ(⇀‸↼‶)ᕗ` `( 　ﾟ,_ゝﾟ)` `(⊙︿⊙✿)`\n`̿̿’̿’\̵͇̿̿\=(•̪●)=/̵͇̿̿/’̿̿ ̿ ̿ ̿` `( ͡° ͜ʖ ͡°)`", inline=False)
-	await bot.say(embed=embed)
-	
-@bot.command(pass_context=True)
-async def wallpaper(ctx):
-	embed = discord.Embed(color=0xffafc9,)
-	embed.set_image(url='https://picsum.photos/1280/720/?image=' + str(random.randint(1, 999)))
-	await bot.say(embed=embed)
-	
-@bot.command(pass_context=True)
-async def gif(ctx):
-	embed = discord.Embed(color=0xffafc9,)
-	embed.set_image(url='http://replygif.net/i/' + str(random.randint(90, 1100)) + '.gif')
-	await bot.say(embed=embed)
-	
-@bot.command(pass_context=True)
-async def diceroll(ctx):
-	randomlist = ['1','2','3','4','5','6',]
-	embed = discord.Embed(title ="🎲 Dice Roll", description="*rolls a dice*", color=0xffafc9,)
-	embed.add_field(name="You rolled a dice and it landed on...", value="Side: **%s**" %(random.choice(randomlist),))
-	await bot.say(embed=embed)
-	
-@bot.command(pass_context=True)
-async def coinflip(ctx):
-	randomlist = ['Heads','Tails',]
-	embed = discord.Embed(title ="💰 Coin Flip", description="*flips a coin*", color=0xffafc9,)
-	embed.add_field(name="You flipped a coin and it landed on", value="Face: **%s**" %(random.choice(randomlist),))
-	await bot.say(embed=embed)
-	
-@bot.command(pass_context=True)
-async def eightball(ctx):
-	randomlist = ['It is certain.',
+          em = discord.Embed(description="In game stats for " + words[2] + ':', color=0x6234b2)
+          em.set_author(name='⚔️   Fortnite')
+          em.set_thumbnail(url='https://cdn.discordapp.com/attachments/499771919059648588/511427912738799635/fortnite.png')
+          em.add_field(name="Matches Played", value=matches_played + '\n', inline=False)
+          em.add_field(name="Wins", value=wins + '\n', inline=True)
+          em.add_field(name="Win percent", value=win_percent + '\n', inline=True)
+          em.add_field(name="Kills", value=kills + '\n', inline=True)
+          em.add_field(name="K/D", value=kd + '\n', inline=True)
+          await client.send_message(message.channel, embed=em)
+        else:
+          em = discord.Embed(description='Failed to get data. Double check spelling of your nickname.', colour=0x6234b2)
+          await client.send_message(message.channel, embed=em)
+    
+    # Fortnite Help
+    if message.content == ';help fortnite':
+      em = discord.Embed(title='Fortnite Help', color=0x6234b2)
+      em.add_field(name='platform', value='pc | xbox | ps4', inline=True)
+      em.add_field(name='nickname', value='your fortnite player name.', inline=True)
+      em.add_field(name='Usage', value='`' + COMMAND_PREFIX + 'fortnite <platform> | <nickname>`', inline=False)
+      await client.send_message(message.channel, embed=em)
+    
+############################## F U N ##############################
+    
+    # Memes
+    if message.content.startswith(';meme'):
+         await client.send_message(message.channel, '`MEME: DISABLED`')
+#    if message.content == ';meme':
+#        randomlist = ['https://goo.gl/1wezZw',  #Dr. Phill
+#                      'https://goo.gl/nB6oCw',  #Gandalf
+#                      'https://goo.gl/viStSC',  #Zach Galifianakis
+#                      'https://goo.gl/U3pEhp',  #Chuck Norris
+#                      'https://goo.gl/YZSPxx',  #Fat Controller
+#                      'https://goo.gl/n2Hajn',  #Ocean
+#                      'https://goo.gl/CDwmTj',  #Austin Powers
+#                      'https://goo.gl/pjkwqZ',  #Nemo
+#                      'https://goo.gl/79AANm',  #Knights
+#                      'https://goo.gl/AxaSrv',  #Carl, Wheels
+#                      'https://goo.gl/WB1PTd',  #Carl, Vader
+#                      'https://goo.gl/Kx7auW',  #Carl, Pew
+#                      'https://goo.gl/N9m7kF',  #Slut
+#                      'https://goo.gl/UFNkSe',  #Shaggy, Weed
+#                    ]
+#        em = discord.Embed(title='Meme:', color=0xffafc9,)
+#        em.set_image(url='%s' %(random.choice(randomlist),))
+#        await client.send_message(message.channel, embed=em)
+        
+    # Password Generator
+    if message.content == ';password':
+        encryptkey = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',]
+        encryptcode = ['1','2','3','4','5','6','7','8','9',]
+        count1 = random.randint(1, 26)
+        count2 = random.randint(1, 26)
+        count3 = random.randint(1, 26)
+        count4 = random.randint(1, 26)
+        count5 = random.randint(1, 26)
+        count6 = random.randint(1, 26)
+        count7 = random.randint(1, 26)
+        count8 = random.randint(1, 26)
+        if count1 < 13:
+            key1 = (random.choice(encryptkey))
+        if count1 >= 13: 
+            key1 = (random.choice(encryptcode))
+        if count2 < 13:
+            key2 = (random.choice(encryptkey))
+        if count2 >= 13: 
+            key2 = (random.choice(encryptcode))
+        if count3 < 13:
+            key3 = (random.choice(encryptkey))
+        if count3 >= 13: 
+            key3 = (random.choice(encryptcode))
+        if count4 < 13:
+            key4 = (random.choice(encryptkey))
+        if count4 >= 13: 
+            key4 = (random.choice(encryptcode))
+        if count5 < 13:
+            key5 = (random.choice(encryptkey))
+        if count5 >= 13: 
+            key5 = (random.choice(encryptcode))
+        if count6 < 13:
+            key6 = (random.choice(encryptkey))
+        if count6 >= 13: 
+            key6 = (random.choice(encryptcode))
+        if count7 < 13:
+            key7 = (random.choice(encryptkey))
+        if count7 >= 13: 
+            key7 = (random.choice(encryptcode))
+        if count8 < 13:
+            key8 = (random.choice(encryptkey))
+        if count8 >= 13: 
+            key8 = (random.choice(encryptcode))
+    # There are about 23,535,820 different password combinations that can be generated.
+        encryptedpass = (key1 + key2 + key3 + key4 + key5 + key6 + key7 + key8)
+        em = discord.Embed(description='Here is your randomly generated password: ' + '`' + encryptedpass + '`', color=0xffafc9)
+        await client.send_message(message.author, embed=em)
+        f = open('authpass.txt','a')
+        f.write('\n' + 'Password: ' + encryptedpass + ' was generated by ' + str(message.author))
+        f.close()
+    
+    # Random Wallpaper
+    if message.content == ';wallpaper':
+        em = discord.Embed(title='Wallpaper:', color=0xffafc9,)
+        em.set_image(url='https://picsum.photos/1280/720/?image=' + str(random.randint(1, 999)))
+        await client.send_message(message.channel, embed=em)
+        
+    # Random Gif
+    if message.content == ';gif':
+        em = discord.Embed(title='Gif:', color=0xffafc9,)
+        em.set_image(url='http://replygif.net/i/' + str(random.randint(90, 1100)) + '.gif')
+        await client.send_message(message.channel, embed=em)
+
+############################## G A M E S ##############################    
+    
+    # Dice Roll
+    if message.content == ';diceroll' or message.content == ';dr':
+        randomlist = ['1','2','3','4','5','6',]
+        em = discord.Embed(title ='**Game: Dice Roll**', color=0xffafc9, description="🎲 *rolls a dice* \n\nYou rolled a dice and it landed on a \n Side: **%s** \n ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿" %(random.choice(randomlist),))
+        em.add_field(name="Other Games:", value="Coin Flip | ;coinflip \n 8 Ball | ;8ball", inline=True)
+        await client.send_message(message.channel, embed=em)
+    
+    # Coin Flip
+    elif message.content == ';coinflip' or message.content == ';cf':
+        randomlist = ['Heads','Tails',]
+        em = discord.Embed(title ='**Game: Coin Flip**', color=0xffafc9, description="💰 *flips a coin* \n\nYou flipped a coin and it landed on \n Face: **%s** \n ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿" %(random.choice(randomlist),))
+        em.add_field(name="Other Games:", value="Dice Roll | ;dicerole \n 8 Ball | ;8ball", inline=True)
+        await client.send_message(message.channel, embed=em)
+    
+    # 8 Ball
+    elif message.content == ';8ball' or message.content == ';8b':
+        randomlist = ['It is certain.',
                       'It is decidedly so.',
                       'Without a doubt.',
                       'Yes - definitely.',
@@ -342,92 +568,88 @@ async def eightball(ctx):
                       'Outlook not so good.',
                       'Very doubtful.',
                      ]
-	embed = discord.Embed(title ="🎱 8 Ball", description="*shakes the 8 Ball up...*", color=0xffafc9,)
-	embed.add_field(name="You shook the 8 ball and it shows you...", value="Answer: **%s**" %(random.choice(randomlist),))
-	await bot.say(embed=embed)
-	
-##############################################################################################################################
-# ℹ️ | H E L P - C O M M A N D S	
-##############################################################################################################################
-	
-@bot.command(pass_context=True)
-async def commands(ctx):
-	embed = discord.Embed(title="📖 General", color=0xffafc9)
-	embed.add_field(name="serverinfo", value="Displays the info of the current server.", inline=False)
-	embed.add_field(name="userinfo", value="Displays a profile of the mentioned user.", inline=False)
-	embed.add_field(name="avatar", value="Dusplays the profile pic of the mentioned user.", inline=False)
-	embed.add_field(name="kick", value="Kicks the mentioned user.", inline=False)
-	embed.add_field(name="clear", value="Clears a specific amount of messages in a channel.", inline=False)
-	embed.add_field(name="about", value="Shows the About description of MikiBot.", inline=False)
-	embed.add_field(name="servercount", value="Shows how many servers this bot occupies.", inline=False)
-	embed.add_field(name="invite", value="Sends the invite to add MikiBot to your server.", inline=False)
-	embed.add_field(name="vote", value="Vote for MikiBot.", inline=False)
-	embed.add_field(name="donate", value="Donate to MikiBot.", inline=False)
-	embed.add_field(name="time", value="Displays the current time of the server.", inline=False)
-	await bot.say(embed=embed)
-	embed = discord.Embed(title="😜 Fun", color=0xffafc9)
-	embed.add_field(name="hi", value='Generates a response, for example: "hai ^-^"', inline=False)
-	embed.add_field(name="kawaii", value="Displays multiple different kawaii emoji", inline=False)
-	embed.add_field(name="wallpaper", value="Generates a random wallpaper.", inline=False)
-	embed.add_field(name="gif", value="Generates a random gif.", inline=False)
-	embed.add_field(name="ping", value="Pongs the user's ping.", inline=False)
-	embed.add_field(name="dicroll", value="Rolls a six sided die.", inline=False)
-	embed.add_field(name="coinflip", value="Flips a coin, could be heads could be tails.", inline=False)
-	embed.add_field(name="eightball", value="Ask a question and shake the 8 Ball.", inline=False)
-	await bot.say(embed=embed)
-	
-##############################################################################################################################
-# 🛠️ | O W N E R - C O M M A N D S	
-##############################################################################################################################
+        em = discord.Embed(title ='**Game: 8 Ball**', color=0xffafc9, description="🎱 *shakes the 8 Ball up...*` \n\nYou shook the 8 ball and it shows you... \n Answer: **%s** \n ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿" %(random.choice(randomlist),))
+        em.add_field(name="Other Games:", value="Dice Roll | ;dicerole \n Coin Flip | ;coinflip", inline=True)
+        await client.send_message(message.channel, embed=em)
+       
+########## COMMING SOON ##########
 
-@bot.command(pass_context=True)
-async def servercount(ctx):
-	embed = discord.Embed(description=f"Currently watching over {str(len(bot.servers))} Discord servers", color=0xffafc9)
-	embed.set_author(name="Server Count", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/500485578794729482/discord_logo1600.png")
-	await bot.say(embed=embed)
-	
-@bot.command(pass_context=True)
-async def serverlist(ctx):
-	serv = list(bot.servers)
-	embed = discord.Embed(title="Server List", description=f"Currently watching over {str(len(bot.servers))} Discord servers", color=0xffafc9)
-	embed.set_author(name="Server List", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/500485578794729482/discord_logo1600.png")
-	await bot.say(embed=embed)
-	for x in range(len(serv)):
-	 embed = discord.Embed(title=serv[x-1].name, description=f"● ServerID: {serv[x-1].id}", color=0x7289da)
-	 await bot.say(embed=embed)
+    # Games
+        # Tic Tac Toe
+        # Connect Four
+        # Hang Man
+        # Roulette
+        # Russian Roulette
+        # Blackjack
+        # Paper Scissors Rock
+        # Akinator
+        # Cock Fight
+        # Truth or Dare
+        # Never Have I Ever
+        # Slots
+        # Dungeons and Dragons
+        # Chess
+        # Jokes
+        
+########## CUT OUT CONTENT NEEDS REVIEW #########
 
-@bot.command(pass_context=True)
-async def test(ctx):
-	embed = discord.Embed(description="All commands under the Admin categorie:", color=0xffafc9)
-	embed.set_author(name="Admin", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/500485578794729482/discord_logo1600.png")
-	embed.add_field(name="ban", value="-",inline=True)
-	embed.add_field(name="unban", value="-",inline=True)
-	embed.add_field(name="kick", value="-",inline=True)
-	embed.add_field(name="clear", value="-",inline=True)
-	embed.add_field(name="ping", value="-",inline=True)
-	embed.add_field(name="count", value="-",inline=True)
-	await bot.say(embed=embed)
-	embed = discord.Embed(description="All commands under the General categorie:", color=0xffafc9)
-	embed.set_author(name="General", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/500485578794729482/discord_logo1600.png")
-	embed.add_field(name="server", value="-",inline=True)
-	embed.add_field(name="user", value="-",inline=True)
-	embed.add_field(name="avatar", value="-",inline=True)
-	embed.add_field(name="about", value="-",inline=True)
-	embed.add_field(name="invite", value="-",inline=True)
-	embed.add_field(name="donate", value="-",inline=True)
-	await bot.say(embed=embed)
-	embed = discord.Embed(description="All commands under the Fun categorie:", color=0xffafc9)
-	embed.set_author(name="Funr", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/500485578794729482/discord_logo1600.png")
-	embed.add_field(name="google", value="-",inline=True)
-	embed.add_field(name="youtube", value="-",inline=True)
-	embed.add_field(name="greet", value="-",inline=True)
-	embed.add_field(name="time", value="-",inline=True)
-	embed.add_field(name="kawaii", value="-",inline=True)
-	embed.add_field(name="wallpaper", value="-",inline=True)
-	embed.add_field(name="gif", value="-",inline=True)
-	embed.add_field(name="diceroll", value="-",inline=True)
-	embed.add_field(name="coinflip", value="-",inline=True)
-	embed.add_field(name="eightball", value="-",inline=True)
-	await bot.say(embed=embed)
-	
-bot.run(os.getenv("BOT_TOKEN"))
+    # Greyscale Wallpaper
+#    if message.content == ';gswallpaper':
+#        em = discord.Embed(description='Right click and then click open link in order to get redirected to the page and download it :yum: ')
+#        em.set_image(url='https://picsum.photos/g/1280/720/?image=' + str(random.randint(1, 999)))
+#        await client.send_message(message.channel, embed=em)
+        
+    # Greyscale Image
+#    if message.content == ';gsimg':
+#        em = discord.Embed(description='Fresh Grayscale image to fit your photo frame! ')
+#        em.set_image(url='https://picsum.photos/g/200/300/?image=' + str(random.randint(1, 999)))
+#        await client.send_message(message.channel, embed=em)
+
+    # Random Image
+#    if message.content == ';randimg':
+#        em = discord.Embed(description='Fresh image to fit your photo frame! ')
+#        em.set_image(url='https://picsum.photos/200/300/?image=' + str(random.randint(1, 999)))
+#        await client.send_message(message.channel, embed=em)
+    
+    # Blur Wallpaper
+#    if message.content == ';blurwallpaper':
+#        em = discord.Embed(description='Right click and then click open link in order to get redirected to the page and download it :yum: ')
+#        em.set_image(url='https://picsum.photos/1280/720/?blur=' + str(random.randint(1, 999)))
+#        await client.send_message(message.channel, embed=em)
+    
+    # Blur Image
+#    if message.content == ';blurimg':
+#        em = discord.Embed(description='Fresh Blurry image to fit your photo frame! ')
+#        em.set_image(url='https://picsum.photos/200/300/?blur=' + str(random.randint(1, 999)))
+#        await client.send_message(message.channel, embed=em)
+
+      
+# Help
+    if message.content == ';help':
+        em = discord.Embed(title="https://discord.gg/UjuGRB9", description="For any other help please join our Discord server...\n\nPrefix:`;` \nCommands: `;<command>`", url="https://discord.gg/UjuGRB9", color=0xffafc9) # Bot
+        em.set_author(name="MikiBot", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
+        
+        # Social
+        em.add_field(name="＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿", value="<:social:511456438296641536> **Social** \ngreet – Sends a greeting in the channel. \nsay <text> – Rewrites your text. \nemojify <text> – Emojifies your text. \ntiny <text> – Decorates your text.", inline=False)
+        
+        # Server
+        em.add_field(name="＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿", value="<:discord:501956002158215198> **Server** \nabout – Shows the About description of MikiBot. \ninvite – Sends the invite to add MikiBot to your server. \nservercount – Shows how many servers this bot occupies. \nserverlist – Shows a list of all the connected servers. \nversion – The current version of MikiBot. \nvote – Vote for MikiBot. \ndonate – Donate to MikiBot. \ntime – Displays the current time of the server. \npurge <amount> – Purges a specific amount of messages in a channel.", inline=False)
+        
+        # Youtube
+        em.add_field(name="＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿", value="<:youtube:511430654139957258> **YouTube** \nyoutube <search> – Searches youtube for the most relevent video.", inline=False)
+        
+        # Fortnite
+        em.add_field(name="＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿", value="<:fortnite:512113103387754509> **Fortnite** \nfortnite <platform> <nickname> – Displays fortnite stats of the entered user. \nhelp fortnite – Shows a how to of the command if you are stuck.", inline=False)
+        
+        # Fun
+        em.add_field(name="＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿", value="<:fun:511457443939614721> **Fun** \n~~meme~~ – `DISABLED` \npassword – Generates a random password. \nwallpaper – Generate a random wallpaper. \ngif – Generate a random gif.", inline=False)
+        
+        # Games
+        em.add_field(name="＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿", value="<:game:511448070005981204> **Games** \ndiceroll – Rolls a six sided die. \ncoinflip – Flips a coin, could be heads could be tails. \n8ball – Ask a question and shake the 8 Ball.", inline=False)
+        
+        em.set_footer(text="version: " + VERSION)
+        await client.send_message(message.channel, embed=em)
+    
+#Bot Token
+client.loop.create_task(change_status())
+client.run(os.getenv('BOT_TOKEN'))
