@@ -52,7 +52,7 @@ async def on_member_join(member):
 @bot.command(pass_context=True)
 @commands.has_permissions(ban_members = True)
 async def ban(ctx, user: discord.Member):
-	await bot.server.ban(user)
+	await bot.ban(user)
 	embed = discord.Embed(color=0xffafc9)
 	embed.description = f"{user.mention} has been banned by {ctx.author.display_name}"
 	await bot.say(embed=embed)
@@ -60,7 +60,7 @@ async def ban(ctx, user: discord.Member):
 @bot.command(pass_context=True)
 @commands.has_permissions(ban_members=True)
 async def unban(ctx, user: discord.Member):
-	await bot.server.unban(user)
+	await bot.unban(user)
 	await bot.send(embed = discord.Embed(title="Unban",description="{0.name} got unbanned from the server".format(user)))
 
 @bot.command(pass_context=True)
