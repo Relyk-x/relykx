@@ -168,7 +168,7 @@ async def about(ctx):
 	embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 	embed.add_field(name="About", value="Hey everyone, I'm MikiBot ^^ \nI'm also very new discord and I'd like your help to improve myself :D \nPlease use m!help to see what else I can do for you~", inline=False)
 	embed.add_field(name="Creator", value="<@257784039795064833>", inline=True)
-	embed.add_field(name="Server", value="<:discord:501956002158215198> https://discord.gg/UjuGRB9", inline=True)
+	embed.add_field(name="Server", value="https://discord.gg/UjuGRB9", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/500485578794729482/discord_logo1600.png", inline=True)
 	embed.set_footer(text=f"version: {version}")
 	await bot.say(embed=embed)
 	embed = discord.Embed(color=0xffafc9,)
