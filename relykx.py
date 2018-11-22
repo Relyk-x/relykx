@@ -332,7 +332,7 @@ async def servercount(ctx):
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
-async def test(ctx, member):
+async def test(ctx):
 	embed = discord.Embed(title="⚙️ Commands", color=0xffafc9)
 	embed.add_field(name="⚠️ Admin", value="All commands under the Admin categorie:",inline=False)
 	embed.add_field(name="ban", value="-",inline=True)
@@ -359,6 +359,6 @@ async def test(ctx, member):
 	embed.add_field(name="diceroll", value="-",inline=True)
 	embed.add_field(name="coinflip", value="-",inline=True)
 	embed.add_field(name="eightball", value="-",inline=True)
-	await bot.send_message(member, embed=embed)
+	await bot.send_message(f"{ctx.message.author}", embed=embed)
 	
 bot.run(os.getenv("BOT_TOKEN"))
