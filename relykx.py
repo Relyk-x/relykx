@@ -367,14 +367,14 @@ async def commands(ctx):
 # 🛠️ | O W N E R - C O M M A N D S	
 ##############################################################################################################################
 
-@bot.command(pass_context=True)
-@commands.has_id('257784039795064833')
+@bot.command(hidden=True)
+@commands.is_owner
 async def servercount(ctx):
 	embed = discord.Embed(description='<:discord:501956002158215198> Currently watching over ' + str(len(bot.servers)) + ' Discord servers', color=0xffafc9)
 	await bot.say(embed=embed)
 	
-@bot.command(pass_context=True)
-@commands.has_id('257784039795064833')
+@bot.command(hidden=True)
+@commands.is_owner
 async def test(ctx):
 	embed = discord.Embed(title=":warning: Admin", description="All commands under the Admin categorie:", color=0xffafc9)
 	embed.add_field(name="ban", value="-",inline=True)
