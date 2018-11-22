@@ -376,13 +376,11 @@ async def commands(ctx):
 ##############################################################################################################################
 
 @bot.command(pass_context=True)
-@commands.has_role('Creator')
 async def servercount(ctx):
 	embed = discord.Embed(description=f"Currently watching over {str(len(bot.servers))} Discord servers", color=0xffafc9)
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
-@commands.has_role('Creator')
 async def serverlist(ctx):
 	serv = list(ctx.message.bot.servers)
 	embed = discord.Embed(description=f"Currently watching over {str(len(bot.servers))} Discord servers", color=0xffafc9)
@@ -392,11 +390,7 @@ async def serverlist(ctx):
 	 await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
-@commands.has_role('Creator')
 async def test(ctx):
-	embed = discord.Embed(description="testing... Hello World")
-	await bot.say(embed=embed)
-
 	embed = discord.Embed(title=":warning: Admin", description="All commands under the Admin categorie:", color=0xffafc9)
 	embed.add_field(name="ban", value="-",inline=True)
 	embed.add_field(name="unban", value="-",inline=True)
