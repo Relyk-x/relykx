@@ -52,17 +52,21 @@ async def on_member_join(member):
 @bot.command(pass_context=True)
 @commands.has_permissions(ban_members = True)
 async def ban(ctx, user: discord.Member):
+	embed = discord.Embed(title="Ban", description = f"{user.mention} has been banned by {ctx.author.display_name}", color=0xffafc9,)
+	seldel = await bot.say(embed=embed)
 	await bot.ban(user)
-	embed = discord.Embed(color=0xffafc9)
-	embed.description = f"{user.mention} has been banned by {ctx.author.display_name}"
-	await bot.say(embed=embed)
-
+	await asyncio.sleep(10)
+	await bot.delete_message(selfdel)
+	
 @bot.command(pass_context=True)
 @commands.has_permissions(ban_members=True)
 async def unban(ctx, user: discord.Member):
+	embed = discord.Embed(title="Unban", description="{0.name} got unbanned from the server".format(user), color=0xffafc9,)
+	seldel = await bot.say(embed=embed)
 	await bot.unban(user)
-	await bot.send(embed = discord.Embed(title="Unban",description="{0.name} got unbanned from the server".format(user)))
-
+	await asyncio.sleep(10)
+	await bot.delete_message(selfdel)
+	
 @bot.command(pass_context=True)
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, user: discord.Member):
