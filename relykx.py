@@ -168,17 +168,24 @@ async def about(ctx):
 	embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 	embed.add_field(name="About", value="Hey everyone, I'm MikiBot ^^ \nI'm also very new discord and I'd like your help to improve myself :D \nPlease use m!help to see what else I can do for you~", inline=False)
 	embed.add_field(name="Creator", value="<@257784039795064833>", inline=True)
-	embed.add_field(name="Server", value="https://discord.gg/UjuGRB9", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/500485578794729482/discord_logo1600.png", inline=True)
 	embed.set_footer(text=f"version: {version}")
 	await bot.say(embed=embed)
+	
 	embed = discord.Embed(color=0xffafc9,)
 	embed.set_author(name="Website", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
 	embed.add_field(name="Link:", value="https://relykxdiscord.wixsite.com/mikibot", inline=False)
 	await bot.say(embed=embed)
+	
+	embed = discord.Embed(color=0x7289da,)
+	embed.set_author(name="Server", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/500485578794729482/discord_logo1600.png")
+	embed.add_field(name="Link:", value="https://discord.gg/UjuGRB9", inline=False)
+	await bot.say(embed=embed)
+	
 	embed = discord.Embed(color=0xce7a1e,)
 	embed.set_author(name="Curious Cat", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/514996231647395841/curiouscat.png")
 	embed.add_field(name="Link:", value="https://curiouscat.me/MikiDiscord", inline=False)
 	await bot.say(embed=embed)
+	
 	embed = discord.Embed(color=0x2da9e1,)
 	embed.set_author(name="Twitter", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/514996202719150088/twitter.png")
 	embed.add_field(name="Link:", value="https://twitter.com/MikiDiscord", inline=False)
