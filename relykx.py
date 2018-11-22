@@ -382,7 +382,6 @@ async def serverlist(ctx):
 	for x in range(len(ctx.message.servers)):
 	 await bot.say((f"```md\n# {ctx.message.servers[x-1].name)}\n ● ServerID: {ctx.message.servers[x-1].id}```")
 
-	
 @bot.command(pass_context=True)
 @commands.has_role('Creator')
 async def test(ctx):
