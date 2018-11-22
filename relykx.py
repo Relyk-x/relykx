@@ -388,7 +388,7 @@ async def serverlist(ctx):
 	embed = discord.Embed(description=f"Currently watching over {str(len(bot.servers))} Discord servers", color=0xffafc9)
 	await bot.say(embed=embed)
 	for x in range(len(serv)):
-	 embed = discord.Embed(title=serv[x-1].name), description=f"● ServerID: {serv[x-1].id}")
+	 embed = discord.Embed(title=serv[x-1].name, description=f"● ServerID: {serv[x-1].id}")
 	 await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
