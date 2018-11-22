@@ -147,6 +147,16 @@ async def count(ctx):
 
 @bot.command(pass_context=True)
 async def server(ctx):
+	bots = 0
+	members = 0
+	total = 0
+	for x in ctx.message.server.members:
+	 if x.bot == True:
+	  bots += 1
+	  total += 1
+	 else:
+	  members += 1
+	  total += 1
 	embed = discord.Embed(title="📋 Server Info", description="Here's what I could find.", color=0xffafc9)
 	embed.set_thumbnail(url=ctx.message.server.icon_url)
 	embed.add_field(name="Name:", value=ctx.message.server.name, inline=True)
@@ -156,9 +166,7 @@ async def server(ctx):
 # embed.add_field(name="Varification level:, value=?, inline=True)
 	embed.add_field(name="Roles:", value=len(ctx.message.server.roles), inline=True)
 # embed.add_field(name="Channels:", value=?, inline=True)
-	embed.add_field(name="Online:", value=f"{len([I for I in ctx.message.server.members if I.status is discord.Status.online])}",inline=False)
-# embed.add_field(name="Members:", value=len(ctx.message.server.member.status = discord.Status.online) + "\n" + len(ctx.message.server.members == 'offline') + "\n" + len(ctx.message.server.members), inline=True)
-	embed.add_field(name="Members:", value=len(ctx.message.server.members), inline=True)
+	embed.add_field(name="Members:", value=f"Online: {len([I for I in ctx.message.server.members if I.status is discord.Status.online])}\nBots: {bots}\nMembers: {members}\nTotal: {total}", inline=True)
 	embed.add_field(name="Created:", value=ctx.message.server.created_at, inline=False)
 # embed.add_field(name="Number of Emotes:", value=?, inline=True)
 	embed.set_footer(text=f"Requested by {ctx.message.author}", icon_url=ctx.message.author.avatar_url) 
@@ -380,8 +388,7 @@ async def serverlist(ctx):
 	embed = discord.Embed(description=f"Currently watching over {str(len(bot.servers))} Discord servers", color=0xffafc9)
 	await bot.say(embed=embed)
 	for x in range(len(serv)):
-	embed = discord.Embed(title=serv[x-1].name), description=f"● ServerID: {serv[x-1].id}")
-	await bot.say(embed=embed)
+	 await bot.say(embed = discord.Embed(title=serv[x-1].name), description=f"● ServerID: {serv[x-1].id}"), embed=embed)
 
 @bot.command(pass_context=True)
 @commands.has_role('Creator')
