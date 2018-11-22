@@ -382,13 +382,15 @@ async def commands(ctx):
 
 @bot.command(pass_context=True)
 async def servercount(ctx):
-	embed = discord.Embed(title="Server Count", description=f"Currently watching over {str(len(bot.servers))} Discord servers", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png", color=0xffafc9)
+	embed = discord.Embed(description=f"Currently watching over {str(len(bot.servers))} Discord servers", color=0xffafc9)
+	embed.set_author(name="Server Count", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/500485578794729482/discord_logo1600.png")
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
 async def serverlist(ctx):
 	serv = list(bot.servers)
-	embed = discord.Embed(title="Server List", description=f"Currently watching over {str(len(bot.servers))} Discord servers", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png", color=0xffafc9)
+	embed = discord.Embed(title="Server List", description=f"Currently watching over {str(len(bot.servers))} Discord servers", color=0xffafc9)
+	embed.set_author(name="Server List", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/500485578794729482/discord_logo1600.png")
 	await bot.say(embed=embed)
 	for x in range(len(serv)):
 	 embed = discord.Embed(title=serv[x-1].name, description=f"● ServerID: {serv[x-1].id}", color=0x7289da)
@@ -396,7 +398,8 @@ async def serverlist(ctx):
 
 @bot.command(pass_context=True)
 async def test(ctx):
-	embed = discord.Embed(title=":warning: Admin", description="All commands under the Admin categorie:", color=0xffafc9)
+	embed = discord.Embed(description="All commands under the Admin categorie:", color=0xffafc9)
+	embed.set_author(name="Admin", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/500485578794729482/discord_logo1600.png")
 	embed.add_field(name="ban", value="-",inline=True)
 	embed.add_field(name="unban", value="-",inline=True)
 	embed.add_field(name="kick", value="-",inline=True)
@@ -404,7 +407,8 @@ async def test(ctx):
 	embed.add_field(name="ping", value="-",inline=True)
 	embed.add_field(name="count", value="-",inline=True)
 	await bot.say(embed=embed)
-	embed = discord.Embed(title=":cyclone: General", description="All commands under the General categorie:", color=0xffafc9)
+	embed = discord.Embed(description="All commands under the General categorie:", color=0xffafc9)
+	embed.set_author(name="General", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/500485578794729482/discord_logo1600.png")
 	embed.add_field(name="server", value="-",inline=True)
 	embed.add_field(name="user", value="-",inline=True)
 	embed.add_field(name="avatar", value="-",inline=True)
@@ -412,7 +416,8 @@ async def test(ctx):
 	embed.add_field(name="invite", value="-",inline=True)
 	embed.add_field(name="donate", value="-",inline=True)
 	await bot.say(embed=embed)
-	embed = discord.Embed(title=":sparkles: Fun", description="All commands under the Fun categorie:", color=0xffafc9)
+	embed = discord.Embed(description="All commands under the Fun categorie:", color=0xffafc9)
+	embed.set_author(name="Funr", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/500485578794729482/discord_logo1600.png")
 	embed.add_field(name="google", value="-",inline=True)
 	embed.add_field(name="youtube", value="-",inline=True)
 	embed.add_field(name="greet", value="-",inline=True)
