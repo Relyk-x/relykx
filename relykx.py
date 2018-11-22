@@ -32,7 +32,7 @@ async def on_ready():
 @bot.event
 async def on_member_join(member):
 	print('Sent message to ' + member.name)
-	servers = list(client.servers)
+	servers = list(bot.servers)
 	print("Connected on " + str(len(client.servers)) + "servers:")
 	embed = discord.Embed(color=0xffafc9,)
 	embed.set_author(name="MikiBot", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png")
@@ -382,7 +382,7 @@ async def servercount(ctx):
 	
 @bot.command(pass_context=True)
 async def serverlist(ctx):
-	serv = list(ctx.message.bot.servers)
+	serv = list(bot.servers)
 	embed = discord.Embed(description=f"Currently watching over {str(len(bot.servers))} Discord servers", color=0xffafc9)
 	await bot.say(embed=embed)
 	for x in range(len(serv)):
