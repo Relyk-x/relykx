@@ -377,16 +377,16 @@ async def commands(ctx):
 
 @bot.command(pass_context=True)
 async def servercount(ctx):
-	embed = discord.Embed(description=f"Currently watching over {str(len(bot.servers))} Discord servers", color=0xffafc9)
+	embed = discord.Embed(title="Server Count", description=f"Currently watching over {str(len(bot.servers))} Discord servers", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png", color=0xffafc9)
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
 async def serverlist(ctx):
 	serv = list(bot.servers)
-	embed = discord.Embed(description=f"Currently watching over {str(len(bot.servers))} Discord servers", color=0xffafc9)
+	embed = discord.Embed(title="Server List", description=f"Currently watching over {str(len(bot.servers))} Discord servers", icon_url="https://cdn.discordapp.com/attachments/499771950764261396/506802847791185920/miki2.png", color=0xffafc9)
 	await bot.say(embed=embed)
 	for x in range(len(serv)):
-	 embed = discord.Embed(title=serv[x-1].name, description=f"● ServerID: {serv[x-1].id}")
+	 embed = discord.Embed(title=serv[x-1].name, description=f"● ServerID: {serv[x-1].id}", color=0x7289da)
 	 await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
